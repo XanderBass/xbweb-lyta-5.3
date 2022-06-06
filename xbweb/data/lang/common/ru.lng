@@ -1,0 +1,33 @@
+save   | Сохранить
+edit   | Редактировать
+reset  | Сбросить
+create | Создать
+trash  | Корзина
+index  | Все
+clean  | Очистить
+cancel | Отмена
+
+no_rows | Пусто
+
+project   | Проект
+dashboard | Рабочий стол
+site      | Перейти на сайт
+system    | Система
+database  | Справочники
+
+error-empty   | поле не заполнено
+error-invalid | указанное значение некорректно
+error-short   | указанное значение слишком короткое
+error-long    | указанное значение слишком длинное
+error-small   | указанное значение слишком мало
+error-big     | указанное значение слишком велико
+error-exists  | указанное значение уже используется
+
+field-name        | Имя
+field-title       | Название
+field-description | Описание
+field-category    | Категория
+field-rank        | Порядок
+
+category-main     | Основное
+category-personal | Персональное

@@ -1,0 +1,244 @@
+/** BACKGROUND **/
+.xbweb-ui form, form.xbweb-ui {
+    background-color: rgb(240,245,255);
+}
+
+.xbweb-ui .data-table tr:nth-child(even), .xbweb-ui.data-table:nth-child(even) tr {
+    background-color: rgb(250,245,240);
+}
+
+.xbweb-ui .data-table tr th, .xbweb-ui.data-table tr th,
+.xbweb-ui .data-table tfoot td, .xbweb-ui.data-table tfoot td,
+.xbweb-ui .data-table tr:hover, .xbweb-ui.data-table tr:hover,
+.xbweb-ui .tabs a, .tabs.xbweb-ui a,
+.xbweb-ui span.fc-static-text, span.fc-static-text.xbweb-ui,
+.xbweb-ui form > h2, form.xbweb-ui > h2,
+.xbweb-ui fieldset legend, fieldset.xbweb-ui legend,
+.xbweb-ui form > div.buttons, form.xbweb-ui > div.buttons,
+.xbweb-ui-wysiwyg .tool-bar {
+    background-color: rgb(245,248,250);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[value='default']:checked + span,
+div[class^='acl-'].xbweb-ui label > input[value='default']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='default']:checked + span,
+div[class*=' acl-'].xbweb-ui label > input[value='default']:checked + span,
+.xbweb-ui input[type=submit], input[type=submit].xbweb-ui,
+.xbweb-ui input[type=button], input[type=button].xbweb-ui,
+.xbweb-ui button.blue, button.blue.xbweb-ui,
+.xbweb-ui button.default, button.default.xbweb-ui,
+.xbweb-ui button.ok, button.ok.xbweb-ui,
+.xbweb-ui .button.blue, .button.blue.xbweb-ui,
+.xbweb-ui .button.default, .button.default.xbweb-ui,
+.xbweb-ui .button.ok, .button.ok.xbweb-ui,
+.xbweb-ui .file-browser li.active, .file-browser.xbweb-ui li.active,
+.xbweb-ui-wysiwyg .tool-bar button {
+    background-color: rgb(120,180,255);
+}
+
+.xbweb-ui input[type=submit].disabled, input[type=submit].xbweb-ui.disabled,
+.xbweb-ui input[type=button].disabled, input[type=button].xbweb-ui.disabled,
+.xbweb-ui button.blue.disabled, button.blue.xbweb-ui.disabled,
+.xbweb-ui button.default.disabled, button.default.xbweb-ui.disabled,
+.xbweb-ui button.ok.disabled, button.ok.xbweb-ui.disabled,
+.xbweb-ui .button.blue.disabled, .button.blue.xbweb-ui.disabled,
+.xbweb-ui .button.default.disabled, .button.default.xbweb-ui.disabled,
+.xbweb-ui .button.ok.disabled, .button.ok.xbweb-ui.disabled {
+    background-color: rgba(120,180,255,.5);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[value='deny']:checked + span,
+div[class^='acl-'].xbweb-ui label > input[value='deny']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='deny']:checked + span,
+div[class*=' acl-'].xbweb-ui label > input[value='deny']:checked + span,
+.xbweb-ui button.red, button.red.xbweb-ui,
+.xbweb-ui button.delete, button.delete.xbweb-ui,
+.xbweb-ui button.remove, button.remove.xbweb-ui,
+.xbweb-ui .button.red, .button.red.xbweb-ui,
+.xbweb-ui .button.delete, .button.delete.xbweb-ui,
+.xbweb-ui .button.remove, .button.remove.xbweb-ui,
+.xbweb-ui form ul.messages > li.error, form.xbweb-ui ul.messages > li.error {
+    background-color: rgb(255,120,100);
+}
+
+.xbweb-ui button.red.disabled, button.red.xbweb-ui.disabled,
+.xbweb-ui button.delete.disabled, button.delete.xbweb-ui.disabled,
+.xbweb-ui button.remove.disabled, button.remove.xbweb-ui.disabled,
+.xbweb-ui .button.red.disabled, .button.red.xbweb-ui.disabled,
+.xbweb-ui .button.delete.disabled, .button.delete.xbweb-ui.disabled,
+.xbweb-ui .button.remove.disabled, .button.remove.xbweb-ui.disabled {
+    background-color: rgba(255,120,100,.5);
+}
+
+.xbweb-ui button.brown, .xbweb-ui .button.brown,
+button.brown.xbweb-ui, .button.brown.xbweb-ui {
+    background-color: rgb(200,150,100);
+}
+
+.xbweb-ui button.brown.disabled, .xbweb-ui .button.brown.disabled,
+button.brown.xbweb-ui.disabled, .button.brown.xbweb-ui.disabled {
+    background-color: rgba(200,150,100,.5);
+}
+
+.xbweb-ui button.yellow, .xbweb-ui .button.yellow,
+button.yellow.xbweb-ui, .button.yellow.xbweb-ui,
+.xbweb-ui form ul.messages > li.warning, form.xbweb-ui ul.messages > li.warning {
+    background-color: rgb(240,200,80);
+}
+
+.xbweb-ui button.yellow.disabled, .xbweb-ui .button.yellow.disabled,
+button.yellow.xbweb-ui.disabled, .button.yellow.xbweb-ui.disabled {
+    background-color: rgba(240,200,80,.5);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[value='allow']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='allow']:checked + span,
+.xbweb-ui div[class^='acl-'] label > input[type='checkbox']:checked + span,
+.xbweb-ui button.add, button.add.xbweb-ui,
+.xbweb-ui button.green, button.green.xbweb-ui,
+.xbweb-ui button.allow, button.allow.xbweb-ui,
+.xbweb-ui .button.add, .button.add.xbweb-ui,
+.xbweb-ui .button.green, .button.green.xbweb-ui,
+.xbweb-ui .button.allow, .button.allow.xbweb-ui,
+.xbweb-ui form ul.messages > li.notice, form.xbweb-ui ul.messages > li.notice {
+    background-color: rgb(80,200,100);
+}
+
+.xbweb-ui button.add.disabled, button.add.disabled.xbweb-ui,
+.xbweb-ui button.green.disabled, button.green.disabled.xbweb-ui,
+.xbweb-ui button.allow.disabled, button.allow.disabled.xbweb-ui,
+.xbweb-ui .button.add.disabled, .button.add.disabled.xbweb-ui,
+.xbweb-ui .button.green.disabled, .button.green.disabled.xbweb-ui,
+.xbweb-ui .button.allow.disabled, .button.allow.disabled.xbweb-ui {
+    background-color: rgba(80,200,100,.5);
+}
+
+.xbweb-ui .tabs a.active, .tabs.xbweb-ui a.active,
+.xbweb-ui form > section, form.xbweb-ui > section,
+.xbweb-ui .file-browser, .file-browser.xbweb-ui,
+.xbweb-ui .data-table td.no-rows:hover,
+.xbweb-ui form ul.messages {
+    background: white;
+}
+
+/** COLOR **/
+.xbweb-ui .data-table tr th.checker input[value="1"] + span:before,
+.xbweb-ui.data-table tr th.checker input[value="1"] + span:before,
+.xbweb-ui .data-table tr td.checker input[value="1"] + span:before,
+.xbweb-ui.data-table tr td.checker input[value="1"] + span:before,
+.xbweb-ui .data-table tr th.checker input[value="2"] + span:before,
+.xbweb-ui.data-table tr th.checker input[value="2"] + span:before,
+.xbweb-ui .data-table tr td.checker input[value="2"] + span:before,
+.xbweb-ui.data-table tr td.checker input[value="2"] + span:before,
+.xbweb-ui .action.icon:before, .xbweb-ui.action.icon:before,
+.xbweb-ui input[type=checkbox]:checked + span:before,
+.xbweb-ui input[type=radio]:checked + span:before,
+input[type=checkbox].xbweb-ui:checked + span:before,
+input[type=radio].xbweb-ui:checked + span:before,
+.xbweb-ui .data-table tfoot td.pager a, .xbweb-ui.data-table tfoot td.pager a,
+.xbweb-ui .autocomplete-suggestions .autocomplete-suggestion strong {
+    color: rgb(120,140,255);
+}
+
+.xbweb-ui div[class^='acl-'] label > input + span,
+div[class^='acl-'].xbweb-ui label > input + span {
+    color: silver;
+}
+
+.xbweb-ui .action.icon[href*='/create']:before, .xbweb-ui.action.icon[href*='/create']:before {
+    color: rgb(60,180,80);
+}
+
+.xbweb-ui label.required > span, label.required.xbweb-ui > span,
+.xbweb-ui label.required > span:after, label.required.xbweb-ui > span:after,
+.xbweb-ui .action.icon[href*='/delete']:before, .xbweb-ui.action.icon[href*='/delete']:before,
+.xbweb-ui .action.icon[href*='/remove']:before, .xbweb-ui.action.icon[href*='/remove']:before {
+    color: rgb(255,120,100);
+}
+
+.xbweb-ui .file-browser li.folder:before, .file-browser.xbweb-ui li.folder:before {
+    color: rgb(200,150,100);
+}
+
+.xbweb-ui div[class^='acl-'] label > input:checked + span,
+div[class^='acl-'].xbweb-ui label > input:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input:checked + span,
+div[class*=' acl-'].xbweb-ui label > input:checked + span,
+.xbweb-ui input[type=submit], input[type=submit].xbweb-ui,
+.xbweb-ui input[type=button], input[type=button].xbweb-ui,
+.xbweb-ui .button, .button.xbweb-ui,
+.xbweb-ui button, button.xbweb-ui,
+.xbweb-ui .file-browser li.active, .file-browser.xbweb-ui li.active,
+.xbweb-ui form ul.messages > li, form.xbweb-ui ul.messages > li {
+    color: white;
+}
+
+.xbweb-ui form h2, form.xbweb-ui h2,
+.xbweb-ui fieldset legend, fieldset.xbweb-ui legend,
+.xbweb-ui .tabs a, .tabs.xbweb-ui a {
+    color: black;
+}
+
+/** BORDER **/
+.xbweb-ui div[class^='acl-'] label > input + span,
+div[class^='acl-'].xbweb-ui label > input + span,
+.xbweb-ui-wysiwyg > div.tool-bar button.splitter {
+    border-color: silver;
+}
+
+.xbweb-ui .data-table, .xbweb-ui.data-table,
+.xbweb-ui form, form.xbweb-ui,
+.xbweb-ui fieldset, fieldset.xbweb-ui,
+.xbweb-ui form > section, form.xbweb-ui > section,
+.xbweb-ui .tab, .xbweb-ui .tabs a, .tabs.xbweb-ui a,
+.xbweb-ui span.fc-static-text, span.fc-static-text.xbweb-ui,
+.xbweb-ui .repeater .image, .xbweb-ui.repeater .image,
+.xbweb-ui input[type=text], input[type=text].xbweb-ui,
+.xbweb-ui input[type=password], input[type=password].xbweb-ui,
+.xbweb-ui input[type=search], input[type=search].xbweb-ui,
+.xbweb-ui input[type=tel], input[type=tel].xbweb-ui,
+.xbweb-ui input[type=email], input[type=email].xbweb-ui,
+.xbweb-ui input[type=url], input[type=url].xbweb-ui,
+.xbweb-ui textarea, textarea.xbweb-ui,
+.xbweb-ui .file-browser .path, .file-browser.xbweb-ui .path {
+    border-color: rgb(220,225,230);
+}
+
+.xbweb-ui .data-table tr td, .xbweb-ui.data-table tr td,
+.xbweb-ui .data-table tr th, .xbweb-ui.data-table tr th,
+.xbweb-ui form > h2, form.xbweb-ui > h2,
+.xbweb-ui form > div.buttons, form.xbweb-ui > div.buttons,
+.xbweb-ui fieldset legend, fieldset.xbweb-ui legend,
+.xbweb-ui-wysiwyg .tool-bar {
+    border-color: rgb(230,235,240);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[value='default']:checked + span,
+div[class^='acl-'].xbweb-ui label > input[value='default']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='default']:checked + span,
+div[class*=' acl-'].xbweb-ui label > input[value='default']:checked + span {
+    border-color: rgba(120,180,255,1);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[value='deny']:checked + span,
+div[class^='acl-'] label.xbweb-ui > input[value='deny']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='deny']:checked + span,
+div[class*=' acl-'] label.xbweb-ui > input[value='deny']:checked + span {
+    border-color: rgba(255,120,100,1);
+}
+
+.xbweb-ui div[class^='acl-'] label > input[type='checkbox']:checked + span,
+div[class^='acl-'].xbweb-ui label > input[type='checkbox']:checked + span,
+.xbweb-ui div[class^='acl-'] label > input[value='allow']:checked + span,
+div[class^='acl-'].xbweb-ui label > input[value='allow']:checked + span,
+.xbweb-ui div[class*=' acl-'] label > input[value='allow']:checked + span,
+div[class*=' acl-'].xbweb-ui label > input[value='allow']:checked + span {
+    border-color: rgba(80,200,100,1);
+}
+
+/** SHADOWS **/
+.xbweb-ui div.modal-wrapper > form, div.modal-wrapper.xbweb-ui > form,
+.xbweb-ui form.single-form, form.xbweb-ui.single-form,
+.xbweb-ui .single-form-wrapper form, .xbweb-ui.single-form-wrapper form {
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+}

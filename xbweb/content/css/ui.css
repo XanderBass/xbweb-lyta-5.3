@@ -1,0 +1,761 @@
+@import url("xbvcl/font.css");
+
+.xbweb-ui .image, .xbweb-ui.image {
+    background: transparent none no-repeat 50% 50%; background-size: contain;
+}
+
+/** TABS **/
+.xbweb-ui .tabs, .xbweb-ui.tabs {
+    margin: 1em 1em -1em;
+}
+
+.xbweb-ui .tabs a, .xbweb-ui.tabs a {
+    display: inline-block; padding: 0 1.4em;
+    position: relative; top: 1px;
+    line-height: 2.8em; text-decoration: none; color: inherit;
+    border: 1px solid rgba(0,0,0,.1); border-radius: 2px 2px 0 0;
+}
+
+.xbweb-ui .tabs a.active:after, .xbweb-ui.tabs a.active:after {
+    display: block; height: 4px; width: 100%; margin-top: -1px;
+    position: absolute; left: 0; top: 100%;
+    background: inherit; content: '';
+}
+
+.xbweb-ui .tab, .xbweb-ui.tab {
+    display: none; margin: 1em; border: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui .tab.active, .xbweb-ui.tab.active {
+    display: block;
+    padding-bottom: 1em;
+}
+
+/** REPEATERS **/
+.xbweb-ui .repeater .sample, .xbweb-ui.repeater .sample {
+    display: none;
+}
+
+.xbweb-ui .repeater .image, .xbweb-ui.repeater .image {
+    width: 100%; height: 10.3em; float: left;
+    border: 1px solid rgba(0,0,0,.1);
+    box-sizing: border-box;
+}
+
+/** FORMS **/
+.xbweb-ui form, form.xbweb-ui {
+    border: 1px solid rgba(0,0,0,.1);
+    overflow: hidden;
+}
+
+.xbweb-ui form ul.messages, form.xbweb-ui ul.messages {
+    list-style: none; margin: 0; padding: .5em 1em;
+}
+
+.xbweb-ui form ul.messages > li, form.xbweb-ui ul.messages > li {
+    padding: 0 .5em; margin: .5em 0;
+    line-height: 1.8em;
+    border-radius: 2px;
+}
+
+.xbweb-ui form ul.messages > li:before, form.xbweb-ui ul.messages > li:before {
+    margin-right: .25em; vertical-align: middle;
+    font: 16px XBVCL, monospace; line-height: inherit;
+    content: '\f0ca';
+}
+
+.xbweb-ui form ul.messages > li.warning:before, form.xbweb-ui ul.messages > li.warning:before {
+    content: '\f0d9';
+}
+
+.xbweb-ui form ul.messages > li.error:before, form.xbweb-ui ul.messages > li.error:before {
+    content: '\f0d8';
+}
+
+.xbweb-ui form p.modal-text, form.xbweb-ui p.modal-text,
+.xbweb-ui form h2, form.xbweb-ui h2 {
+    display: block; margin: 0; padding: 0 .8em;
+    font: inherit; font-weight: bold; font-size: 1.2em;
+}
+
+.xbweb-ui form p.modal-text, form.xbweb-ui p.modal-text {
+    margin: 1em 0;
+}
+
+.xbweb-ui form h2, form.xbweb-ui h2 {
+    line-height: 2.4em;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui form > div.buttons, form.xbweb-ui > div.buttons {
+    padding: 1em; clear: both; margin-top: 1em;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui fieldset > div.buttons, fieldset.xbweb-ui > div.buttons {
+    padding: 1em; clear: both; margin-top: 1em;
+}
+
+.xbweb-ui form label, form.xbweb-ui label {
+    display: block; width: 50%; padding: 0 1em; margin-top: .5em; float: left;
+    line-height: 2.2em; font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+.xbweb-ui form label.fc-boolean, form.xbweb-ui label.fc-boolean,
+.xbweb-ui form label.fc-radio, form.xbweb-ui label.fc-radio {
+    margin-top: 1em;
+}
+
+.xbweb-ui form label.full, form.xbweb-ui label.full {
+    width: 100%;
+}
+
+.xbweb-ui form label.required > span:after, form.xbweb-ui label.required > span:after {
+    margin-left: .5em; vertical-align: super;
+    font: 10px XBVCL; content: '*'; color: red;
+}
+
+.xbweb-ui form label.fc-text > *:not(span), form.xbweb-ui label.fc-text > *:not(span) {
+    line-height: normal;
+}
+
+.xbweb-ui fieldset, fieldset.xbweb-ui {
+    display: block; margin: 1em; padding: 3.2em 0 1em; position: relative;
+    border: 1px solid transparent; box-sizing: border-box;
+}
+
+.xbweb-ui fieldset legend, fieldset.xbweb-ui legend {
+    display: block; padding: 0 .8em; width: 100%;
+    position: absolute; left: 0; top: 0;
+    line-height: 2.2em; font-weight: bold; font-size: 1.2em;
+    border-bottom: 1px solid transparent;
+    box-sizing: border-box;
+}
+
+/** ACL elements **/
+.xbweb-ui div[class^='acl-'], .xbweb-ui div[class*=' acl-'],
+div[class^='acl-'].xbweb-ui, div[class*=' acl-'].xbweb-ui {
+    margin-top: .5em; padding: 0 1em;
+}
+
+.xbweb-ui div[class^='acl-'] > span, .xbweb-ui div[class*=' acl-'] > span,
+div[class^='acl-'].xbweb-ui > span, div[class*=' acl-'].xbweb-ui > span {
+    font-size: 1.1em; line-height: 2.2em;
+}
+
+.xbweb-ui div[class^='acl-'] label, .xbweb-ui div[class*=' acl-'] label,
+div[class^='acl-'].xbweb-ui label, div[class*=' acl-'].xbweb-ui label,
+.xbweb-ui div[class^='acl-'] span.default, .xbweb-ui div[class*=' acl-'] span.default,
+div[class^='acl-'].xbweb-ui span.default, div[class*=' acl-'].xbweb-ui span.default {
+    width: auto; margin: 0 0 0 .5em; padding: 0; float: right;
+}
+
+.xbweb-ui div[class^='acl-'] span.default, .xbweb-ui div[class*=' acl-'] span.default,
+div[class^='acl-'].xbweb-ui span.default, div[class*=' acl-'].xbweb-ui span.default {
+    padding: 0 1.2em;
+}
+
+.xbweb-ui div[class^='acl-'] label > span, .xbweb-ui div[class*=' acl-'] label > span,
+div[class^='acl-'].xbweb-ui label > span, div[class*=' acl-'].xbweb-ui label > span {
+    display: inline-block; padding: 0 1.2em; min-width: 50px;
+    line-height: 2.2em; text-align: center;
+    border: 1px solid rgba(0,0,0,.1); border-radius: 2px;
+}
+
+.xbweb-ui div[class^='acl-'] label > span:before,
+.xbweb-ui div[class*=' acl-'] label > span:before,
+div[class^='acl-'].xbweb-ui label > span:before,
+div[class*=' acl-'].xbweb-ui label > span:before {
+    display: none;
+}
+
+/** INPUTS **/
+.xbweb-ui span.fc-static-text, span.fc-static-text.xbweb-ui {
+    display: block; padding: 0 .5em; height: 2.2em; line-height: 2.2em;
+    border: 1px solid rgba(0,0,0,.2); border-radius: 2px;
+}
+
+.xbweb-ui select, select.xbweb-ui,
+.xbweb-ui select option, select.xbweb-ui option,
+.xbweb-ui input, input.xbweb-ui,
+.xbweb-ui button, .xbweb-ui a.button,
+.xbweb-ui .button, .button.xbweb-ui {
+    font: inherit; line-height: 2.2em; border-radius: 2px;
+}
+
+.xbweb-ui input[type=submit], input[type=submit].xbweb-ui,
+.xbweb-ui input[type=button], input[type=button].xbweb-ui,
+.xbweb-ui input[type=reset], input[type=reset].xbweb-ui,
+.xbweb-ui button, .xbweb-ui a.button,
+.xbweb-ui .button, .button.xbweb-ui {
+    display: inline-block; box-sizing: border-box;
+    padding: 0 1.2em; min-width: 100px; height: 2.6em;
+    font-size: 1.2em; line-height: 2.6em; text-decoration: none; text-align: center;
+    background: rgb(200, 200, 200);
+    border: 1px solid transparent;
+}
+
+.xbweb-ui select, select.xbweb-ui,
+.xbweb-ui select option, select.xbweb-ui option,
+.xbweb-ui input[type=text], input[type=text].xbweb-ui,
+.xbweb-ui input[type=password], input[type=password].xbweb-ui,
+.xbweb-ui input[type=search], input[type=search].xbweb-ui,
+.xbweb-ui input[type=tel], input[type=tel].xbweb-ui,
+.xbweb-ui input[type=email], input[type=email].xbweb-ui,
+.xbweb-ui input[type=url], input[type=url].xbweb-ui,
+.xbweb-ui input[type=number], input[type=number].xbweb-ui,
+.xbweb-ui textarea, textarea.xbweb-ui {
+    display: inline-block;
+    width: 100%; padding: 0 .5em;
+    border: 1px solid rgba(0,0,0,.1);
+    box-sizing: border-box;
+}
+
+.xbweb-ui select, select.xbweb-ui {
+    position: relative;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: inherit;
+}
+
+.xbweb-ui textarea, textarea.xbweb-ui  {
+    height: 8.2em; padding: .5em; resize: none; line-height: normal;
+    border-radius: 2px;
+}
+
+.xbweb-ui input[type=checkbox], .xbweb-ui input[type=radio],
+input[type=checkbox].xbweb-ui, input[type=radio].xbweb-ui {
+    display: none;
+}
+
+.xbweb-ui input[type=checkbox] + span:before, .xbweb-ui input[type=radio] + span:before,
+input[type=checkbox].xbweb-ui + span:before, input[type=radio].xbweb-ui + span:before {
+    display: inline-block; width: 1.2em; margin-right: .2em;
+    position: relative; top: -2px;
+    font: 1.6em XBVCL, monospace; line-height: 1.4em; color: rgba(0,0,0,.1);
+    vertical-align: middle; text-align: center; content: '\f0d5';
+}
+
+.xbweb-ui input[type=checkbox]:checked + span:before,
+.xbweb-ui input[type=radio]:checked + span:before,
+input[type=checkbox].xbweb-ui:checked + span:before,
+input[type=radio].xbweb-ui:checked + span:before {
+    color: black;
+}
+
+.xbweb-ui label.fc-file span,
+label.fc-file.xbweb-ui span {
+    display: block;
+}
+
+.xbweb-ui label.fc-file input[type=file],
+label.fc-file.xbweb-ui input[type=file] {
+    display: none;
+}
+
+.xbweb-ui label.fc-file button.delete, label.fc-file.xbweb-ui button.delete {
+    width: 2em; height: 2em; min-width: 0; padding: 0; float: right;
+    line-height: 2.2em; text-align: center;
+}
+
+.xbweb-ui label.fc-file button.delete:before,
+label.fc-file.xbweb-ui button.delete:before {
+    font: 1.4em XBVCL, monospace; line-height: 1.375em;
+    content: '\f0d2';
+}
+
+.xbweb-ui label.fc-file button.delete ~ span.fc-static-text,
+label.fc-file.xbweb-ui button.delete ~ span.fc-static-text {
+    margin-right: 3.2em;
+}
+
+.xbweb-ui input[type=radio] + span:before,
+input[type=radio].xbweb-ui + span:before {
+    content: '\f0ce'; top: -2px;
+}
+
+.xbweb-ui input[type=radio]:checked + span:before,
+input[type=radio].xbweb-ui:checked + span:before {
+    content: '\f0cf';
+}
+
+.xbweb-ui input[type=checkbox]:checked + span:before,
+input[type=checkbox].xbweb-ui:checked + span:before {
+    content: '\f0cb';
+}
+
+.xbweb-ui input[type=checkbox].switch + span:before,
+input[type=checkbox].switch.xbweb-ui + span:before {
+    content: '\f0d6'; top: -1px;
+}
+
+.xbweb-ui input[type=checkbox].switch:checked + span:before,
+input[type=checkbox].switch.xbweb-ui:checked + span:before {
+    content: '\f0d7';
+}
+
+.xbweb-ui input[type=checkbox].visibility + span:before,
+input[type=checkbox].visibility.xbweb-ui + span:before {
+    content: '\f094'; top: -1px;
+}
+
+.xbweb-ui input[type=checkbox].visibility:checked + span:before,
+input[type=checkbox].visibility.xbweb-ui:checked + span:before {
+    content: '\f095';
+}
+
+.xbweb-ui input[type=checkbox].power + span:before,
+input[type=checkbox].power.xbweb-ui + span:before {
+    content: '\f10f';
+}
+
+.xbweb-ui input[type=checkbox].power:checked + span:before,
+input[type=checkbox].power.xbweb-ui:checked + span:before {
+    content: '\f10f';
+}
+
+.xbweb-ui input[type=checkbox].bell + span:before,
+input[type=checkbox].bell.xbweb-ui + span:before {
+    content: '\f096'; top: 0;
+}
+
+.xbweb-ui input[type=checkbox].bell:checked + span:before,
+input[type=checkbox].bell.xbweb-ui:checked + span:before {
+    content: '\f099';
+}
+
+.xbweb-ui input[type=checkbox].sound + span:before,
+input[type=checkbox].sound.xbweb-ui + span:before {
+    content: '\f09e'; top: 0;
+}
+
+.xbweb-ui input[type=checkbox].sound:checked + span:before,
+input[type=checkbox].sound.xbweb-ui:checked + span:before {
+    content: '\f09f';
+}
+
+/** WYSIWYG **/
+.xbweb-ui-wysiwyg {
+    border: 1px solid rgba(0,0,0,.1); border-radius: 2px;
+}
+
+.xbweb-ui-wysiwyg > div.tool-bar {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui-wysiwyg > div.tool-bar button {
+    height: 2em; width: 2em; min-width: 0; padding: 0; margin: .3em;
+    line-height: 2em; text-align: center; vertical-align: middle;
+}
+
+.xbweb-ui-wysiwyg > div.tool-bar button.splitter {
+    width: 0;
+    border-right: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui-wysiwyg textarea {
+    margin: 0;
+    border: none;
+}
+
+.xbweb-ui-wysiwyg iframe {
+    display: block; width: 100%;
+    border: none;
+}
+
+.xbweb-ui-wysiwyg textarea, .xbweb-ui-wysiwyg iframe {
+    height: 400px;
+}
+
+.xbweb-ui-wysiwyg:not(.code) textarea, .xbweb-ui-wysiwyg > div.tool-bar.code,
+.xbweb-ui-wysiwyg.code > div.tool-bar.wysiwyg, .xbweb-ui-wysiwyg.code iframe {
+    display: none;
+}
+
+.xbweb-ui-wysiwyg.code > div.tool-bar.code {
+    display: block;
+}
+
+.xbweb-ui-wysiwyg div.tool-bar button:before {
+    font: 16px XBVCL, monospace;
+    content: '\f0ab';
+}
+
+.xbweb-ui-wysiwyg > div.tool-bar button.splitter:before {
+    display: none;
+}
+
+.xbweb-ui-wysiwyg div.tool-bar button.cmd-code,
+.xbweb-ui-wysiwyg div.tool-bar button.cmd-wysiwyg { float: right; }
+
+.xbweb-ui-wysiwyg div.tool-bar button.cmd-code:before { content: '\f0e5'; }
+.xbweb-ui-wysiwyg div.tool-bar button.cmd-wysiwyg:before { content: '\f123'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="bold"]:before { content: '\f11b'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="italic"]:before { content: '\f11d'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="strikethrough"]:before { content: '\f11f'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="underline"]:before { content: '\f11e'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="subscript"]:before { content: '\f12a'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="superscript"]:before { content: '\f129'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="justifyLeft"]:before { content: '\f110'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="justifyRight"]:before { content: '\f112'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="justifyFull"]:before { content: '\f113'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="justifyCenter"]:before { content: '\f111'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="createLink"]:before { content: '\f120'; }
+.xbweb-ui-wysiwyg div.tool-bar button[data-command="insertImage"]:before { content: '\f0e1'; }
+
+/** BROWSERS **/
+.xbweb-ui .file-browser + div.buttons, .file-browser.xbweb-ui + div.buttons {
+    margin-top: 0;
+}
+
+.xbweb-ui .file-browser, .file-browser.xbweb-ui {
+    font-size: 1.1em;
+}
+
+.xbweb-ui .file-browser .path, .file-browser.xbweb-ui .path {
+    padding: 0 1em;
+    line-height: 2em;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui .file-browser ul, .file-browser.xbweb-ui ul {
+    list-style: none; margin: 0; padding: 1em 0;
+}
+
+.xbweb-ui .file-browser ul a, .file-browser.xbweb-ui ul a {
+    text-decoration: none; color: inherit;
+}
+
+.xbweb-ui .file-browser li, .file-browser.xbweb-ui li {
+    display: inline-block; width: 128px; height: 1.8em; margin: 0 1em;
+    line-height: 1.8em; cursor: pointer; border-radius: 2px;
+}
+
+.xbweb-ui .file-browser .path:before, .file-browser.xbweb-ui .path:before,
+.xbweb-ui .file-browser li:before, .file-browser.xbweb-ui li:before {
+    display: inline-block; width: 2em; height: 1.8em;
+    line-height: 1.8em; text-align: center;
+    font: 1em XBVCL, monospace;
+    content: '\f0f4';
+}
+
+.xbweb-ui .file-browser .path:before, .file-browser.xbweb-ui .path:before,
+.xbweb-ui .file-browser li.folder:before, .file-browser.xbweb-ui li.folder:before {
+    content: '\f0f1';
+}
+
+/** CONTENT **/
+.xbweb-ui .data-table, .xbweb-ui.data-table {
+    width: 100%; font-size: 1.2em;
+    border: 1px solid rgba(0,0,0,.1);
+    border-spacing: 0;
+}
+
+.xbweb-ui .data-table-heap h2 {
+    margin: 0; padding: 0; line-height: 2.6em;
+    float: left;
+}
+
+.xbweb-ui .data-table-heap .actions {
+    float: right;
+}
+
+.xbweb-ui .data-table-heap:after {
+    display: block; clear: both; content: '';
+}
+
+.xbweb-ui .data-table tr th, .xbweb-ui.data-table tr th {
+    position: relative;
+    text-align: left;
+    cursor: default;
+}
+
+.xbweb-ui .data-table tr th.sortable, .xbweb-ui.data-table tr th.sortable {
+    padding-right: 2em;
+    cursor: pointer;
+}
+
+.xbweb-ui .data-table tr th.sortable:after, .xbweb-ui.data-table tr th.sortable:after {
+    display: block; width: 2em; height: 2.2em;
+    position: absolute; right: 0; top: 0;
+    font-family: XBVCL, monospace;
+    text-align: center; content: '';
+}
+
+.xbweb-ui .data-table tr th.sortable.sort-asc:after,
+.xbweb-ui.data-table tr th.sortable.sort-asc:after {
+    content: '\f01a';
+}
+
+.xbweb-ui .data-table tr th.sortable.sort-desc:after,
+.xbweb-ui.data-table tr th.sortable.sort-desc:after {
+    content: '\f018';
+}
+
+.xbweb-ui .data-table tr th.id, .xbweb-ui.data-table tr th.id {
+    width: 4em;
+}
+
+.xbweb-ui .data-table tr th, .xbweb-ui.data-table tr th,
+.xbweb-ui .data-table tr td, .xbweb-ui.data-table tr td {
+    padding: 0 .5em; line-height: 2.2em;
+}
+
+.xbweb-ui .data-table tr td, .xbweb-ui.data-table tr td {
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui .data-table tr th.actions, .xbweb-ui.data-table tr th.actions,
+.xbweb-ui .data-table tr td.actions, .xbweb-ui.data-table tr td.actions {
+    width: 9em; text-align: right;
+}
+
+.xbweb-ui .data-table tr th.checker > span,
+.xbweb-ui.data-table tr th.checker > span,
+.xbweb-ui .data-table tr td.checker > span,
+.xbweb-ui.data-table tr td.checker > span {
+    display: inline-block; padding: 0 0 0 1.8em;
+    position: relative;
+}
+
+.xbweb-ui .data-table tr th.checker > span:before,
+.xbweb-ui.data-table tr th.checker > span:before,
+.xbweb-ui .data-table tr td.checker > span:before,
+.xbweb-ui.data-table tr td.checker > span:before {
+    display: inline-block; margin: -.5em 0 0;
+    position: absolute; top: 50%; left: 0;
+    text-align: center; font: 1.4em XBVCL, monospace; line-height: 1em;
+    content: '\f0d5'; color: rgba(0,0,0,.1);
+}
+
+.xbweb-ui .data-table tr th.checker input[value="1"] + span:before,
+.xbweb-ui.data-table tr th.checker input[value="1"] + span:before,
+.xbweb-ui .data-table tr td.checker input[value="1"] + span:before,
+.xbweb-ui.data-table tr td.checker input[value="1"] + span:before {
+    content: '\f0cb';
+}
+
+.xbweb-ui .data-table td.no-rows {
+    padding: 1em;
+    text-align: center; font-size: 2em; font-weight: bold;
+    color: silver;
+}
+
+.xbweb-ui .data-table tfoot td.pager {
+    text-align: right;
+}
+
+.xbweb-ui .data-table tfoot td.pager a,
+.xbweb-ui.data-table tfoot td.pager a,
+.xbweb-ui .data-table tfoot td.pager span,
+.xbweb-ui.data-table tfoot td.pager span {
+    display: inline-block; padding: 0 .5em; height: 2em;
+    text-align: center; text-decoration: none; line-height: 2em;
+    font-weight: bold;
+}
+
+.xbweb-ui .data-table tfoot td.pager a:before,
+.xbweb-ui.data-table tfoot td.pager a:before,
+.xbweb-ui .data-table tfoot td.pager span:before,
+.xbweb-ui.data-table tfoot td.pager span:before {
+    font-family: XBVCL, monospace;
+}
+
+.xbweb-ui .data-table tfoot td.pager a.first:before,
+.xbweb-ui.data-table tfoot td.pager a.first:before,
+.xbweb-ui .data-table tfoot td.pager span.first:before,
+.xbweb-ui.data-table tfoot td.pager span.first:before { content: '\f00b' }
+.xbweb-ui .data-table tfoot td.pager a.prev:before,
+.xbweb-ui.data-table tfoot td.pager a.prev:before,
+.xbweb-ui .data-table tfoot td.pager span.prev:before,
+.xbweb-ui.data-table tfoot td.pager span.prev:before { content: '\f003' }
+.xbweb-ui .data-table tfoot td.pager a.next:before,
+.xbweb-ui.data-table tfoot td.pager a.next:before,
+.xbweb-ui .data-table tfoot td.pager span.next:before,
+.xbweb-ui.data-table tfoot td.pager span.next:before { content: '\f001' }
+.xbweb-ui .data-table tfoot td.pager a.last:before,
+.xbweb-ui.data-table tfoot td.pager a.last:before,
+.xbweb-ui .data-table tfoot td.pager span.last:before,
+.xbweb-ui.data-table tfoot td.pager span.last:before { content: '\f009' }
+
+/** MODAL **/
+.xbweb-ui .modal-wrapper, .xbweb-ui.modal-wrapper {
+    display: none; width: 100%; height: 100%;
+    position: fixed; left: 0; top: 0; z-index: 102;
+    background: rgba(255,255,255,.5);
+}
+
+.xbweb-ui .modal-wrapper.active, .xbweb-ui.modal-wrapper.active { display: block; }
+
+.xbweb-ui div.modal-wrapper.loading:before, div.modal-wrapper.xbweb-ui.loading:before {
+    display: inline-block; width: 64px; height: 64px; margin: -44px 0 0 -44px;
+    position: absolute; left: 50%; top: 50%;
+    content: '';
+
+    background-color: transparent;
+    border-width: 12px; border-style: solid; border-color: transparent rgb(120,180,255);
+    border-radius: 50%;
+
+    animation: xbweb_loading 2.3s linear infinite;
+    -o-animation:xbweb_loading 2.3s linear infinite;
+    -webkit-animation: xbweb_loading 2.3s linear infinite;
+    -moz-animation: xbweb_loading 2.3s linear infinite;
+}
+
+@keyframes xbweb_loading {
+    0% { transform: rotate(0deg); }
+    100% { transform:rotate(360deg); }
+}
+
+@-o-keyframes xbweb_loading {
+    0% { -o-transform: rotate(0deg); }
+    100% { -o-transform: rotate(360deg); }
+}
+
+@-ms-keyframes xbweb_loading {
+    0% { -ms-transform: rotate(0deg); }
+    100% { -ms-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes xbweb_loading {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes xbweb_loading {
+    0% { -moz-transform: rotate(0deg); }
+    100% { -moz-transform: rotate(360deg); }
+}
+
+.xbweb-ui div.modal-wrapper > form, div.modal-wrapper.xbweb-ui > form {
+    margin: 4.5em auto; width: 480px;
+}
+
+.xbweb-ui form.single-form, form.xbweb-ui.single-form {
+    margin: 4.5em auto; width: 300px; border-radius: 2px;
+}
+
+.xbweb-ui .single-form-wrapper, .xbweb-ui.single-form-wrapper {
+    width: 100%; height: 100%;
+    position: fixed; left: 0; top: 0;
+}
+
+.xbweb-ui .single-form-wrapper > *, .xbweb-ui.single-form-wrapper > * {
+    width: 300px; margin: -120px 0 0 -150px;
+    position: absolute; left: 50%; top: 50%;
+    border-radius: 2px;
+}
+
+.xbweb-ui div.modal-wrapper > form.double-deck, div.modal-wrapper.xbweb-ui > form.double-deck {
+    width: 720px;
+}
+
+.xbweb-ui div.modal-wrapper.loading > form, .xbweb-ui div.modal-wrapper.loading > div,
+div.modal-wrapper.xbweb-ui.loading > form, div.modal-wrapper.xbweb-ui.loading > div {
+    display: none;
+}
+
+.xbweb-ui div.modal-wrapper > form label, div.modal-wrapper.xbweb-ui > form label,
+.xbweb-ui form.single-form label, form.xbweb-ui.single-form label,
+.xbweb-ui .single-form-wrapper > form label, .xbweb-ui.single-form-wrapper > form label {
+    width: 100%; float: none;
+}
+
+.xbweb-ui div.modal-wrapper > form.double-deck label,
+div.modal-wrapper.xbweb-ui > form.double-deck label {
+    width: 50%;
+}
+
+.xbweb-cmf-message { padding: 1em; font-size: 1.1em; }
+
+div.modal-wrapper .xbweb-cmf-message .text {
+    padding: 0 0 1em;
+}
+
+div.modal-wrapper .xbweb-cmf-message .code,
+.xbweb-cmf-message.error-404 .info-lng, .xbweb-cmf-message.error-403 .info-lng {
+    display: none;
+}
+
+.xbweb-ui .action.icon, .xbweb-ui.action.icon {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.xbweb-ui .action.icon:before, .xbweb-ui.action.icon:before {
+    display: inline-block; width: 1.5em;
+    font: 1.2em XBVCL, monospace; line-height: 1.5em;
+    text-align: center;
+    color: inherit;
+}
+
+.xbweb-ui .action.icon[href*='/create']:before, .xbweb-ui.action.icon[href*='/create']:before {
+    content: '\f0c7';
+}
+
+.xbweb-ui .action.icon[href*='/edit']:before, .xbweb-ui.action.icon[href*='/edit']:before {
+    content: '\f0da';
+}
+
+.xbweb-ui .action.icon[href*='/move_up']:before, .xbweb-ui.action.icon[href*='/move_up']:before {
+    content: '\f038';
+}
+
+.xbweb-ui .action.icon[href*='/move_down']:before, .xbweb-ui.action.icon[href*='/move_down']:before {
+    content: '\f03a';
+}
+
+.xbweb-ui .action.icon[href*='/reset_rank']:before, .xbweb-ui.action.icon[href*='/reset_rank']:before {
+    content: '\f108';
+}
+
+.xbweb-ui .action.icon[href*='/delete']:before, .xbweb-ui.action.icon[href*='/delete']:before {
+    content: '\f0ff';
+}
+
+.xbweb-ui .action.icon[href*='/restore']:before, .xbweb-ui.action.icon[href*='/restore']:before {
+    content: '\f05d';
+}
+
+.xbweb-ui .action.icon[href*='/remove']:before, .xbweb-ui.action.icon[href*='/remove']:before {
+    content: '\f0d2';
+}
+
+.xbweb-ui .action.icon[href*='/settings']:before, .xbweb-ui.action.icon[href*='/settings']:before {
+    content: '\f0eb';
+}
+
+.xbweb-ui form .single-tab, form.xbweb-ui .single-tab { padding-bottom: 1em; }
+.xbweb-ui form .single-tab + .buttons, form.xbweb-ui .single-tab + .buttons {
+    margin-top: 0;
+}
+
+/** FIXES **/
+.xbweb-ui-wysiwyg.code > div.tool-bar:after,
+.xbweb-ui form section:after, form.xbweb-ui section:after,
+.xbweb-ui fieldset:after, fieldset.xbweb-ui:after,
+.xbweb-ui div[class^='acl-']:after, div[class^='acl-'].xbweb-ui:after,
+.xbweb-ui div[class*=' acl-']:after, div[class*=' acl-'].xbweb-ui:after,
+.xbweb-ui .repeater .item:after, .xbweb-ui.repeater .item:after {
+    display: block; clear: both; content: '';
+}
+
+.xbweb-vardump {
+    width: 30%; margin: 1em; padding: 1em;
+    background: white;
+    font: 14px monospace;
+    border: 1px solid rgba(0,0,0,.1);
+}
+
+.xbweb-ui .autocomplete-suggestions {
+    margin-left: -1px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.xbweb-ui .autocomplete-suggestions .autocomplete-suggestion {
+    padding: 0 .5em; height: 2em;
+    line-height: 2em;
+}

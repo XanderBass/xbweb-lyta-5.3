@@ -1,0 +1,25 @@
+{
+  "users/login"      : "anonimous",
+  "users/logout"     : "all",
+  "users/register"   : "anonimous",
+  "users/activation" : "anonimous, user",
+  "users/activate"   : "moderator, admin",
+  "users/remainpass" : "anonimous",
+  "users/changepass" : "anonimous",
+  "users/profile"    : "user, moderator, admin",
+
+  "users/makeuser"      : "admin",
+  "users/makemoderator" : "admin",
+  "users/makeadmin"     : "root",
+  "users/makeroot"      : "neo",
+
+  "users/create"   : "admin, moderator",
+  "users/index"    : "admin, moderator",
+  "users/get"      : "admin, moderator",
+  "users/edit"     : "admin, moderator",
+  "users/delete"   : "admin, moderator",
+  "users/remove"   : "admin",
+  "users/trash"    : "admin",
+  "users/clean"    : "admin",
+  "users/settings" : "admin"
+}

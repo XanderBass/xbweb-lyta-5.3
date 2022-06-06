@@ -1,0 +1,22 @@
+php_flag register_globals Off
+AddDefaultCharset utf-8
+#php_value date.timezone Europe/Moscow
+
+php_value error_reporting -1
+php_value display_errors On
+php_value report_memleaks On
+
+Options +FollowSymLinks -Indexes
+
+RewriteEngine On
+
+RewriteRule ^admin/$ index.php?route=admin/index [L,QSA]
+
+RewriteCond %{REQUEST_URI} ^/xbweb/(.*)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^xbweb/(.+)$ index.php?file=$1 [L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php [L,QSA]

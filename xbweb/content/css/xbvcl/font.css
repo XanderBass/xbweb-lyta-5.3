@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'XBVCL';
+  src: url('font.eot?3349144');
+  src: url('font.eot?3349144#iefix') format('embedded-opentype'),
+       url('font.woff2?3349144') format('woff2'),
+       url('font.woff?3349144') format('woff'),
+       url('font.ttf?3349144') format('truetype'),
+       url('font.svg?3349144#xbvcl') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

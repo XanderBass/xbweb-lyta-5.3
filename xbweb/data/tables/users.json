@@ -1,0 +1,90 @@
+{
+    "options" : "fields,deleted410,norows204",
+    "table"   : "users",
+    "fields"  : [
+        {"class": "/primary"},
+        {
+            "name"       : "login",
+            "data"       : {"length": 32},
+            "flags"      : "required, unique, table, sortable",
+            "access"     : {
+                "anonimous" : "create, read",
+                "moderator" : "full",
+                "admin"     : "full",
+                "others"    : "read"
+            }
+        },
+        {
+            "name"       : "email",
+            "class"      : "/email",
+            "data"       : {"length": 128},
+            "flags"      : "required, unique, table, sortable",
+            "access"     : {
+                "anonimous" : "create, read",
+                "moderator" : "full",
+                "admin"     : "full",
+                "others"    : "read"
+            }
+        },
+        {
+            "name"       : "phone",
+            "class"      : "/phone",
+            "flags"      : "required, unique, table, sortable",
+            "access"     : {
+                "anonimous" : "create, read",
+                "moderator" : "full",
+                "admin"     : "full",
+                "others"    : "read"
+            }
+        },
+        {
+            "class"      : "/password",
+            "flags"      : "required",
+            "access"     : {
+                "anonimous" : "create",
+                "user"      : "update",
+                "moderator" : "create, update",
+                "admin"     : "create, update",
+                "others"    : "read"
+            }
+        },
+        {
+            "class"      : "/key",
+            "access"     : {
+                "anonimous" : "create, read",
+                "moderator" : "create, read",
+                "admin"     : "create, read",
+                "others"    : "read"
+            },
+            "attributes" : "system"
+        },
+        {"std" : "created"},
+        {
+            "name"       : "activated",
+            "class"      : "/datetime",
+            "access"     : "read",
+            "attributes" : "system, isnull"
+        },
+        {
+            "name"       : "deleted",
+            "class"      : "/datetime",
+            "access"     : {
+                "moderator" : "create, read",
+                "admin"     : "create, read",
+                "others"    : "read"
+            },
+            "attributes" : "system, isnull"
+        },
+        {
+            "class"       : "/role",
+            "access"      : "read",
+            "attributes"  : "system"
+        },
+        {
+            "class"      : "/flags",
+            "data"       : {"values": ""},
+            "access"     : "read",
+            "attributes" : "system"
+        }
+    ]
+}

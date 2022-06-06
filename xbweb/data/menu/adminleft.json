@@ -1,0 +1,26 @@
+{
+  "project" : {
+    "type"  : "block",
+    "items" : {
+      "site"      : {"newtab" : true, "url" : "/"},
+      "dashboard" : {"action" : "/"}
+    }
+  },
+  "users" : {
+    "type"  : "block",
+    "items" : {
+      "users" : {
+        "type"  : "category",
+        "items" : {
+          "users-index"  : {
+            "action" : "/users/index"
+          },
+          "users-create" : {
+            "action" : "/users/create"
+          }
+        }
+      },
+      "settings" : {"type" : "item", "action" : "/users/settings"}
+    }
+  }
+}

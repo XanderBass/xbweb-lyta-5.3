@@ -1,0 +1,12 @@
+# IDEs
+.idea
+.settings
+.classpath
+.project
+nbproject
+.DS_Store
+
+# CMF
+/var
+/www/files
+/admin/files

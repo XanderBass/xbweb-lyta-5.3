@@ -1,0 +1,225 @@
+html, body { height: 100%; }
+
+body { margin: 0; padding: 0; font: 12px monospace; }
+
+header {
+  width: 100%; height: 4em;
+  position: fixed; left: 0; top: 0; z-index: 100;
+  border-bottom: 1px solid transparent;
+  box-sizing: border-box;
+}
+
+header > * {
+  display: block; margin: 1em; float: left;
+  line-height: 2em;
+}
+
+aside {
+  height: 100%; width: 280px; padding-top: 4em;
+  position: fixed; left: 0; top: 0; z-index: 101;
+  box-sizing: border-box;
+}
+
+aside a { color: inherit; text-decoration: none; }
+aside > nav.toggler {
+  width: 100%; height: 4em; padding: 0 1em;
+  position: absolute; left: 0; top: 0; overflow: hidden;
+  line-height: 4em;
+  box-sizing: border-box;
+}
+
+aside > nav.toggler > h2 {
+  display: block; margin: 0 2em 0 0; padding-left: 40px;
+  position: relative;
+  font-size: 1em; overflow: hidden;
+}
+
+aside > nav.toggler > h2:before {
+  display: inline-block; width: 24px; height: 4em;
+  position: absolute; left: 4px; top: 0;
+  background: transparent url('/favicon.png') no-repeat 50% 50%; background-size: contain;
+  content: '';
+}
+
+aside > nav.toggler > a { display: block; width: 2em; float: right; text-align: center; }
+
+
+main { padding-top: 4em; }
+#content > section { padding: 1em; margin: 1em; border-radius: 2px; }
+aside > section.content { height: 100%; font-size: 1.2em; }
+
+aside ~ main { margin-left: 280px; }
+aside ~ main > header { padding-left: 280px; }
+
+aside section.content nav {
+  display: block; width: 280px; padding-bottom: 1.2em;
+  line-height: 40px;
+}
+
+aside section.content nav h2 {
+  display: block; padding: 0 12px; margin: 0; overflow: hidden;
+  font: inherit; text-transform: uppercase;
+}
+
+aside section.content nav h2:before {
+  display: none; width: 32px; height: 40px; margin-right: 16px;
+  vertical-align: middle;
+  font: 20px XBVCL, monospace; line-height: 40px; text-align: center;
+  content: '\f10a';
+}
+
+aside ul { display: block; margin: 0; padding: 0; list-style: none; }
+aside ul li ul { height: 0; overflow: hidden; }
+aside ul li.active ul { height: auto; }
+
+aside li { position: relative; }
+aside li > span { cursor: pointer; }
+aside li > a, aside li > span {
+  display: inline-block; padding: 0 16px 0 50px; width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+aside li > a > .counter, aside li > span > .counter {
+  display: none; height: 1.6em; margin-top: -.8em; padding: 0 .5em;
+  position: absolute; right: 1em; top: 50%;
+  line-height: 1.6em; border-radius: 4px;
+}
+
+aside.toggled li > a > .counter, aside.toggled li > span > .counter {
+  right: auto; left: 4em; top: 25%;
+  font-size: .5em;
+}
+
+aside li > a > .counter.active, aside li > span > .counter.active {
+  display: inline-block;
+}
+
+aside li > a:before, aside li > span:before {
+  display: inline-block; width: 32px; height: 40px;
+  position: absolute; left: 12px; top: 0;
+  vertical-align: middle; text-align: center;
+  font: 20px XBVCL, monospace; line-height: 40px;
+  content: '\f0c7';
+}
+
+aside li li > a, aside li li > span { padding-left: 66px; }
+aside li li > a:before, aside li li > span:before { left: 28px; }
+
+aside li[class^="menu-item-"] > a:before, aside li[class^="menu-item-"] > span:before,
+aside li[class*=" menu-item-"] > a:before, aside li[class*=" menu-item-"] > span:before {
+  content: '\f079';
+}
+
+aside.toggled { width: 4.8em; }
+aside.toggled > nav.toggler > h2 > span { display: none; }
+aside.toggled ~ main { margin-left: 4.8em; }
+aside.toggled ~ main > header { padding-left: 4.8em; }
+aside.toggled ul li.active ul { height: 0; }
+aside.toggled li > a, aside.toggled li > span { padding-left: 4em; }
+aside.toggled section.content nav h2:before { display: inline-block; }
+
+header *[class^='widget-'], header *[class*=' widget-'] {
+  display: inline-block; height: 2em; width: 2em; padding: 0 4px 0 36px; margin-right: .5em;
+  position: relative; overflow: hidden;
+  text-decoration: none; text-align: center; color: inherit;
+  border: 1px solid transparent; border-radius: 2px;
+}
+
+header *[class^='widget-']:before, header *[class*=' widget-']:before {
+  display: block; width: 32px; height: 2em;
+  position: absolute; left: 0; top: 0;
+  font-family: XBVCL, monospace; text-align: center; line-height: 2em;
+  border-right: 1px solid transparent;
+}
+
+header .widget-notices:before { content: '\f097'; }
+header .widget-notices.unread:before { content: '\f099'; }
+header .widget-messages:before { content: '\f0b0'; }
+header .widget-messages.unread:before { content: '\f0b1'; }
+
+nav.user-menu {
+  margin: 0 .625em; height: 2.5em; position: relative;
+  font-size: 1.6em; line-height: 2.2em;
+  float: right;
+}
+
+nav.user-menu > a { vertical-align: middle; text-decoration: none; color: inherit; }
+nav.user-menu > a.username { font-size: .8em; }
+nav.user-menu > a.avatar {
+  display: inline-block; height: 1.8em; width: 1.8em; margin-left: .5em;
+  background: rgba(0,0,10,.1);
+  line-height: 1.8em;
+  border-radius: 10%;
+}
+
+nav.user-menu ul { list-style: none; margin: 0; padding: 0; }
+
+nav.user-menu > ul {
+  display: none; min-width: 200%;
+  position: absolute; right: 0; top: 100%;
+}
+
+nav.user-menu:hover > ul, nav.user-menu.active > ul { display: block; }
+
+nav.user-menu > ul > li {
+  padding: 0 1em; font-size: .8em;
+  border-top: 1px solid transparent;
+}
+
+nav.user-menu > ul > li li { line-height: 2.4em; }
+nav.user-menu > ul > li a { text-decoration: none; color: inherit; }
+
+nav.user-menu > ul > li.category-info { padding: 1em; border: none; position: relative; }
+nav.user-menu > ul > li.category-info > span.info {
+  display: inline-block; margin: 0 0 0 5em;
+  line-height: normal;
+  float: right;
+}
+
+nav.user-menu > ul > li.category-info > span.info > span.username {
+  display: block;
+  line-height: 1em; text-transform: uppercase;
+}
+
+nav.user-menu > ul > li.category-info > a.avatar {
+  display: inline-block; height: 4em; width: 4em;
+  position: absolute; top: 1em; left: 1em;
+  background: rgba(0,0,10,.1);
+  border-radius: 10%;
+}
+
+nav.user-menu > ul > li.category-info a.button {
+  display: inline-block; margin-top: 1em;
+  font-size: .8em; line-height: 2.2em;
+  text-align: center; text-transform: uppercase;
+}
+
+header:after, aside > nav.toggler:after,
+nav.user-menu > ul > li:after {
+  display: block; clear: both; content: '';
+}
+
+section.form { padding: 0; }
+
+#content > section {
+  border: 1px solid rgba(0,0,0,.1);
+}
+
+aside a.do-toggle:before { font-family: XBVCL, monospace; content: '<'; }
+aside.toggled a.do-toggle:before { content: '>'; }
+
+@media (max-width: 800px) {
+  aside { width: 4em; height: 4em; }
+  aside ~ main > header { padding-left: 4em; }
+  aside ~ main { margin-left: 0; }
+  aside ul li.active ul { height: 0; }
+  aside li > a, aside li > span { padding-left: 4em; }
+  aside section.content nav h2:before { display: inline-block; }
+
+  aside.toggled { width: 280px; height: 100%; }
+  aside.toggled section.content nav h2:before { display: none; }
+
+  aside a.do-toggle:before { font-family: XBVCL, monospace; content: '\f0ee'; }
+  aside.toggled a.do-toggle:before { content: '\f0d2'; }
+}

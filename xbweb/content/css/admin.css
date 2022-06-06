@@ -1,0 +1,65 @@
+@import "scrollBar.css";
+@import "grid.css";
+@import "ui.css";
+
+aside .sb-scrollbar       { background-color: rgba(255, 255, 255, .3); }
+aside .sb-scrollbar:hover { background-color: rgba(255, 255, 255, .5); }
+aside .sb-content         { overflow-x: hidden; }
+
+aside li > a[href*="/index"]:before             { content: '\f124'; }
+aside li > a[href*="/create"]:before            { content: '\f0c6'; }
+aside li > a[href*="/trash"]:before             { content: '\f0ff'; }
+aside li > a[href*="/fields/index"]:before      { content: '\f117'; }
+aside li > a[href*="/settings"]:before          { content: '\f0eb'; }
+
+aside li.menu-category.key-users > span:before  { content: '\f160'; }
+aside li.menu-category.key-groups > span:before { content: '\f161'; }
+aside li.menu-item.key-dashboard > a:before     { content: '\f133'; }
+aside li.menu-item.key-site > a:before          { content: '\f162'; }
+
+aside li.menu-item.key-leads-index        > a:before { content: '\f161'; }
+aside li.menu-item.key-leads-payments     > a:before { content: '\f149'; }
+aside li.menu-item.key-leads-services     > a:before { content: '\f14e'; }
+aside li.menu-item.key-leads-problems     > a:before { content: '\f0ef'; }
+aside li.menu-item.key-leads-symptoms     > a:before { content: '\f0bb'; }
+aside li.menu-item.key-leads-statuses     > a:before { content: '\f09a'; }
+aside li.menu-item.key-leads-categories   > a:before { content: '\f08f'; }
+aside li.menu-item.key-leads-specialities > a:before { content: '\f091'; }
+
+span.color-square {
+    display: block; height: 1em; width: 1em;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+span.color-square.white,
+select.color-select option { background: white; }
+span.color-square.black,
+select.color-select option.black { background: black; color: white; }
+span.color-square.blue,
+select.color-select option.blue { background: #bed1f8; }
+span.color-square.indigo,
+select.color-select option.indigo { background: white; }
+span.color-square.purple,
+select.color-select option.purple { background: #dfccf9; }
+span.color-square.pink,
+select.color-select option.pink { background: white; }
+span.color-square.red,
+select.color-select option.red { background: #f7c1cf; }
+span.color-square.orange,
+select.color-select option.orange { background: white; }
+span.color-square.yellow,
+select.color-select option.yellow { background: #fbedcc; }
+span.color-square.green,
+select.color-select option.green { background: #cef3d2; }
+span.color-square.teal,
+select.color-select option.teal { background: white; }
+span.color-square.cyan,
+select.color-select option.cyan { background: white; }
+span.color-square.silver,
+select.color-select option.silver { background: silver; }
+span.color-square.dark,
+select.color-select option.dark { background: white; }
+span.color-square.light-blue,
+select.color-select option.light-blue { background: white; }
+span.color-square.ocean,
+select.color-select option.ocean { background: white; }

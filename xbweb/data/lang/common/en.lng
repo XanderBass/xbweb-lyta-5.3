@@ -1,0 +1,33 @@
+save   | Save
+edit   | Edit
+reset  | Reset
+create | Create
+trash  | Trash
+index  | All
+clean  | Clean
+cancel | Cancel
+
+no_rows | There are no rows
+
+project   | Project
+dashboard | Dashboard
+site      | Go to site
+system    | System
+database  | Database
+
+error-empty   | value is empty
+error-invalid | value is incorrect
+error-short   | value is too short
+error-long    | value is too long
+error-small   | value is too small
+error-big     | value is too big
+error-exists  | value is in use
+
+field-name        | Name
+field-title       | Title
+field-description | Description
+field-category    | Category
+field-rank        | Rank
+
+category-main     | Main
+category-personal | Personal

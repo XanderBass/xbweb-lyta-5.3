@@ -1,0 +1,6 @@
+{
+  "logout" : {
+    "title"  : "Log out",
+    "action" : "/users/logout"
+  }
+}

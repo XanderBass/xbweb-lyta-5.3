@@ -1,0 +1,27 @@
+id             | ID
+main           | Main
+users-edit     | User edit
+users-index    | All users
+users-create   | New user
+users          | Users
+users-settings | Users settings
+users-login    | Log in
+users-logout   | Log out
+
+field-login    | Login    | | Login
+field-email    | E-mail   | Correct e-mail address | E-mail address
+field-phone    | Phone    | | Phone
+field-password | Password | | Password
+
+user_delete        | Delete user          | Delete user to trash?
+user_delete_ok     | User deleted         | User deleted successfully
+user_delete_error  | Error deleting user  | Error occured while deleting user
+user_restore       | Restore user         | Restore user from trash?
+user_restore_ok    | User restored        | User restored successfully
+user_restore_error | Error restoring user | Error occured while restoring user
+user_remove        | Remove user          | Remove user?
+user_remove_ok     | User removed         | User removed successfully
+user_remove_error  | Error removing user  | Error occured while removing user
+user_clean         | Trash clean          | Clean trash?
+user_clean_ok      | Trash is clean       | Trash cleaned successfully
+user_clean_error   | Error trash cleaning | Error occured while cleaning trash

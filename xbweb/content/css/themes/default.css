@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css?family=Cuprum&subset=cyrillic");
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700&subset=cyrillic");
+@import url("_.css");
+
+body { font-family: 'Noto Sans', sans-serif; }
+aside { font-family: 'Cuprum', sans-serif; }
+aside section.content nav h2 { font-family: 'Noto Sans', sans-serif; }
+
+body { background-color: rgb(240,245,250); }
+aside { background-color: rgb(20,40,70); }
+header { background-color: rgb(245,248,250); }
+
+aside > nav.toggler,
+aside li:hover > span, aside li:hover > a,
+aside li.active > span, aside li.active > a {
+  background-color: rgba(0,0,0,.2);
+}
+
+nav.user-menu > ul,
+header *[class^='widget-']:before, header *[class*=' widget-']:before,
+#content > section {
+  background-color: white;
+}
+
+aside li > a > .counter, aside li > span > .counter { background-color: rgba(0,0,0,.1); }
+nav.user-menu > ul > li.category-info a.button,
+aside li > a > .counter.active, aside li > span > .counter.active {
+  background-color: rgba(120,140,255,1);
+}
+
+body { color: rgb(100,110,115); }
+
+aside {
+  color: rgba(255,255,255,.7);
+}
+
+aside h2,
+aside li > a:before, aside li > span:before {
+  color: rgba(255,255,255,.4);
+}
+
+aside li:hover > a:before, aside li:hover > span:before,
+aside li.active > a:before, aside li.active > span:before {
+  color: white;
+}
+
+header *[class^='widget-'], header *[class*=' widget-'],
+aside li > a > .counter, aside li > span > .counter,
+aside li > a:before, aside li > span:before {
+  color: rgba(200,220,255,.4);
+}
+
+header, header *[class^='widget-'].unread, header *[class*=' widget-'].unread {
+  color: black;
+}
+
+nav.user-menu > ul,
+aside li:hover > a:before, aside li:hover > span:before,
+aside li.active > a:before, aside li.active > span:before {
+  color: rgba(120,140,255,.9);
+}
+
+header *[class^='widget-']:before, header *[class*=' widget-']:before {
+  color: rgb(120,180,255);
+}
+
+aside a:hover,
+aside nav li:hover > span, aside nav li:hover > a,
+aside nav li.active > span, aside nav li.active > a {
+  color: white;
+}
+
+nav.user-menu > ul > li {
+  border-color: rgba(0,0,0,.1);
+}
+
+header, header *[class^='widget-'], header *[class*=' widget-'] {
+  border-color: rgb(220,225,230);
+}
+
+header *[class^='widget-']:before, header *[class*=' widget-']:before {
+  border-color: rgb(230,235,240);
+}
+
+nav.user-menu > ul {
+  box-shadow: 0 20px 30px 10px rgba(45,48,50,.1);
+}
+
+header, #content > section { box-shadow: 0 0 20px rgba(45,48,50,.1); }
+aside { box-shadow: 0 4em 20px rgba(45,48,50,.1); }
+
+@media (max-width: 800px) {
+  aside { box-shadow: none; }
+  aside.toggled { box-shadow: 0 4em 20px rgba(45,48,50,.1); }
+}
