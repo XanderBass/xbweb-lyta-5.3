@@ -30,7 +30,14 @@
         require Paths\CORE . 'loader.php';
 
         /** Loading CONFIG if installed */
-        if (INSTALLED) require Paths\WEBROOT . 'config.php';
+        if (INSTALLED) {
+            require Paths\WEBROOT . 'config.php';
+        } else {
+            if (Request::get('controller') != 'install') {
+                $file = Request::get('file');
+                if ($file === false) \xbweb::redirect('/install');
+            }
+        }
 
         /** Loading second libraries */
         require Paths\LIB . 'roles.php';
