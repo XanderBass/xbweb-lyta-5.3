@@ -3,9 +3,9 @@
         Config::set(array(
             'db' => array(
                 'host' => '127.0.0.1',
-                'user' => 'dbuser',
-                'pass' => 'dbpassword',
-                'name' => 'dbname'
+                'user' => 'nebrosaerf',
+                'pass' => 'UkfuytFpf8',
+                'name' => 'nebrosaerf'
             ),
             'debug'     => false, // Debug flag
             '503'       => false, // If true, site is 503

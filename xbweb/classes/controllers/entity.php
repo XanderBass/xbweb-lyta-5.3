@@ -175,11 +175,11 @@
         }
 
         /**
-         * Edit existing entity
+         * Edit existing entity or create new
          * @return array
          * @throws ErrorNotFound
          * @throws \xbweb\Error
-         * @action ./edit
+         * @action ./save
          */
         public function do_save() {
             $model  = Model::create($this->_modelPath);

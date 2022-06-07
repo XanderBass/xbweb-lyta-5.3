@@ -13,71 +13,108 @@ body {
     text-decoration: none; line-height: 1.2em; font-weight: bold;
 }
 
-#xbweb-login {
-    width: 300px; padding: 0; margin: -200px 0 0 -150px;
-    position: absolute; top: 50%; left: 50%;
+#xbweb-login, div.xbweb-simple-form {
+    width: 600px; padding: 0; margin: 2em 0 0 -300px;
+    position: absolute; top: 0; left: 50%;
     box-sizing: border-box;
     color: rgba(0, 0, 0, .6);
     border: 1px solid transparent; border-radius: 6px;
     box-shadow: 0 25px 25px -30px rgba(0, 0, 0, .5);
 }
 
-#xbweb-login > div.messages > div { margin: 1em; padding: 0 .5em; line-height: 2em; }
+#xbweb-login {
+    width: 300px; margin-left: -150px; margin-top: -200px;
+    top: 50%;
+}
 
-#xbweb-login > h1 {
+#xbweb-login > div.messages > div,
+div.xbweb-simple-form > div.messages > div { margin: 1em; padding: 0 .5em; line-height: 2em; }
+
+#xbweb-login > h1,
+div.xbweb-simple-form > h1 {
     margin: 0; padding: .625em;
     font-size: 1.6em; font-weight: normal;
     border-bottom: 1px solid transparent;
 }
 
-#xbweb-login > form { padding: 1em; }
-#xbweb-login > form label {
+#xbweb-login > form, div.xbweb-simple-form > form { padding: 1em; }
+#xbweb-login > form label, div.xbweb-simple-form > form label {
     display: block; margin: 0 0 .75em;
     line-height: 2em;
 }
 
-#xbweb-login > form label.required > span:after {
+#xbweb-login > form label.top-lined,
+div.xbweb-simple-form > form label.top-lined {
+    margin-top: 1.5em; padding-top: 1.5em;
+    border-top: 1px solid transparent;
+}
+
+#xbweb-login > form label.bottom-lined,
+div.xbweb-simple-form > form label.bottom-lined {
+    margin-bottom: 1.5em; padding-bottom: 1.5em;
+    border-bottom: 1px solid transparent;
+}
+
+#xbweb-login > form label.required > span:after,
+div.xbweb-simple-form > form label.required > span:after {
     content: ' *'; color: red;
 }
 
 #xbweb-login > form label input[type=text],
 #xbweb-login > form label input[type=tel],
 #xbweb-login > form label input[type=email],
-#xbweb-login > form label input[type=password] {
+#xbweb-login > form label input[type=password],
+div.xbweb-simple-form > form label input[type=text],
+div.xbweb-simple-form > form label input[type=tel],
+div.xbweb-simple-form > form label input[type=email],
+div.xbweb-simple-form > form label input[type=password] {
     width: 60%; padding: 0 .5em;
     float: right;
     font: inherit; line-height: 2em; color: inherit;
     border: 1px solid transparent; border-radius: 2px;
 }
 
-#xbweb-login > form label.checkbox > input[type=checkbox] { display: none; }
-#xbweb-login > form label.checkbox > input[type=checkbox] + span {
+#xbweb-login > form label.checkbox > input[type=checkbox],
+div.xbweb-simple-form > form label.checkbox > input[type=checkbox] {
+    display: none;
+}
+
+#xbweb-login > form label.checkbox > input[type=checkbox] + span,
+div.xbweb-simple-form > form label.checkbox > input[type=checkbox] + span {
     display: block; padding-left: 24px;
     position: relative;
 }
 
-#xbweb-login > form label.checkbox > input[type=checkbox] + span:before {
+#xbweb-login > form label.checkbox > input[type=checkbox] + span:before,
+div.xbweb-simple-form > form label.checkbox > input[type=checkbox] + span:before {
     display: inline-block; height: 20px; margin-top: -10px;
     position: absolute; left: 0; top: 50%;
     font: 20px XBVCL, monospace; line-height: 20px;
     content: '\f0d5';
 }
 
-#xbweb-login > form label.checkbox > input[type=checkbox]:checked + span:before {
+#xbweb-login > form label.checkbox > input[type=checkbox]:checked + span:before,
+div.xbweb-simple-form > form label.checkbox > input[type=checkbox]:checked + span:before {
     content: '\f0cb';
 }
 
-#xbweb-login > div.links { padding: 1em; border-top: 1px solid transparent; }
-#xbweb-login > div.links a { color: inherit; line-height: 2em; }
+#xbweb-login > div.links, div.xbweb-simple-form > div.links { padding: 1em; border-top: 1px solid transparent; }
+#xbweb-login > div.links a, div.xbweb-simple-form > div.links a { color: inherit; line-height: 2em; }
 #xbweb-login > div.links button,
-#xbweb-login > div.links a.button { color: white; float: right; }
-#xbweb-login > div.links a:hover { text-decoration: none; }
+#xbweb-login > div.links a.button,
+div.xbweb-simple-form > div.links button,
+div.xbweb-simple-form > div.links a.button { color: white; float: right; }
+#xbweb-login > div.links a:hover,
+div.xbweb-simple-form > div.links a:hover { text-decoration: none; }
 
-#xbweb-login > form div.buttons label { float: left; margin: 0; }
-#xbweb-login > form div.buttons button { float: right; }
+#xbweb-login > form div.buttons label,
+div.xbweb-simple-form > form div.buttons label { float: left; margin: 0; }
+#xbweb-login > form div.buttons button,
+div.xbweb-simple-form > form div.buttons button { float: right; }
 
-#xbweb-login button, #xbweb-login a.button {
-    display: inline-block; padding: 0 1em; min-width: 100px; width: 100px;
+#xbweb-login button, #xbweb-login a.button,
+div.xbweb-simple-form button, div.xbweb-simple-form a.button {
+    display: inline-block; padding: 0 1em; min-width: 110px; width: 110px;
     font: inherit; line-height: 2em; text-decoration: none; text-align: center; color: white;
     border: 1px solid transparent; border-radius: 2px;
     box-sizing: border-box;
@@ -86,30 +123,50 @@ body {
 
 #xbweb-login > form label:after,
 #xbweb-login div.buttons:after,
-#xbweb-login div.links:after { display: block; clear: both; content: ''; }
+#xbweb-login div.links:after,
+div.xbweb-simple-form > form label:after,
+div.xbweb-simple-form div.buttons:after,
+div.xbweb-simple-form div.links:after { display: block; clear: both; content: ''; }
 
 
 #xbweb-logo,
-#xbweb-login > form label.checkbox > input[type=checkbox] + span:before {
+#xbweb-login > form label.checkbox > input[type=checkbox] + span:before,
+div.xbweb-simple-form > form label.checkbox > input[type=checkbox] + span:before {
     color: rgb(100, 140, 200);
 }
 
-#xbweb-login { background: rgb(245, 250, 255); }
+#xbweb-login, div.xbweb-simple-form { background: rgb(245, 250, 255); }
 #xbweb-login > h1,
-#xbweb-login > div.links { background: rgba(100, 140, 200, .1); }
-#xbweb-login > div.messages > div         { background: rgb(180, 180, 180); }
-#xbweb-login > div.messages > div.error   { background: rgb(255, 120, 110); }
-#xbweb-login > div.messages > div.warning { background: rgb(200, 160, 100); }
-#xbweb-login > div.messages > div.notice  { background: rgb(110, 140, 255); }
-#xbweb-login button      , #xbweb-login a.button       { background: rgb(100, 140, 200); }
-#xbweb-login button:hover, #xbweb-login a.button:hover { background: rgb(120, 160, 220); }
+#xbweb-login > div.links,
+div.xbweb-simple-form > h1,
+div.xbweb-simple-form > div.links { background: rgba(100, 140, 200, .1); }
+#xbweb-login > div.messages > div,
+div.xbweb-simple-form > div.messages > div { background: rgb(180, 180, 180); }
+#xbweb-login > div.messages > div.error,
+div.xbweb-simple-form > div.messages > div.error { background: rgb(255, 120, 110); }
+#xbweb-login > div.messages > div.warning,
+div.xbweb-simple-form > div.messages > div.warning { background: rgb(200, 160, 100); }
+#xbweb-login > div.messages > div.notice,
+div.xbweb-simple-form > div.messages > div.notice { background: rgb(110, 140, 255); }
+#xbweb-login button, #xbweb-login a.button,
+div.xbweb-simple-form button, div.xbweb-simple-form a.button { background: rgb(100, 140, 200); }
+#xbweb-login button:hover, #xbweb-login a.button:hover,
+div.xbweb-simple-form button:hover, div.xbweb-simple-form a.button:hover { background: rgb(120, 160, 220); }
 
-#xbweb-login { border-color: rgba(100, 100, 100, .3); }
-#xbweb-login > h1,
+#xbweb-login, div.xbweb-simple-form { border-color: rgba(100, 100, 100, .3); }
+#xbweb-login > h1, div.xbweb-simple-form > h1,
 #xbweb-login > form label input[type=text],
 #xbweb-login > form label input[type=tel],
 #xbweb-login > form label input[type=email],
 #xbweb-login > form label input[type=password],
-#xbweb-login > div.links {
+div.xbweb-simple-form > form label input[type=text],
+div.xbweb-simple-form > form label input[type=tel],
+div.xbweb-simple-form > form label input[type=email],
+div.xbweb-simple-form > form label input[type=password],
+#xbweb-login > div.links, div.xbweb-simple-form > div.links,
+#xbweb-login > form label.top-lined,
+div.xbweb-simple-form > form label.top-lined,
+#xbweb-login > form label.bottom-lined,
+div.xbweb-simple-form > form label.bottom-lined {
     border-color: rgba(100, 100, 100, .1);
 }

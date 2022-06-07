@@ -63,13 +63,18 @@
             if (empty($data['template'])) {
                 $fn  = empty($req['template']) ? 'index' : $req['template'];
                 $mod = $req['module'];
+                if (($req['controller'] == 'users') && ($req['action'] == 'login')) {
+                    $fn  = array($fn.'.'.Content::EXT_TPL, 'not-logged.'.Content::EXT_TPL);
+                    $sys = true;
+                }
+                if ($req['controller'] == 'install') $sys = true;
             } else {
                 $fn  = explode('/', $data['template']);
                 $mod = array_shift($fn);
                 $fn  = implode('/', $fn);
                 if ($fn == 'message') $sys = true;
             }
-            $fn .= '.'.Content::EXT_TPL;
+            if (!is_array($fn)) $fn .= '.'.Content::EXT_TPL;
             $fn  = Content::file($fn, 'templates', $mod, $sys, $_fl);
             return Content::render($fn, $data, $_fl);
         }
@@ -84,6 +89,11 @@
         public static function content($path = null, $data = null, $sys = false) {
             if (CMF::isError()) return self::_error();
             $req = ($path === null) ? Request::get() : Request::route($path);
+            if (
+                (($req['controller'] == 'users') && ($req['action'] == 'login'))
+                ||
+                ($req['controller'] == 'install')
+            ) $sys = true;
             $fn  = empty($req['page']) ? 'index' : $req['page'];
             $fn  = trim($fn, '/');
             $cfl = array($fn.'.'.Content::EXT_PAGE);

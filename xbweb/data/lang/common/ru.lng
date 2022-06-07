@@ -1,11 +1,14 @@
-save   | Сохранить
-edit   | Редактировать
-reset  | Сбросить
-create | Создать
-trash  | Корзина
-index  | Все
-clean  | Очистить
-cancel | Отмена
+save      | Сохранить
+edit      | Редактировать
+reset     | Сбросить
+create    | Создать
+trash     | Корзина
+index     | Все
+clean     | Очистить
+cancel    | Отмена
+next-step | Далее
+prev-step | Назад
+finish    | Завершить
 
 no_rows | Пусто
 

@@ -45,7 +45,7 @@
                 if ($module == 'app') continue;
                 self::loadModule($module);
             }
-            Session::init();
+            if (INSTALLED) Session::init();
         }
 
         /**
