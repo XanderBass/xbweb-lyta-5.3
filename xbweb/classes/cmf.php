@@ -40,11 +40,13 @@
                 'changepass' => '/users/changepass',
             ));
             $this->_modules = \xbweb::modules(true);
-            self::loadModule('app');
             foreach ($this->_modules as $module) {
                 if ($module == 'app') continue;
                 self::loadModule($module);
             }
+            self::loadModule('app');
+            $cfg = Settings::getAll();
+            if (!empty($cfg)) Config::set($cfg);
             if (INSTALLED) Session::init();
         }
 

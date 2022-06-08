@@ -69,6 +69,25 @@ SQL;
         }
 
         /**
+         * Get all settings
+         * @return array
+         * @throws FieldError
+         */
+        public static function getAll() {
+            $values = array();
+            if ($rows = DB::rows("select * from `[+prefix+]settings`")) {
+                foreach ($rows as $row) {
+                    $mn = $row['module'];
+                    $fl = self::_fields($mn);
+                    $fn = $row['name'];
+                    if (empty($fields[$fn])) continue;
+                    $values[$mn][$fn] = Field::unpack($fl[$fn], $row['value']);
+                }
+            }
+            return $values;
+        }
+
+        /**
          * Save settings from request
          * @param string $module  Module
          * @param array  $values  Values

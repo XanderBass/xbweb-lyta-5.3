@@ -20,7 +20,7 @@
      * Configuration component class
      */
     class Config {
-        protected static $_registry = null;
+        protected static $_registry = array();
 
         /**
          * Get configuration value
@@ -58,7 +58,11 @@
          */
         public static function set($name, $value = null) {
             if (is_array($name)) {
-                self::$_registry = $name;
+                if (empty($value)) {
+                    self::$_registry = array_merge_recursive(self::$_registry, $name);
+                } else {
+                    self::$_registry = $name;
+                }
                 return self::$_registry;
             }
             $name = trim($name, '/');
