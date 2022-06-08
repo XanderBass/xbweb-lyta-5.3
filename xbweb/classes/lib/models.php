@@ -17,6 +17,7 @@
     namespace xbweb\lib;
 
     use xbweb\Field;
+    use xbweb\FieldError;
     use xbweb\User;
 
     /**
@@ -27,17 +28,19 @@
          * Get fields from REQUEST
          * @param array  $fields     Fields
          * @param string $operation  Operation
+         * @param array  $post       Source of request data
          * @return array
          * @throws \xbweb\Error
          */
-        public static function request($fields, $operation) {
-            $ug = User::current()->role;
+        public static function request($fields, $operation, $post = null) {
+            $ug     = User::current()->role;
             $errors = array();
             $values = array();
+            if (empty($post)) $post = $_POST;
             foreach ($fields as $key => $field) {
                 if (Field::allowed($field, $operation, $ug)) {
-                    if (!isset($_POST[$key]) && ($operation == 'update')) continue;
-                    $value = isset($_POST[$key]) ? $_POST[$key] : null;
+                    if (!isset($post[$key]) && ($operation == 'update')) continue;
+                    $value = isset($post[$key]) ? $post[$key] : null;
                 } else {
                     if (in_array('system', $field['attributes']) && !empty($field['default'])) {
                         $value = $field['default'];
@@ -136,5 +139,33 @@
                 $data[$key] = $field;
             }
             return $data;
+        }
+
+        /**
+         * Correct array of fields
+         * @param array $rows   Rows
+         * @param mixed $model  Model
+         * @param mixed $pri    Primary field
+         * @return array
+         * @throws FieldError
+         */
+        public static function fields($rows, $model = null, &$pri = null) {
+            $ret = array();
+            foreach ($rows as $fid => $field) {
+                if (!empty($field['std'])) $field = Field::std($field);
+                $field['model'] = $model;
+                $field = Field::correct($field);
+                if (empty($field['name'])) throw new FieldError('Empty field name', $fid);
+                $ret[$field['name']] = $field;
+                if (in_array('primary', $field['attributes'])) $pri = $field['name'];
+            }
+            foreach ($ret as $fn => $field) {
+                if (method_exists($field['classname'], 'items')) {
+                    $ret[$fn]['data']['items'] = call_user_func_array(array(
+                        $field['classname'], 'items'
+                    ), array($field));
+                }
+            }
+            return $ret;
         }
     }

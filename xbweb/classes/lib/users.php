@@ -165,15 +165,16 @@
          * @throws ErrorNotFound
          */
         public static function register(&$request, &$errors = false) {
-            $model   = Model::create('/users');
+            $model = Model::create('/users');
+            $act   = intval(Config::get('users/activation', 0));
             list($request, $errors) = $model->request('create', 'register', true);
             $request['key'] = true;
-            if (!Config::get('users/activation', false)) $request['activated'] = true;
+            if (empty($act)) $request['activated'] = true;
             if (empty($errors)) {
                 if ($result = $model->add($request)) {
                     $user = PipeLine::invoke('registerUsers', self::getByID($result), $request);
                     $data = null;
-                    if (Config::get('users/activation', false)) {
+                    if ($act == 1) {
                         $key  = self::gkey($user, 'activation');
                         $url  = Request::canonical('/activation?user=' . $user['id'] . '&key=' . $key);
                         $data = array('url' => $url);

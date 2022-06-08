@@ -13,6 +13,10 @@ field-login    | Login    | | Login
 field-email    | E-mail   | Correct e-mail address | E-mail address
 field-phone    | Phone    | | Phone
 field-password | Password | | Password
+field-activation | Activation
+
+no-activation | No activation
+by-email      | By Email
 
 user_delete        | Delete user          | Delete user to trash?
 user_delete_ok     | User deleted         | User deleted successfully

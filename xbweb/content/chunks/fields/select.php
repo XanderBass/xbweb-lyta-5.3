@@ -4,7 +4,7 @@
     if (empty($title))       $title       = 'Link';
     if (empty($placeholder)) $placeholder = $title;
     if (empty($description)) $description = '';
-    if (empty($flags))       $flags = array();
+    if (empty($flags))       $flags       = array();
     if (empty($data['items'])) $data['items'] = array();
     if (empty($data['title'])) $data['title'] = 'name';
     $rc = in_array('required', $flags) ? ' required' : '';

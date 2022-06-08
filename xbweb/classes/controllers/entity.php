@@ -33,6 +33,7 @@
 
     use xbweb\Mailer;
     use xbweb\Response;
+    use xbweb\Settings;
 
     /**
      * Entity controller prototype class
@@ -254,11 +255,19 @@
         /**
          * Settings
          * @return array
+         * @throws \xbweb\Error
+         * @throws \xbweb\FieldError
          * @action ./settings
          */
         public function do_settings() {
-            // TODO
-            return Response::success();
+            $mid = lcfirst($this->getMID());
+            if (Request::isPost()) {
+                Settings::save($mid, $values, $errors);
+            } else {
+                $values = Settings::get($mid);
+                $errors = null;
+            }
+            return Response::form(Settings::form($mid), $values, $errors);
         }
 
         /**

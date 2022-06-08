@@ -39,3 +39,22 @@
         }
         return $data;
     });
+
+    PipeLine::handler('cmf', 'settingsUsers', function($data){
+        $data['activation'] = array(
+            'name'   => 'activation',
+            'class'  => '/integer',
+            'input'  => '/select',
+            'access' => array(
+                'admin'  => 'full',
+                'others' => 'read'
+            ),
+            'data' => array(
+                'items' => array(
+                    0 => array('name' => Language::translate('no-activation')),
+                    1 => array('name' => Language::translate('by-email'))
+                )
+            ),
+        );
+        return $data;
+    });

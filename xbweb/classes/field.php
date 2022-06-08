@@ -81,7 +81,7 @@
                 }
             }
             if (empty($data['input'])) $data['input'] = $data['class'];
-            foreach (array('default', 'title', 'description', 'unique', 'index') as $k)
+            foreach (array('default', 'title', 'description', 'unique', 'index', 'category') as $k)
                 $data[$k] = isset($data[$k]) ? $data[$k] : null;
             foreach (array('access', 'attributes', 'flags') as $k)
                 $data[$k] = empty($data[$k]) ? 0 : $data[$k];

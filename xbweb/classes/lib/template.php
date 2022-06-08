@@ -398,8 +398,8 @@ html;
             }
             $tabs = implode("\r\n", $tabs);
             $buttons = array(
-                'edit'  => Language::translate('edit'),
-                'save'  => Language::translate('save'),
+                'edit'  => Language::translate('save'),
+                'save'  => Language::translate('apply'),
                 'reset' => Language::translate('reset'),
             );
             $errs = array();

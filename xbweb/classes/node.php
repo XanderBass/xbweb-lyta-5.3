@@ -18,7 +18,7 @@
 
     /**
      * CMF node prototype class
-     * @property-read string $path
+     * @property-read string $path  Node path
      */
     abstract class Node extends BasicObject {
         const NODE_TYPE = '';
@@ -31,6 +31,14 @@
          */
         protected function __construct($path) {
             $this->_path = $path;
+        }
+
+        /**
+         * Property: mid
+         * @return string
+         */
+        public function getMID() {
+            return strtr(ucwords($this->_path, '/'), array('/' => ''));
         }
 
         /**

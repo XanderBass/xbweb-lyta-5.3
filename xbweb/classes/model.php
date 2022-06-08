@@ -31,18 +31,20 @@
      * @property-read array  $options  Model options
      */
     abstract class Model extends Node {
-        const NODE_TYPE = 'Model';
-        const OPTIONS   = 'deleted410,norows204';
-        const LIMIT     = 20;
+        const NODE_TYPE  = 'Model';
+        const OPTIONS    = 'deleted410,norows204';
+        const LIMIT      = 20;
+        const FIELDS_KEY = 'fields';
 
         protected static $_models = array();
 
-        protected $_fields  = array();
-        protected $_table   = null;
-        protected $_alias   = null;
-        protected $_limit   = self::LIMIT;
-        protected $_primary = null;
-        protected $_options = array();
+        protected $_fields   = array();
+        protected $_table    = null;
+        protected $_alias    = null;
+        protected $_limit    = self::LIMIT;
+        protected $_primary  = null;
+        protected $_options  = array();
+        protected $_settings = array();
 
         /**
          * Constructor
@@ -56,27 +58,14 @@
             if (!is_array($data))      throw new NodeError('Model data incorrect', $path);
             if (empty($data['table'])) throw new NodeError('No table specified', $path);
             $this->_table   = $data['table'];
+            $this->_alias   = 't_'.ucwords($this->_table, '_');
             $this->_options = empty($data['options']) ? array() : LibFlags::toArray(static::OPTIONS, $data['options']);
             $this->_limit   = empty($data['limit']) ? static::LIMIT : intval($data['limit']);
             $rows = empty($data['fields']) ? false : $data['fields'];
             $rows = PipeLine::invoke($this->pipeName('fields'), $rows);
             if (empty($rows)) throw new NodeError('There are no valid fields', $path);
-            foreach ($rows as $fid => $field) {
-                if (!empty($field['std'])) $field = Field::std($field);
-                $field['model'] = $this;
-                $field = Field::correct($field);
-                if (empty($field['name'])) throw new FieldError('Empty field name', $fid);
-                $this->_fields[$field['name']] = $field;
-                if (in_array('primary', $field['attributes'])) $this->_primary = $field['name'];
-            }
-            $this->_alias = 't_'.ucwords($this->_table, '_');
-            foreach ($this->_fields as $fn => $field) {
-                if (method_exists($field['classname'], 'items')) {
-                    $this->_fields[$fn]['data']['items'] = call_user_func_array(array(
-                        $field['classname'], 'items'
-                    ), array($field));
-                }
-            }
+            $this->_fields = Models::fields($rows, $this, $pkey);
+            if (!empty($pkey)) $this->_primary = $pkey;
         }
 
         /**
