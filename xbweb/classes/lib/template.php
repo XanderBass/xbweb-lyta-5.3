@@ -429,8 +429,8 @@ html;
     {$cats}
     {$tabs}
     <div class="buttons">
-        <button type="submit" name="action" value="edit" class="ok">{$buttons['edit']}</button>
-        <button type="submit" name="action" value="save" class="ok">{$buttons['save']}</button>
+        <button type="submit" name="method" value="edit" class="ok">{$buttons['edit']}</button>
+        <button type="submit" name="method" value="save" class="ok">{$buttons['save']}</button>
         <button type="reset">{$buttons['reset']}</button>
     </div>
 </form> 

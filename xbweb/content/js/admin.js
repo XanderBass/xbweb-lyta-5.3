@@ -33,6 +33,10 @@ $(function(){
         return false;
     }).on('submit', 'form', function(){
         var loader = null;
+        var data   = {"is-ajax": "true"};
+        if ($(this)[0].hasAttribute('name') && $(this)[0].hasAttribute('value')) {
+            data[$(this).attr('name')] = $(this)[0].hasAttribute('value');
+        }
         if ($(this).closest('.modal-wrapper')) {
             loader = $(this).closest('.modal-wrapper');
         } else {
@@ -40,12 +44,23 @@ $(function(){
         }
         loader.addClass('loading');
         $(this).ajaxSubmit({
-            "data"    : {"is-ajax": "true"},
+            "data"    : data,
             "success" : function(ret) {
                 $('#content').html(ret).XBWebInit();
                 loader.remove();
             }
         });
         return false;
+    }).on('click', 'form button[type=submit]', function(){
+        var form = $(this).closest('form');
+        if ($(this)[0].hasAttribute('name') && $(this)[0].hasAttribute('value')) {
+            var name  = $(this).attr('name');
+            var value = $(this).attr('value');
+            if (form.find('input[name=' + name + ']').length > 0) {
+                form.find('input[name=' + name + ']').val(value);
+            } else {
+                form.append($('<input type="hidden" name="'+name+'">').val(value));
+            }
+        }
     });
 });

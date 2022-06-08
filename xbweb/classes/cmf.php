@@ -100,7 +100,6 @@
             $module = Request::get('module');
             if (empty($page)) $page = 'index';
             $fn = lib\Content::file($page.'.'.lib\Content::EXT_PAGE, 'pages', $module, $sys, $_fl);
-            Debug::set('page search', $_fl);
             if (empty($fn)) {
                 $fd = PipeLine::invoke('pageNotFound', array(), $page);
                 if (empty($fd)) throw new ErrorNotFound('Page not found', $page);

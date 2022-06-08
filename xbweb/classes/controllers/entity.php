@@ -170,7 +170,13 @@
         public function do_edit() {
             $model  = Model::create($this->_modelPath);
             $result = $this->_form('update', $values, $errors);
-            if (Request::isPost() && $result) $this->_index();
+            if (Request::isPost() && $result) {
+                $sa = empty($_POST['method']) ? 'edit' : $_POST['method'];
+                switch ($sa) {
+                    case 'save': break;
+                    default    : $this->_index();
+                }
+            }
             return Response::form($model->form('update', $values), $values, $errors);
         }
 

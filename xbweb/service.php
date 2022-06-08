@@ -1,4 +1,5 @@
 <?php
+    /** @noinspection PhpUnusedParameterInspection */
     /**
      * Xander Bass Website Content Management Framework (XBWeb CMF)
      *
@@ -30,7 +31,7 @@
         return $data;
     });
 
-    PipeLine::handler('cmf', 'formUsers', function($data, $operation){
+    PipeLine::handler('cmf', 'formUsers', function($data, $row, $operation){
         switch ($operation) {
             case 'update':
                 $data['main']['password']['flags'] = array();
