@@ -422,6 +422,9 @@ html;
             } else {
                 $errs = '';
             }
+            $_b = array('<button type="submit" name="method" value="edit" class="ok">'.$buttons['edit'].'</button>');
+            if (array_pop($action) != 'settings') $_b[] = '<button type="submit" name="method" value="save" class="ok">'.$buttons['save'].'</button>';
+            $_b = implode("\r\n", $_b);
             return <<<html
 <form action="{$url}" method="post" enctype="multipart/form-data">
     <h2>{$caption}</h2>
@@ -429,8 +432,7 @@ html;
     {$cats}
     {$tabs}
     <div class="buttons">
-        <button type="submit" name="method" value="edit" class="ok">{$buttons['edit']}</button>
-        <button type="submit" name="method" value="save" class="ok">{$buttons['save']}</button>
+        {$_b}
         <button type="reset">{$buttons['reset']}</button>
     </div>
 </form> 

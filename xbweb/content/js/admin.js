@@ -34,9 +34,6 @@ $(function(){
     }).on('submit', 'form', function(){
         var loader = null;
         var data   = {"is-ajax": "true"};
-        if ($(this)[0].hasAttribute('name') && $(this)[0].hasAttribute('value')) {
-            data[$(this).attr('name')] = $(this)[0].hasAttribute('value');
-        }
         if ($(this).closest('.modal-wrapper')) {
             loader = $(this).closest('.modal-wrapper');
         } else {

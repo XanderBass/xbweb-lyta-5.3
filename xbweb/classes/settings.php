@@ -81,7 +81,7 @@ SQL;
             if (empty($_POST[$module])) return true;
             $fields  = self::_fields($module);
             $REQ     = Models::request($fields, 'update', $_POST[$module]);
-            $values  = $REQ['request'];
+            $values  = $REQ['values'];
             $errors  = $REQ['errors'];
             if (!empty($errors)) return false;
             $rows    = array();
