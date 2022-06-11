@@ -20,7 +20,7 @@
         '/xbweb/js/jquery.js',
         '/xbweb/js/jquery.form.js',
         '/xbweb/js/ui.js',
-        '/xbweb/js/scrollbar.js'
+        '/xbweb/js/scrollBar.js'
     ))?>
     <?=Template::jqueryLoad()?>
     <script type="text/javascript" src="/xbweb/js/admin.js"></script>

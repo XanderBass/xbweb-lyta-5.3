@@ -11,3 +11,5 @@ nbproject
 /www
 /admin
 config.php
+robots.txt
+modules/app
