@@ -8,6 +8,6 @@ nbproject
 
 # CMF
 /var
-/www/files
-/admin/files
+/www
+/admin
 config.php

@@ -45,9 +45,11 @@
                 self::loadModule($module);
             }
             self::loadModule('app');
-            $cfg = Settings::getAll();
-            if (!empty($cfg)) Config::set($cfg);
-            if (INSTALLED) Session::init();
+            if (INSTALLED) {
+                $cfg = Settings::getAll();
+                if (!empty($cfg)) Config::set($cfg);
+                Session::init();
+            }
         }
 
         /**
@@ -127,6 +129,7 @@
             $file = ($folder == 'xbweb' ? Paths\CORE.'content/' : Paths\MODULES).$file;
             $mime = lib\Files::getMIMEByExt($file);
             if (!file_exists($file)) throw new ErrorNotFound('XBWeb file not found', Request::get('file'));
+            header($_SERVER['SERVER_PROTOCOL'] . ' 200 OK');
             header("Content-type: {$mime}; charset=".Config::get('charset', 'utf-8'));
             readfile($file);
             exit;
