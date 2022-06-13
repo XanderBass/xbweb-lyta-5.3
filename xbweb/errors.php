@@ -59,7 +59,6 @@
                 }
             }
             $this->data['message'] = $msg;
-            http_response_code($this->httpCode);
             parent::__construct($msg, $code);
         }
 

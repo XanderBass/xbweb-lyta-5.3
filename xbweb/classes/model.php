@@ -312,7 +312,6 @@
                     $path = $data;
                     $data = json_decode(file_get_contents($fn), true);
                 }
-                http_response_code(200);
             }
             if (empty(self::$_models[$path])) self::$_models[$path] = new $cn($path, $data);
             return self::$_models[$path];

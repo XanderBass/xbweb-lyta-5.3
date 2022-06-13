@@ -65,16 +65,18 @@
             CMF::get();
             $response = CMF::execute();
             $response['error_page'] = false;
+            $error = false;
             if (empty($response['status']))   $response['status']   = 'success';
             if (empty($response['HTTPCode'])) $response['HTTPCode'] = 200;
-            if (CMF::isError()) http_response_code(200);
-        } catch (\Exception $e) {
-            $response = Error::getResponse($e);
+        } catch (\Exception $error) {
+            $response = Error::getResponse($error);
             $response['error_page'] = true;
             if (empty($response['status']))   $response['status']   = 'error';
             if (empty($response['HTTPCode'])) $response['HTTPCode'] = 500;
-            if (http_response_code() > 499) CMF::logError($e);
         }
+
+        http_response_code($response['HTTPCode']);
+        if (http_response_code() > 499) CMF::logError($error);
 
         Debug::p('Action executed');
 

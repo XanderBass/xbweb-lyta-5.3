@@ -134,34 +134,22 @@
             switch ($cn[0]) {
                 case 'modules':
                     array_shift($cn);
-                    if (count($cn) < 2) {
-                        http_response_code(500);
-                        throw new Exception("Invalid module class '{$classname}'");
-                    }
+                    if (count($cn) < 2) throw new Exception("Invalid module class '{$classname}'");
                     $mn = array_shift($cn);
                     $fn = xbweb\Paths\MODULES.$mn.'/classes/'.implode('/', $cn).'.php';
                     break;
                 case 'www':
                 case 'admin':
                     $mn = array_shift($cn);
-                    if (empty($cn)) {
-                        http_response_code(500);
-                        throw new Exception("Invalid module class '{$classname}'");
-                    }
+                    if (empty($cn)) throw new Exception("Invalid module class '{$classname}'");
                     $fn = xbweb\Paths\WEBROOT.$mn.'/classes/'.implode('/', $cn).'.php';
                     break;
                 default:
                     $fn = xbweb\Paths\CORE.'classes/'.implode('/', $cn).'.php';
             }
-            if (!file_exists($fn)) {
-                http_response_code(500);
-                throw new Exception("No class file for '{$classname}' in '{$fn}'");
-            }
+            if (!file_exists($fn)) throw new Exception("No class file for '{$classname}' in '{$fn}'");
             require $fn;
-            if (!class_exists($classname, false)) {
-                http_response_code(500);
-                throw new Exception("No class '{$classname}' in '{$fn}'");
-            }
+            if (!class_exists($classname, false)) throw new Exception("No class '{$classname}' in '{$fn}'");
             return true;
         });
     }

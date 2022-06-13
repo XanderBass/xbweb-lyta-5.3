@@ -251,12 +251,10 @@
             $cn = self::realClass($path, $type, $fn);
             if (!class_exists($cn, false)) {
                 if (!file_exists($fn)) {
-                    http_response_code(500);
                     throw new Exception("No class file for '{$cn}' in '{$fn}'");
                 }
                 require $fn;
                 if (!class_exists($cn, false)) {
-                    http_response_code(500);
                     throw new Exception("No class '{$cn}' in '{$fn}'");
                 }
             }
