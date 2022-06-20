@@ -281,6 +281,8 @@
          * @param string $template  Template
          * @param mixed  $data      Variables
          * @param mixed  $files     Attachments
+         * @param mixed  $headers   Headers
+         * @param mixed  $msg       Message
          * @return string
          */
         public function body($subject, $template, $data, $files, &$headers = null, &$msg = null) {
