@@ -184,4 +184,17 @@ APACHE;
             $ext  = array_pop($name);
             return \xbweb::MIMEType($ext);
         }
+
+        /**
+         * Get data-URI for file
+         * @param string $name  File name
+         * @return string
+         */
+        public static function dataURI($name) {
+            $mime = self::getMIMEByExt($name);
+            $f    = fopen($name, "rb");
+            $data = fread($f, filesize($name));
+            fclose($f);
+            return "data:{$mime};base64,".base64_encode($data);
+        }
     }

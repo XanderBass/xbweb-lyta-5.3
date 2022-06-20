@@ -40,20 +40,11 @@
             foreach ($this->_bcc as $email) $rec[] = $email;
             if (empty($rec)) throw new Error('No mail addresses');
 
-            $headers = $this->get_headers($subject);
-
             $data['config']  = $this->_config;
             $data['subject'] = $subject;
 
-            $msg = $this->message(self::letter($template, $data));
-            if (is_array($files)) if (count($files) > 0) foreach ($files as $fn) $msg.= "\r\n".$this->file($fn);
-            $msg.= "\r\n{$this->_splitter}--";
+            $body = $this->body($subject, $template, $data, $files, $headers, $msg);
 
-            $_ = array();
-            foreach ($headers as $k => $v) $_[] = "$k: $v";
-            $headers = implode("\r\n", $_);
-
-            $body = "{$headers}\r\n\r\n{$msg}\r\n.\r\n";
             if (Files::dir(\xbweb\Paths\RUNTIME.'mail')) {
                 file_put_contents(\xbweb\Paths\RUNTIME.'mail/'.$this->_splitter.'.mail', $body);
             }

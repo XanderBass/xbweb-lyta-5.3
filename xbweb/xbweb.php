@@ -78,6 +78,10 @@
             return $r;
         }
 
+        public static function b64hash($s) {
+            return trim(strtr(base64_encode(pack("H*" , md5($s))), '+/', '-_'), '=');
+        }
+
         /**
          * Generate string-based unique ID
          * @param string $s  Input string

@@ -91,19 +91,10 @@
 
             $lines[] = array('DATA', '354', 'invalid data');
 
-            $headers = $this->get_headers($subject);
-
             $data['config']  = $this->_config;
             $data['subject'] = $subject;
 
-            $msg = $this->message(self::letter($template, $data));
-            if (is_array($files)) if (count($files) > 0) foreach ($files as $fn) $msg.= "\r\n".$this->file($fn);
-
-            $_ = array();
-            foreach ($headers as $k => $v) $_[] = "$k: $v";
-            $headers = implode("\r\n", $_);
-
-            $body = "{$headers}\r\n\r\n{$msg}\r\n--{$this->_splitter}--\r\n.\r\n";
+            $body = $this->body($subject, $template, $data, $files, $headers, $msg);
             if ($this->_logData) {
                 $file = \xbweb\Paths\RUNTIME.'mail/'.\xbweb::now('Y-m-d-H-i-s').'-'.$this->_splitter.'.txt';
                 if (Files::dir(dirname($file))) {

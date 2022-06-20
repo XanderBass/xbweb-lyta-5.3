@@ -40,6 +40,8 @@
     abstract class Mailer extends BasicObject {
         const MIME_VERSION = '1.0';
 
+        protected static $_media = array();
+
         protected $_config   = null;
         protected $_from     = null;
         protected $_reply    = null;
@@ -232,7 +234,7 @@
             $msg = '--'.$this->_splitter."\r\n";
             $msg.= 'Content-Type: text/'.$this->_config['type'].'; charset='.$this->_config['charset']."\r\n";
             $msg.= "Content-Transfer-Encoding: base64\r\n\r\n";
-            $msg.= chunk_split(base64_encode("\r\n\r\n\r\n\r\n\r\n\r\n".$html));
+            $msg.= chunk_split(base64_encode($html));
             return $msg;
         }
 
@@ -255,6 +257,49 @@
         }
 
         /**
+         * Get file part
+         * @param string $fn  Filename
+         * @return string
+         */
+        public function media($fn) {
+            $mt  = LibFiles::getMIMEByExt($fn);
+            $fid = self::inlineFileName($fn);
+            $f   = fopen($fn, "rb");
+            $msg = '--'.$this->_splitter."\r\n";
+            $msg.= "Content-ID: <{$fid}>\r\n";
+            $msg.= "Content-Type: {$mt}\r\n";
+            $msg.= "Content-Transfer-Encoding: base64\r\n";
+            $msg.= "Content-Disposition: inline\r\n\r\n";
+            $msg.= chunk_split(base64_encode(fread($f, filesize($fn))));
+            fclose($f);
+            return $msg;
+        }
+
+        /**
+         * Get letter body
+         * @param string $subject   Subject
+         * @param string $template  Template
+         * @param mixed  $data      Variables
+         * @param mixed  $files     Attachments
+         * @return string
+         */
+        public function body($subject, $template, $data, $files, &$headers = null, &$msg = null) {
+            self::$_media = array();
+            // Headers
+            $headers = $this->get_headers($subject);
+            $_ = array();
+            foreach ($headers as $k => $v) $_[] = "$k: $v";
+            $headers = implode("\r\n", $_);
+            // Message
+            $msg = $this->message(self::letter($template, $data));
+            if (!empty(self::$_media)) foreach (self::$_media as $fn) $msg.= "\r\n".$this->media($fn);
+            if (is_array($files)) if (count($files) > 0) foreach ($files as $fn) $msg.= "\r\n".$this->file($fn);
+            $msg.= "\r\n{$this->_splitter}--";
+            // Return
+            return "{$headers}\r\n\r\n{$msg}\r\n.\r\n";
+        }
+
+        /**
          * Normalize config
          * @param mixed $config  Config
          * @return mixed
@@ -272,6 +317,15 @@
         abstract public function send($template, $subject, $data = array(), $files = null);
 
         /**
+         * Get CID for inline file
+         * @param string $fn  Real file name
+         * @return string
+         */
+        public static function inlineFileName($fn) {
+            return 'file_'.\xbweb::b64hash($fn);
+        }
+
+        /**
          * Compose letter
          * @param string $template  Template
          * @param array  $data      Data
@@ -284,6 +338,16 @@
             $fnt = Content::file($template.'.'.Content::EXT_TPL, 'templates/mail', $module, false, $fl);
             if (empty($fnt)) return true;
             return Content::render($fnt, $data, $fl);
+        }
+
+        /**
+         * Add media file
+         * @param string $fn  Real file name
+         * @return string
+         */
+        public static function addMedia($fn) {
+            self::$_media[] = $fn;
+            return self::inlineFileName($fn);
         }
 
         /**
