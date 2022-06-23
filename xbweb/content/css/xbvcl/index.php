@@ -1,11 +1,9 @@
-<?php
-    if (empty($fontroot)) $fontroot = '';
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
     <title>XBVCL iconic font</title>
     <link rel="icon" href="<?=xbweb::icon()?>" type="image/png">
-    <link rel="stylesheet" type="text/css" href="<?=$fontroot?>font.css">
+    <link rel="stylesheet" type="text/css" href="/xbweb/css/xbvcl/font.css">
     <style>
         ul {
             display: block; margin: 1em auto; padding: 0; list-style: none; width: 960px;

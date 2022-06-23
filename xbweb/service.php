@@ -52,7 +52,10 @@
             'data' => array(
                 'items' => array(
                     0 => array('name' => Language::translate('no-activation')),
-                    1 => array('name' => Language::translate('by-email'))
+                    1 => array('name' => Language::translate('by-email')),
+                    2 => array('name' => Language::translate('by-phone')),
+                    3 => array('name' => Language::translate('by-both')),
+                    4 => array('name' => Language::translate('manual-activation')),
                 )
             ),
         );

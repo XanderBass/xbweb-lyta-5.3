@@ -8,11 +8,16 @@ XBWebUI = {
         return b + ', ' + a;
     },
     "intval" : function(v) {
-        try { return parseInt(v); } catch (e) { return 0; }
+        try {
+            return parseInt(v);
+        } catch (e) {
+            return 0;
+        }
     },
+    // Init
     "init" : function() {
         this.env.isIE = /*@cc_on!@*/false;
-    }
+    },
 };
 
 (function($){

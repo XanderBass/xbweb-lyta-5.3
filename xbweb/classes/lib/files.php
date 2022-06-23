@@ -197,4 +197,21 @@ APACHE;
             fclose($f);
             return "data:{$mime};base64,".base64_encode($data);
         }
+
+        /**
+         * Get cached file
+         * @param string   $file  Cached file name
+         * @param callable $get   Callback for getting data
+         * @return bool|string
+         */
+        public static function cached($file, $get) {
+            $fn = \xbweb\Paths\RUNTIME.$file;
+            if (file_exists($fn)) return file_get_contents($fn);
+            if (is_callable($get)) {
+                $data = $get();
+                if (self::dir(dirname($fn))) file_put_contents($fn, $data);
+                return $data;
+            }
+            return false;
+        }
     }

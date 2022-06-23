@@ -120,6 +120,7 @@
          */
         public static function table($table = null) {
             $table = self::tableName($table);
+            $users = self::tableName('users');
             return <<<sql
 create table if not exists `{$table}` (
   `id`          bigint not null auto_increment,
@@ -129,13 +130,15 @@ create table if not exists `{$table}` (
   `charset`     varchar (16) null,
   `title`       tinytext null,
   `description` text null,
-  `access`      tinyint null,
+  `access`      int not null default '0',
   `flags`       int not null default '0',
   `created`     datetime not null,
   `deleted`     datetime null,
+  `owner`       bigint null,
   primary key (`id`),
   unique index `node` (`parent`,`alias`),
-  foreign key (`parent`) references `{$table}`(`id`) on update set null on delete cascade 
+  foreign key (`parent`) references `{$table}`(`id`) on update set null on delete cascade,
+  foreign key (`owner`)  references `{$users}`(`id`) on update set null on delete cascade
 ) Engine = InnoDB
 sql;
         }

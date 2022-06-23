@@ -120,11 +120,20 @@
         public static function file($file) {
             if (empty($file)) throw new ErrorNotFound('XBWeb file not set');
             $folder = Request::get('folder');
-            if (($folder == 'xbweb') && ((trim($file) == 'css/xbvcl') || (trim($file) == 'css/xbvcl/index.php'))) {
-                /** @noinspection PhpUnusedLocalVariableInspection */
-                $fontroot = '/xbweb/css/xbvcl/';
-                require Paths\CORE.'content/css/xbvcl/index.php';
-                exit;
+            if ($folder == 'xbweb') {
+                $file = trim($file);
+                switch ($file) {
+                    case 'css/xbvcl':
+                    case 'css/xbvcl/index.php':
+                        require Paths\CORE.'content/css/xbvcl/index.php';
+                        exit;
+                    case 'js/xbweb':
+                        // $js = LibFiles::cached('assets/xbweb.js', array('\xbweb\CMF', 'XBWebJS'));
+                        $js = self::XBWebJS();
+                        header('Content-Type: text/javascript; charset=utf-8');
+                        echo $js;
+                        exit;
+                }
             }
             $file = ($folder == 'xbweb' ? Paths\CORE.'content/' : Paths\MODULES).$file;
             $mime = lib\Files::getMIMEByExt($file);
@@ -133,6 +142,26 @@
             header("Content-type: {$mime}; charset=".Config::get('charset', 'utf-8'));
             readfile($file);
             exit;
+        }
+
+        /**
+         * Get XBWeb JavaScript files
+         * @return string
+         */
+        public static function XBWebJS() {
+            $js = array();
+            $fp = Paths\CORE.'content/js/xbweb/';
+            if (file_exists($fp.'index.js')) {
+                $scripts = file_get_contents($fp.'index.js');
+                if (preg_match_all('#([\'\"])([\w\.\-]+)\1#si', $scripts, $matches)) {
+                    if (!empty($matches[2])) foreach ($matches[2] as $script) {
+                        if (file_exists($fp.$script)) {
+                            $js[] = file_get_contents($fp.$script);
+                        }
+                    }
+                }
+            }
+            return implode("\r\n\r\n", $js);
         }
 
         /**
