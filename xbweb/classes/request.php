@@ -160,7 +160,7 @@
             $cpath = empty($path);
             $path  = parse_url($cpath ? $_SERVER['REQUEST_URI'] : $path, PHP_URL_PATH);
             $path  = trim(preg_replace('#(\/{2,})#si', '/', $path), '/');
-            $route = array('contentType' => 'html', 'template' => 'index', 'page' => 'index');
+            $route = array('contentType' => 'html', 'page' => 'index');
             $path  = empty($path) ? array() : explode('/', $path);
             // contentType
             if (count($path)) {
@@ -203,12 +203,10 @@
                     if (!empty($_POST['id'])) $route['id'] = intval($_POST['id']);
                     $route['alias']    = empty($path) ? null : implode('/', $path);
                     $ctrl = $route['controller'] === true ? '' : $route['controller'];
-                    $route['template'] = $ctrl;
-                    $route['page']     = (empty($ctrl) ? '' : $ctrl.'/').$route['action'];
+                    $route['page'] = (empty($ctrl) ? '' : $ctrl.'/').$route['action'];
                 } else {
                     $ctrl = $route['controller'] === true ? '' : $route['controller'];
-                    $route['template'] = $ctrl;
-                    $route['page']     = (empty($ctrl) ? '' : $ctrl.'/').'index';
+                    $route['page'] = (empty($ctrl) ? '' : $ctrl.'/').'index';
                 }
             }
             foreach (array('module', 'controller', 'action', 'id', 'alias') as $k) if (!isset($route[$k])) $route[$k] = null;

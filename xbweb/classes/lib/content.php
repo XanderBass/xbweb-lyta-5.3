@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUnusedParameterInspection */
+
     /**
      * Xander Bass Website Content Management Framework (XBWeb CMF)
      *
@@ -16,6 +17,7 @@
 
     namespace xbweb\lib;
 
+    use xbweb\Config;
     use xbweb\Request;
     use xbweb\User;
 
@@ -103,12 +105,13 @@
 
         /**
          * Render template part
-         * @param string $__path   Path
-         * @param mixed  $__data   Variables
-         * @param mixed  $__files  Debug files
+         * @param string $__path    Path
+         * @param mixed  $__data    Variables
+         * @param mixed  $__files   Debug files
+         * @param string $template  Got template
          * @return string
          */
-        public static function render($__path, $__data = null, $__files = null) {
+        public static function render($__path, $__data = null, $__files = null, &$template = null) {
             if (!empty($__path) && file_exists($__path)) {
                 ob_start();
                 if (is_array($__data)) extract($__data);
@@ -116,7 +119,7 @@
                 include $__path;
                 return ob_get_clean();
             } else {
-                return '<!-- File not found: '.var_export($__files, true).' -->';
+                return Config::get('debug') ? '<!-- File not found: '.var_export($__files, true).' -->' : '';
             }
         }
     }

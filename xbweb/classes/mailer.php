@@ -337,7 +337,7 @@
             $template = explode('/', $template);
             $module   = array_shift($template);
             $template = implode('/', $template);
-            $fnt = Content::file($template.'.'.Content::EXT_TPL, 'templates/mail', $module, false, $fl);
+            $fnt = Content::file($template.'.'.Content::EXT_TPL, 'mail', $module, false, $fl);
             if (empty($fnt)) return true;
             return Content::render($fnt, $data, $fl);
         }

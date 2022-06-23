@@ -81,13 +81,14 @@
 
         /**
          * Get template file
-         * @param string $path  Request path
-         * @param mixed  $data  Data
-         * @param bool   $sys   Include system content folder
+         * @param string $path      Request path
+         * @param mixed  $data      Data
+         * @param bool   $sys       Include system content folder
+         * @param string $template  Template
          * @return string
          */
-        public static function content($path = null, $data = null, $sys = false) {
-            if (CMF::isError()) return self::_error();
+        public static function content($path = null, $data = null, $sys = false, &$template = null) {
+            if (CMF::isError()) return self::_error($data, $template);
             $req = ($path === null) ? Request::get() : Request::route($path);
             if (
                 (($req['controller'] == 'users') && ($req['action'] == 'login'))
@@ -109,7 +110,7 @@
                 $cfl[] = 'dialogs/'.$tpl.'.'.Content::EXT_PAGE;
             }
             $fn = Content::file($cfl, 'pages', $req['module'], $sys, $_fl);
-            return Content::render($fn, $data, $_fl);
+            return Content::render($fn, $data, $_fl, $template);
         }
 
         /**
@@ -184,15 +185,16 @@
             if (CMF::isError()) {
                 render_error:
                 // Content
-                $content = self::_error($data);
+                $content = self::_error($data, $template);
                 if (Request::isAJAX()) return $content;
                 // Template
                 try {
-                    $fnt = Content::file(array(
-                        'errors/'.http_response_code().'.'.Content::EXT_TPL,
-                        'errors/500.'.Content::EXT_TPL,
-                        'error.'.Content::EXT_TPL
-                    ), 'templates', Request::get('module'), true, $_fl_tpl);
+                    $templates = array();
+                    if (!empty($template)) $templates[] = $template.'.'.Content::EXT_TPL;
+                    $templates[] = 'errors/'.http_response_code().'.'.Content::EXT_TPL;
+                    $templates[] = 'errors/500.'.Content::EXT_TPL;
+                    $templates[] = 'error.'.Content::EXT_TPL;
+                    $fnt = Content::file($templates, 'templates', Request::get('module'), true, $_fl_tpl);
                 } catch (\Exception $e) {
                     die($e->getMessage());
                 }
@@ -201,7 +203,7 @@
                 return Content::render($tpl, $data, $_fl_tpl);
             } else {
                 try {
-                    $content = self::content($path, $data, $isAdmin);
+                    $content = self::content($path, $data, $isAdmin, $template);
                     if (Request::isAJAX()) return $content;
                     $data['content'] = $content;
                     return self::template($path, $data, $isAdmin);
@@ -248,10 +250,11 @@
 
         /**
          * Error
-         * @param mixed $data  Data
+         * @param mixed  $data      Data
+         * @param string $template  Template
          * @return string
          */
-        protected static function _error($data = null) {
+        protected static function _error($data = null, &$template = null) {
             // Current vars
             $fnc = Content::file(array(
                 'errors/'.http_response_code().'.'.Content::EXT_PAGE,
@@ -259,7 +262,7 @@
                 'error.'.Content::EXT_PAGE
             ), 'pages', Request::get('module'), true, $_fl_cnt);
             $cnt = ($fnc === false) ? Paths\CORE.'content/pages/error.'.Content::EXT_PAGE : $fnc;
-            return Content::render($cnt, $data, $_fl_cnt);
+            return Content::render($cnt, $data, $_fl_cnt, $template);
         }
 
         /**
