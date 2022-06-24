@@ -23,7 +23,8 @@
      * Basic view system class
      */
     class View {
-        protected static $_fn = null;
+        protected static $_fn       = null;
+        protected static $_template = null;
 
         /**
          * Register function
@@ -52,6 +53,14 @@
         }
 
         /**
+         * Set template for output
+         * @param string $path  Template path
+         */
+        public static function setTemplate($path) {
+            self::$_template = $path;
+        }
+
+        /**
          * Get template file
          * @param string $path  Request path
          * @param mixed  $data  Data
@@ -64,10 +73,20 @@
                 $fn  = empty($req['template']) ? 'index' : $req['template'];
                 $mod = $req['module'];
                 if (($req['controller'] == 'users') && ($req['action'] == 'login')) {
-                    $fn  = array($fn.'.'.Content::EXT_TPL, 'not-logged.'.Content::EXT_TPL);
+                    $fn  = array('not-logged.'.Content::EXT_TPL, $fn.'.'.Content::EXT_TPL);
                     $sys = true;
                 }
-                if ($req['controller'] == 'install') $sys = true;
+                if ($req['controller'] == 'install') {
+                    $fn  = 'install';
+                    $sys = true;
+                }
+                if (!empty(self::$_template)) {
+                    if (is_array($fn)) {
+                        array_unshift($fn, self::$_template.'.'.Content::EXT_TPL);
+                    } else {
+                        $fn = array(self::$_template.'.'.Content::EXT_TPL, $fn.'.'.Content::EXT_TPL);
+                    }
+                }
             } else {
                 $fn  = explode('/', $data['template']);
                 $mod = array_shift($fn);
@@ -75,7 +94,8 @@
                 if ($fn == 'message') $sys = true;
             }
             if (!is_array($fn)) $fn .= '.'.Content::EXT_TPL;
-            $fn  = Content::file($fn, 'templates', $mod, $sys, $_fl);
+            $fn = Content::file($fn, 'templates', $mod, $sys, $_fl);
+            Debug::set('tpllist', $_fl);
             return Content::render($fn, $data, $_fl);
         }
 

@@ -22,14 +22,17 @@
     class Response {
         /**
          * Return "ERROR" result
-         * @param mixed $e  Errors array or error string
+         * @param mixed  $e      Errors array or error string
+         * @param string $title  Page title
          * @return array
          */
-        public static function error($e) {
-            return array(
+        public static function error($e, $title = null) {
+            $ret = array(
                 'status' => 'error',
                 'errors' => is_array($e) ? $e : array($e)
             );
+            if ($title !== null) $ret['title'] = $title;
+            return $ret;
         }
 
         /**
@@ -54,12 +57,14 @@
 
         /**
          * Return "OK" result
-         * @param mixed $data  Result data
+         * @param mixed  $data   Result data
+         * @param string $title  Page title
          * @return array
          */
-        public static function success($data = null) {
+        public static function success($data = null, $title = null) {
             $ret = array('status' => 'success');
-            if ($data !== null) $ret['result'] = $data;
+            if ($data  !== null) $ret['result'] = $data;
+            if ($title !== null) $ret['title']  = $title;
             return $ret;
         }
 
