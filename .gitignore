@@ -1,15 +1,18 @@
 # IDEs
-.idea
-.settings
-.classpath
-.project
-nbproject
+/.idea/
+/.settings/
+/.classpath/
+/.project/
+/nbproject/
 .DS_Store
 
+# Common
+/favicon.ico
+
 # CMF
-/var
-/www
-/admin
-config.php
-robots.txt
-/modules/app
+/var/
+/www/
+/admin/
+/config.php
+/robots.txt
+/modules/app/
