@@ -19,7 +19,6 @@
 
     use xbweb\Config;
     use xbweb\Request;
-    use xbweb\User;
 
     /**
      * Common view functions
@@ -62,18 +61,6 @@
                     if (file_exists($path.$fn)) return $path.$fn;
                 }
             }
-            if (($folder == 'templates') && (Request::get('context') == Request::CTX_ADMIN)) {
-                try {
-                    $ua = User::current()->authorized;
-                } catch (\Exception $e) {
-                    $ua = false;
-                }
-                if ($ua) {
-                    return \xbweb\Paths\CORE.'content/templates/admin.php';
-                } else {
-                    return \xbweb\Paths\CORE.'content/templates/not-logged.php';
-                }
-            }
             return false;
         }
 
@@ -105,13 +92,12 @@
 
         /**
          * Render template part
-         * @param string $__path    Path
-         * @param mixed  $__data    Variables
-         * @param mixed  $__files   Debug files
-         * @param string $template  Got template
+         * @param string $__path   Path
+         * @param mixed  $__data   Variables
+         * @param mixed  $__files  Debug files
          * @return string
          */
-        public static function render($__path, $__data = null, $__files = null, &$template = null) {
+        public static function render($__path, $__data = null, $__files = null) {
             if (!empty($__path) && file_exists($__path)) {
                 ob_start();
                 if (is_array($__data)) extract($__data);

@@ -23,34 +23,7 @@
      * Basic view system class
      */
     class View {
-        protected static $_fn       = null;
         protected static $_template = null;
-
-        /**
-         * Register function
-         * @param string   $name  Function method
-         * @param callable $fn    Function
-         * @return bool
-         */
-        public static function fn_set($name, $fn) {
-            if (self::$_fn === null) self::$_fn = array();
-            if (!is_callable($fn)) return false;
-            self::$_fn[$name] = $fn;
-            return true;
-        }
-
-        /**
-         * Execute function
-         * @return mixed
-         */
-        public static function fn() {
-            $args = func_get_args();
-            if (count($args) < 1) return false;
-            $name = array_shift($args);
-            if (!isset(self::$_fn[$name])) return false;
-            if (!is_callable(self::$_fn[$name])) return false;
-            return call_user_func_array(self::$_fn[$name], $args);
-        }
 
         /**
          * Set template for output
@@ -64,11 +37,11 @@
          * Get template file
          * @param string $path  Request path
          * @param mixed  $data  Data
-         * @param bool   $sys   Include system content folder
          * @return string
          */
-        public static function template($path = null, $data = null, $sys = false) {
+        public static function template($path = null, $data = null) {
             $req = ($path === null) ? Request::get() : Request::route($path);
+            $sys = false;
             if (empty($data['template'])) {
                 $fn  = empty($req['template']) ? 'index' : $req['template'];
                 $mod = $req['module'];
@@ -101,36 +74,27 @@
 
         /**
          * Get template file
-         * @param string $path      Request path
-         * @param mixed  $data      Data
-         * @param bool   $sys       Include system content folder
-         * @param string $template  Template
+         * @param string $path  Request path
+         * @param mixed  $data  Data
          * @return string
          */
-        public static function content($path = null, $data = null, $sys = false, &$template = null) {
-            if (CMF::isError()) return self::_error($data, $template);
+        public static function content($path = null, $data = null) {
+            if (CMF::isError()) return self::_error($data);
             $req = ($path === null) ? Request::get() : Request::route($path);
-            if (
+            $sys = (
                 (($req['controller'] == 'users') && ($req['action'] == 'login'))
                 ||
                 ($req['controller'] == 'install')
-            ) $sys = true;
+            );
             $fn  = empty($req['page']) ? 'index' : $req['page'];
             $fn  = trim($fn, '/');
             $cfl = array($fn.'.'.Content::EXT_PAGE);
-            if (empty($data['window'])) {
-                if ($req['context'] == Request::CTX_ADMIN) {
-                    $action = empty($req['action']) ? 'index' : $req['action'];
-                    $cfl[]  = 'admin/entity/'.$action.'.'.Content::EXT_PAGE;
-                }
-            } else {
-                $tpl = $data['window'] === true ? (
-                    empty($data['status']) ? 'success' : $data['status']
-                ) : $data['window'];
-                $cfl[] = 'dialogs/'.$tpl.'.'.Content::EXT_PAGE;
+            if ($req['context'] == Request::CTX_ADMIN) {
+                $action = empty($req['action']) ? 'index' : $req['action'];
+                $cfl[]  = 'admin/entity/'.$action.'.'.Content::EXT_PAGE;
             }
             $fn = Content::file($cfl, 'pages', $req['module'], $sys, $_fl);
-            return Content::render($fn, $data, $_fl, $template);
+            return Content::render($fn, $data, $_fl);
         }
 
         /**
@@ -201,16 +165,15 @@
          * @return string
          */
         public static function render($data = null, $path = null) {
-            $isAdmin = (Request::get('context') == Request::CTX_ADMIN);
             if (CMF::isError()) {
                 render_error:
                 // Content
-                $content = self::_error($data, $template);
+                $content = self::_error($data);
                 if (Request::isAJAX()) return $content;
                 // Template
                 try {
                     $templates = array();
-                    if (!empty($template)) $templates[] = $template.'.'.Content::EXT_TPL;
+                    if (!empty(self::$_template)) $templates[] = self::$_template.'.'.Content::EXT_TPL;
                     $templates[] = 'errors/'.http_response_code().'.'.Content::EXT_TPL;
                     $templates[] = 'errors/500.'.Content::EXT_TPL;
                     $templates[] = 'error.'.Content::EXT_TPL;
@@ -223,10 +186,10 @@
                 return Content::render($tpl, $data, $_fl_tpl);
             } else {
                 try {
-                    $content = self::content($path, $data, $isAdmin, $template);
+                    $content = self::content($path, $data);
                     if (Request::isAJAX()) return $content;
                     $data['content'] = $content;
-                    return self::template($path, $data, $isAdmin);
+                    return self::template($path, $data);
                 } catch (\Exception $e) {
                     $data = Error::getResponse($e);
                     $data['error_page'] = true;
@@ -270,11 +233,10 @@
 
         /**
          * Error
-         * @param mixed  $data      Data
-         * @param string $template  Template
+         * @param mixed  $data  Data
          * @return string
          */
-        protected static function _error($data = null, &$template = null) {
+        protected static function _error($data = null) {
             // Current vars
             $fnc = Content::file(array(
                 'errors/'.http_response_code().'.'.Content::EXT_PAGE,
@@ -282,18 +244,6 @@
                 'error.'.Content::EXT_PAGE
             ), 'pages', Request::get('module'), true, $_fl_cnt);
             $cnt = ($fnc === false) ? Paths\CORE.'content/pages/error.'.Content::EXT_PAGE : $fnc;
-            return Content::render($cnt, $data, $_fl_cnt, $template);
-        }
-
-        /**
-         * callStatic
-         * @param string $name       Method name
-         * @param array  $arguments  Arguments
-         * @return mixed
-         */
-        public static function __callStatic($name, $arguments) {
-            if (!isset(self::$_fn[$name])) return false;
-            if (!is_callable(self::$_fn[$name])) return false;
-            return call_user_func_array(self::$_fn[$name], func_get_args());
+            return Content::render($cnt, $data, $_fl_cnt);
         }
     }
