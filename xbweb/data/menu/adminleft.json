@@ -1,26 +1,28 @@
 {
-  "project" : {
-    "type"  : "block",
-    "items" : {
-      "site"      : {"newtab" : true, "url" : "/"},
-      "dashboard" : {"action" : "/"}
-    }
-  },
-  "users" : {
-    "type"  : "block",
-    "items" : {
-      "users" : {
-        "type"  : "category",
+    "project" : {
+        "type"  : "block",
         "items" : {
-          "users-index"  : {
-            "action" : "/users/index"
-          },
-          "users-create" : {
-            "action" : "/users/create"
-          }
+            "site"      : {"newtab" : true, "url" : "/"},
+            "dashboard" : {"action" : "/"}
         }
-      },
-      "settings" : {"type" : "item", "action" : "/users/settings"}
+    },
+    "users" : {
+        "type"  : "block",
+        "items" : {
+            "users" : {
+                "type"  : "category",
+                "items" : {
+                    "users-index"  : {
+                        "action" : "/users/index"
+                    },
+                    "users-create" : {
+                        "action" : "/users/create"
+                    },
+                    "users-settings" : {
+                        "action" : "/users/settings"
+                    }
+                }
+            }
+        }
     }
-  }
 }

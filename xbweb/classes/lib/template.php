@@ -30,7 +30,7 @@
     class Template {
         const TPL_MENU_BLOCK = <<<HTML
 <nav class="[+classes+]">
-  <h2>[+title+]</h2>
+  <h2><span>[+title+]</span></h2>
   <ul>
     [+items+]
   </ul>
@@ -38,14 +38,14 @@
 HTML;
         const TPL_MENU_CATEGORY = <<<HTML
 <li class="[+classes+]">
-  <span>[+title+][+counter+]</span>
+  <span><span>[+title+]</span>[+counter+]</span>
   <ul>
     [+items+]
   </ul>
 </li>
 HTML;
         const TPL_MENU_ITEM = <<<HTML
-<li class="[+classes+]"><a href="[+url+]">[+title+][+counter+]</a></li>
+<li class="[+classes+]"><a href="[+url+]"><span>[+title+]</span>[+counter+]</a></li>
 HTML;
 
         /**
@@ -361,24 +361,25 @@ html;
             $cats    = array();
             $tabs    = array();
             $f       = true;
-            foreach ($form as $cat => $fields) {
+            foreach ($form as $fid => $field) {
+                $fc    = explode('/', $field['input']);
+                $mn    = array_shift($fc);
+                $fp    = $mn.'/fields/'.implode('/', $fc);
+                $key   = 'field-'.(empty($module) ? '' : $module.'-').$fid;
+                $cat   = empty($field['category']) ? 'main' : $field['category'];
+                $field = Language::field($key, $field);
+                $field['value'] = isset($values[$fid]) ? $values[$fid] : null;
+                $_fl          = array();
+                $fn           = Content::chunk($fp, true, $_fl);
+                $tabs[$cat][] = Content::render($fn, $field, $_fl);
+            }
+
+            foreach ($tabs as $cat => $fields) {
                 if (empty($fields)) continue;
                 $a   = $f ? 'active' : '';
                 $f   = false;
-                $tab = array();
-                $c   = count($form) > 1 ? 'tab '.$a : 'single-tab';
-                foreach ($fields as $fid => $field) {
-                    $fc    = explode('/', $field['input']);
-                    $mn    = array_shift($fc);
-                    $fp    = $mn.'/fields/'.implode('/', $fc);
-                    $key   = 'field-'.(empty($module) ? '' : $module.'-').$fid;
-                    $field = Language::field($key, $field);
-                    $field['value'] = isset($values[$fid]) ? $values[$fid] : null;
-                    $_fl   = array();
-                    $fn    = Content::chunk($fp, true, $_fl);
-                    $tab[] = Content::render($fn, $field, $_fl);
-                }
-                $tab    = implode("\r\n", $tab);
+                $tab = implode("\r\n", $fields);;
+                $c   = count($tabs) > 1 ? 'tab '.$a : 'single-tab';
                 $cats[] = '<a href="#form-category-'.$cat.'" class="'.$a.'">'.Language::translate('category-'.$cat).'</a>';
                 $tabs[] = <<<html
 <section id="form-category-{$cat}" class="{$c}">

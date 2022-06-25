@@ -34,7 +34,7 @@
     PipeLine::handler('cmf', 'formUsers', function($data, $row, $operation){
         switch ($operation) {
             case 'update':
-                $data['main']['password']['flags'] = array();
+                $data['password']['flags'] = array();
                 break;
         }
         return $data;

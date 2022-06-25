@@ -182,9 +182,11 @@
          * @throws Error
          */
         public function form($operation, $row = null) {
-            return PipeLine::invoke($this->pipeName('form'), array(
-                'main' => Models::form($this->_fields, $operation, $row)
-            ), $row, $operation);
+            return PipeLine::invoke(
+                $this->pipeName('form'),
+                Models::form($this->_fields, $operation, $row),
+                $row, $operation
+            );
         }
 
         /**
