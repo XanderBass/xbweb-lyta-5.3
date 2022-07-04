@@ -9,7 +9,6 @@
     $url   = empty($url) ? '/' : $url;
     if (empty($url))     $url     = '/';
     if (empty($title))   $title   = 'Message';
-    if (empty($message)) $message = 'Empty message';
 ?><!DOCTYPE html>
 <html><head>
     <meta charset="utf-8">
@@ -36,8 +35,5 @@
         }
     </style>
 </head><body>
-    <div class="message">
-        <p><?=$message?></p>
-        <p>Click <a href="<?=$url?>">here</a> or page redirects automatically</p>
-    </div>
+    <?=$content?>
 </body></html>
