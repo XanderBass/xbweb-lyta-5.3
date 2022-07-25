@@ -52,12 +52,22 @@
 
         /**
          * Get session file
-         * @param string $SID  Session ID
+         * @param string $SID    Session ID
+         * @param bool   $valid  Valid
          * @return string
          */
-        protected function _file($SID)
-        {
-            return $this->_path.implode('/', str_split($SID, 2)).'.sess';
+        protected function _file($SID, &$valid = false) {
+            $valid = self::isValidSID($SID);
+            if ($valid) {
+                $fn = implode('/', str_split($SID, 2));
+            } elseif (strpos('session_bot', $SID)) {
+                $fn = str_replace('session_bot_', 'bots/', $SID);
+            } elseif (strpos('session_cli', $SID)) {
+                $fn = 'cli';
+            } else {
+                $fn = 'others/'.implode('/', str_split(md5($SID), 2));
+            }
+            return $this->_path.$fn.'.sess';
         }
 
         /**
@@ -161,7 +171,7 @@
         public function create_sid()
         {
             if (Request::isCLI())        return 'session_cli';
-            if ($bot = Request::isBot()) return 'session_bot_'.strtolower($bot);
+            if ($bot = Request::isBot()) return 'session_bot_'.md5($bot);
             $IP = Request::IP();
             if (empty($IP)) $IP = '127.0.0.1';
             for ($c = 0; $c < 10; $c++) {

@@ -539,6 +539,15 @@ sql;
         }
 
         /**
+         * Validate SID
+         * @param string $SID  Session ID
+         * @return bool
+         */
+        public static function isValidSID($SID) {
+            return ctype_alnum(str_replace('_', '', $SID));
+        }
+
+        /**
          * Table name
          * @return string
          */
