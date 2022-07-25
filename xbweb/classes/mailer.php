@@ -37,7 +37,8 @@
      * @method $this cc($mail, $name = null)
      * @method $this bcc($mail, $name = null)
      */
-    abstract class Mailer extends BasicObject {
+    abstract class Mailer extends BasicObject
+    {
         const MIME_VERSION = '1.0';
 
         protected static $_media = array();
@@ -57,7 +58,8 @@
          * Constructor
          * @param array $config  Configuration
          */
-        protected function __construct(array $config) {
+        protected function __construct(array $config)
+        {
             $def = array(
                 'version' => static::MIME_VERSION,
                 'type'    => 'html',
@@ -75,7 +77,8 @@
          * @param mixed $v  Value
          * @return bool
          */
-        protected function set_logData($v) {
+        protected function set_logData($v)
+        {
             $this->_logData = !empty($v);
             return $this->_logData;
         }
@@ -86,7 +89,8 @@
          * @param mixed  $data  Data
          * @return array
          */
-        protected function _log($name = null, $data = null) {
+        protected function _log($name = null, $data = null)
+        {
             static $time = null;
             static $file = null;
             if ($time === null) {
@@ -115,7 +119,8 @@
          * @return $this
          * @throws Error
          */
-        public function __call($method, $arguments) {
+        public function __call($method, $arguments)
+        {
             switch ($method) {
                 case 'to':
                 case 'cc':
@@ -137,7 +142,8 @@
          * @param string $subject  Subject
          * @return array
          */
-        protected function get_headers($subject) {
+        protected function get_headers($subject)
+        {
             $dto = new \DateTime();
             $headers = array(
                 'Content-Type' => 'multipart/mixed; boundary="'.trim($this->_splitter).'"',
@@ -162,7 +168,8 @@
          * @param string $subject  Subject
          * @return string
          */
-        public function messageID($subject) {
+        public function messageID($subject)
+        {
             $d = new \DateTime();
             $s = $this->_from.' '.implode(',', $this->_to).' '.$subject;
             return $d->format('YmdHis').'.'.md5($s);
@@ -175,7 +182,8 @@
          * @return $this
          * @throws Error
          */
-        public function from($mail, $name = null) {
+        public function from($mail, $name = null)
+        {
             $address = trim($mail);
             if (false === strpos($mail, '@')) throw new Error('Invalid from mail address');
             if (empty($name)) {
@@ -193,7 +201,8 @@
          * @return $this
          * @throws Error
          */
-        public function reply($mail) {
+        public function reply($mail)
+        {
             $address = trim($mail);
             if (false === strpos($mail, '@')) throw new Error('Invalid reply-to mail address');
             $this->_reply = $address;
@@ -206,7 +215,8 @@
          * @param string $name  Name
          * @return bool|string
          */
-        public function address($mail, $name = null) {
+        public function address($mail, $name = null)
+        {
             $address = trim($mail);
             if (false === strpos($address, '@')) return false;
             $address = "<{$address}>";
@@ -220,7 +230,8 @@
          * @param string $s  String
          * @return string
          */
-        public function encode($s) {
+        public function encode($s)
+        {
             $s = base64_encode($s);
             return "=?{$this->_config['charset']}?B?{$s}?=";
         }
@@ -230,7 +241,8 @@
          * @param string $html  HTML
          * @return string
          */
-        public function message($html) {
+        public function message($html)
+        {
             $msg = '--'.$this->_splitter."\r\n";
             $msg.= 'Content-Type: text/'.$this->_config['type'].'; charset='.$this->_config['charset']."\r\n";
             $msg.= "Content-Transfer-Encoding: base64\r\n\r\n";
@@ -243,7 +255,8 @@
          * @param string $fn  Filename
          * @return string
          */
-        public function file($fn) {
+        public function file($fn)
+        {
             $mt  = LibFiles::getMIMEByExt($fn);
             $fid = basename($fn);
             $f   = fopen($fn, "rb");
@@ -261,7 +274,8 @@
          * @param string $fn  Filename
          * @return string
          */
-        public function media($fn) {
+        public function media($fn)
+        {
             $mt  = LibFiles::getMIMEByExt($fn);
             $fid = self::inlineFileName($fn);
             $f   = fopen($fn, "rb");
@@ -285,7 +299,8 @@
          * @param mixed  $msg       Message
          * @return string
          */
-        public function body($subject, $template, $data, $files, &$headers = null, &$msg = null) {
+        public function body($subject, $template, $data, $files, &$headers = null, &$msg = null)
+        {
             self::$_media = array();
             // Headers
             $headers = $this->get_headers($subject);
@@ -323,7 +338,8 @@
          * @param string $fn  Real file name
          * @return string
          */
-        public static function inlineFileName($fn) {
+        public static function inlineFileName($fn)
+        {
             return 'file_'.\xbweb::b64hash($fn);
         }
 
@@ -333,7 +349,8 @@
          * @param array  $data      Data
          * @return bool|string
          */
-        public static function letter($template, $data) {
+        public static function letter($template, $data)
+        {
             $template = explode('/', $template);
             $module   = array_shift($template);
             $template = implode('/', $template);
@@ -347,7 +364,8 @@
          * @param string $fn  Real file name
          * @return string
          */
-        public static function addMedia($fn) {
+        public static function addMedia($fn)
+        {
             self::$_media[] = $fn;
             return self::inlineFileName($fn);
         }
@@ -358,7 +376,8 @@
          * @return Mailer
          * @throws Error
          */
-        public static function create($config = null) {
+        public static function create($config = null)
+        {
             if ($config === null) $config = Config::get('mailer');
             if (empty($config)) throw new Error('No mailer configuration');
             $type = empty($config['class']) ? 'sendmail' : $config['class'];

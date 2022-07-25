@@ -19,7 +19,8 @@
     /**
      * Array functions library
      */
-    class Arrays {
+    class Arrays
+    {
         /**
          * Get the value from array by path
          * @param array  $a  Input array
@@ -27,7 +28,8 @@
          * @param mixed  $d  Default value
          * @return mixed
          */
-        public static function get(array $a, $k, $d = null) {
+        public static function get(array $a, $k, $d = null)
+        {
             $k = trim($k, '/');
             if (empty($k)) return $a;
             $k = explode('/', $k);
@@ -46,7 +48,8 @@
          * @param mixed  $v  Value
          * @return mixed
          */
-        public static function set(array &$a, $k, $v = null) {
+        public static function set(array &$a, $k, $v = null)
+        {
             $k = trim($k, '/');
             if (empty($k)) {
                 $a = $v;
@@ -76,7 +79,8 @@
          * @param string $key      Array key
          * @return array|bool
          */
-        public static function collectField($rows, $key) {
+        public static function collectField($rows, $key)
+        {
             if (!is_array($rows)) return false;
             $ret = array();
             foreach ($rows as $id => $row) {
@@ -92,7 +96,8 @@
          * @param mixed $keys  Array keys
          * @return array|bool
          */
-        public static function collectFields($rows, $keys) {
+        public static function collectFields($rows, $keys)
+        {
             if (!is_array($rows)) return false;
             $keys = \xbweb::arg($keys);
             $ret  = array();
@@ -112,7 +117,8 @@
          * @param array $a
          * @return array
          */
-        public static function safeDump(array $a) {
+        public static function safeDump(array $a)
+        {
             $ret = array();
             foreach ($a as $i => $v) {
                 if (is_object($v)) {

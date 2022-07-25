@@ -19,7 +19,8 @@
     /**
      * Debug component
      */
-    class Debug {
+    class Debug
+    {
         protected static $ps   = null;
         protected static $data = null;
 
@@ -28,7 +29,8 @@
          * @param string $name  Point name
          * @return array
          */
-        public static function p($name) {
+        public static function p($name)
+        {
             static $t = null;
             if ($t === null) {
                 $t = microtime(true);
@@ -45,7 +47,8 @@
          * Get all timing points
          * @return array
          */
-        public static function ps() {
+        public static function ps()
+        {
             if (empty(self::$ps)) self::$ps = array();
             return self::$ps;
         }
@@ -55,7 +58,8 @@
          * @param string $key   Key
          * @param mixed  $data  Data
          */
-        public static function set($key, $data) {
+        public static function set($key, $data)
+        {
             self::$data[$key] = $data;
         }
 
@@ -64,7 +68,8 @@
          * @param string $key  Key (NULL for all data)
          * @return mixed
          */
-        public static function get($key = null) {
+        public static function get($key = null)
+        {
             if (empty(self::$data)) self::$data['__state'] = 'initialized';
             return empty($key) ? self::$data : (isset(self::$data[$key]) ? self::$data[$key] : null);
         }
@@ -74,7 +79,8 @@
          * @param string $fn    Filename
          * @param mixed  $data  Data
          */
-        public static function log($fn, $data) {
+        public static function log($fn, $data)
+        {
             file_put_contents($fn, var_export($data, true)."\r\n\r\n", FILE_APPEND);
         }
     }

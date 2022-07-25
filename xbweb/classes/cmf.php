@@ -19,7 +19,8 @@
     /**
      * Main CMF class
      */
-    class CMF extends BasicObject {
+    class CMF extends BasicObject
+    {
         protected static $_instance = null;
 
         protected $_routes  = null;
@@ -29,7 +30,8 @@
          * Constructor
          * @throws Error
          */
-        protected function __construct() {
+        protected function __construct()
+        {
             $this->_routes = PipeLine::invoke('getRoutes', array(
                 'login'      => '/users/login',
                 'logout'     => '/users/logout',
@@ -62,7 +64,8 @@
          * @throws ErrorNotFound
          * @throws ErrorPage
          */
-        public function __invoke($path = null, $data = null) {
+        public function __invoke($path = null, $data = null)
+        {
             return static::execute($path, $data);
         }
 
@@ -73,7 +76,8 @@
          * @throws ErrorNotFound
          * @throws Error
          */
-        public static function route($page) {
+        public static function route($page)
+        {
             $CMF    = self::get();
             $routes = $CMF->_routes;
             $page   = ltrim($page, '/');
@@ -99,7 +103,8 @@
          * @throws ErrorNotFound
          * @throws Error
          */
-        public static function page($path = null, $sys = false) {
+        public static function page($path = null, $sys = false)
+        {
             $page   = empty($path) ? Request::get('page') : $path;
             $module = Request::get('module');
             if (empty($page)) $page = 'index';
@@ -117,7 +122,8 @@
          * @param string $file  File path
          * @throws ErrorNotFound
          */
-        public static function file($file) {
+        public static function file($file)
+        {
             if (empty($file)) throw new ErrorNotFound('XBWeb file not set');
             $folder = Request::get('folder');
             if ($folder == 'xbweb') {
@@ -148,7 +154,8 @@
          * Get XBWeb JavaScript files
          * @return string
          */
-        public static function XBWebJS() {
+        public static function XBWebJS()
+        {
             $js = array();
             $fp = Paths\CORE.'content/js/xbweb/';
             if (file_exists($fp.'index.js')) {
@@ -168,7 +175,8 @@
          * Check for 503
          * @throws ErrorPage
          */
-        public static function check503() {
+        public static function check503()
+        {
             if (Config::get('debug') && Config::get('503')) {
                 $ips = \xbweb::arg(Config::get('debug_ips'));
                 if (!in_array('127.0.0.1', $ips)) $ips[] = '127.0.0.1';
@@ -181,7 +189,8 @@
          * Check if result is error
          * @return bool
          */
-        public static function isError() {
+        public static function isError()
+        {
             return (http_response_code() > 399);
         }
 
@@ -196,7 +205,8 @@
          * @throws ErrorPage
          * @throws \Exception
          */
-        public static function execute($path = null, $data = null) {
+        public static function execute($path = null, $data = null)
+        {
             if ($path !== null) {
                 try {
                     $R = static::route(Request::get('page'));
@@ -231,7 +241,8 @@
          * Load module
          * @param $name
          */
-        public static function loadModule($name) {
+        public static function loadModule($name)
+        {
             $l = Paths\MODULES.'/'.$name.'/loader.php';
             if (file_exists($l)) require $l;
         }
@@ -240,7 +251,8 @@
          * Init CMF
          * @throws Error
          */
-        public static function get() {
+        public static function get()
+        {
             if (self::$_instance instanceof self) return self::$_instance;
             self::$_instance = new self();
             return self::$_instance;
@@ -252,7 +264,8 @@
          * @param string      $filename  File name
          * @return bool|int
          */
-        public static function logError(\Exception $e, $filename = null) {
+        public static function logError(\Exception $e, $filename = null)
+        {
             if (empty($filename)) $filename = Paths\RUNTIME.'error-log/'.\xbweb::id('error').'.log';
             $response = Error::getResponse($e);
             unset($response['traceAsString']);

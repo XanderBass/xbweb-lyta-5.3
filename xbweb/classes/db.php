@@ -32,14 +32,16 @@
      * @method static string         log($query, $point = '', $key = null)
      * @method static string         log_result($result, $key = null)
      */
-    class DB {
+    class DB
+    {
         const REX_ENTITY = '~^([a-zA-Z])(\w*)([a-zA-Z\d])$~si';
 
         /**
          * Get instance of provider
          * @return Provider
          */
-        public static function get() {
+        public static function get()
+        {
             static $provider = null;
             if ($provider === null) $provider = Provider::create(self::config());
             return $provider;
@@ -49,7 +51,8 @@
          * Return type of DB
          * @return string
          */
-        public static function getType() {
+        public static function getType()
+        {
             return self::get()->type;
         }
 
@@ -57,7 +60,8 @@
          * Get log
          * @return array
          */
-        public static function getLog() {
+        public static function getLog()
+        {
             return self::get()->log;
         }
 
@@ -65,7 +69,8 @@
          * Get configuration
          * @return array
          */
-        public static function config() {
+        public static function config()
+        {
             static $config = null;
             if ($config === null) $config = Config::get('db');
             return $config;
@@ -78,7 +83,8 @@
          * @return mixed
          * @throws \Exception
          */
-        public static function __callStatic($name, $args) {
+        public static function __callStatic($name, $args)
+        {
             $db = self::get();
             return call_user_func_array(array($db, $name), $args);
         }
@@ -89,7 +95,8 @@
          * @param bool $def
          * @return bool|string
          */
-        public static function operation($name, $def = false) {
+        public static function operation($name, $def = false)
+        {
             $ops = array(
                 'eq'       => '=',
                 'neq'      => '<>',

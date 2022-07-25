@@ -39,7 +39,8 @@
      * Entity controller prototype class
      * @property-read Where $fuse
      */
-    class Entity extends Controller {
+    class Entity extends Controller
+    {
         const MODEL  = '/table';
         const ENTITY = 'entity';
 

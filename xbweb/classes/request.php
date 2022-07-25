@@ -19,7 +19,8 @@
     /**
      * Request component
      */
-    class Request {
+    class Request
+    {
         protected static $_route = null;
         protected static $_path  = null;
         protected static $_map   = null;
@@ -35,7 +36,8 @@
          * AJAX request flag
          * @return bool
          */
-        public static function isAJAX() {
+        public static function isAJAX()
+        {
             static $key = null;
             if ($key === null) $key = Config::get('request/keys/is_ajax', static::KEY_AJAX);
             return isset($_REQUEST[$key]) ? filter_var($_REQUEST[$key], FILTER_VALIDATE_BOOLEAN) : false;
@@ -45,19 +47,26 @@
          * Check requested by CLI
          * @return bool
          */
-        public static function isCLI() { return (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg'); }
+        public static function isCLI()
+        {
+            return (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg');
+        }
 
         /**
          * HTTPS flag
          * @return bool
          */
-        public static function isHTTPS() { return !empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off'); }
+        public static function isHTTPS()
+        {
+            return !empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] != 'off');
+        }
 
         /**
          * Check if requested by search bot
          * @return string|bool
          */
-        public static function isBot() {
+        public static function isBot()
+        {
             $bots = array(
                 'Google', 'Yahoo', 'Rambler', 'Yandex', 'Mail',
                 'Bot', 'Spider', 'Snoopy', 'Crawler', 'Finder', 'curl'
@@ -72,14 +81,18 @@
          * Check if request method is post
          * @return bool
          */
-        public static function isPost() { return (strtolower($_SERVER['REQUEST_METHOD']) == 'post'); }
+        public static function isPost()
+        {
+            return (strtolower($_SERVER['REQUEST_METHOD']) == 'post');
+        }
 
         /**
          * Current type of IP address
          * @param mixed $ip  IP address. NULL for current.
          * @return bool
          */
-        public static function IPType($ip = null) {
+        public static function IPType($ip = null)
+        {
             static $current = null;
             if ($current === null) $current = self::IP();
             if ($ip === null) $ip = $current;
@@ -92,7 +105,8 @@
          * Current IP address
          * @return mixed
          */
-        public static function IP() {
+        public static function IP()
+        {
             return $_SERVER['REMOTE_ADDR'];
         }
 
@@ -101,7 +115,8 @@
          * @param bool $rWWW  Return without "WWW"
          * @return string
          */
-        public static function domain($rWWW = false) {
+        public static function domain($rWWW = false)
+        {
             static $domain = null;
             if (empty($domain)) $domain = Config::get('server/name');
             if (empty($domain)) if (!empty($_SERVER['SERVER_NAME'])) $domain = $_SERVER['SERVER_NAME'];
@@ -114,7 +129,8 @@
          * Get current root host name
          * @return string
          */
-        public static function RSN() {
+        public static function RSN()
+        {
             static $rsn = null;
             if (($rsn === null)) {
                 $rsn = Config::get('server/rootname', false);
@@ -130,7 +146,8 @@
          * Get subdomain
          * @return bool|string
          */
-        public static function subdomain() {
+        public static function subdomain()
+        {
             $rsn = self::RSN();
             $csn = self::domain();
             $rex = '~^(.+)\.'.preg_quote($rsn).'$~si';
@@ -145,7 +162,8 @@
          * @param string $x  Source array
          * @return null
          */
-        public static function variable($k, $d = null, $x = null) {
+        public static function variable($k, $d = null, $x = null)
+        {
             if ($x == 'post') return isset($_POST[$k]) ? $_POST[$k] : $d;
             if ($x == 'get')  return isset($_GET[$k])  ? $_GET[$k]  : $d;
             return isset($_REQUEST[$k]) ? $_REQUEST[$k] : $d;
@@ -156,7 +174,8 @@
          * @param string $path  Path (without query string)
          * @return array
          */
-        public static function route($path = null) {
+        public static function route($path = null)
+        {
             $cpath = empty($path);
             $path  = parse_url($cpath ? $_SERVER['REQUEST_URI'] : $path, PHP_URL_PATH);
             $path  = trim(preg_replace('#(\/{2,})#si', '/', $path), '/');
@@ -219,7 +238,8 @@
          * Get token entity
          * @return mixed
          */
-        public static function token() {
+        public static function token()
+        {
             static $keys = null;
             if ($keys === null) $keys = array(
                 'form' => Config::get('request/keys/token', static::KEY_TOKEN),
@@ -235,7 +255,8 @@
          * @param string $k  Key or NULL for getting full information
          * @return mixed
          */
-        public static function get($k = null) {
+        public static function get($k = null)
+        {
             if (self::$_route === null) self::current();
             if ($k === null) return self::$_route;
             return isset(self::$_route[$k]) ? self::$_route[$k] : false;
@@ -247,7 +268,8 @@
          * @param mixed  $data  Data
          * @return string
          */
-        public static function current($path = null, $data = null) {
+        public static function current($path = null, $data = null)
+        {
             $refresh = false;
             if (self::$_path === null) {
                 self::$_path = $path === null ? null : $path;
@@ -275,7 +297,8 @@
          * Get current full action path
          * @return string
          */
-        public static function action() {
+        public static function action()
+        {
             static $cache = null;
             if ($cache === null) {
                 $req   = self::get();
@@ -292,7 +315,8 @@
          * @param string $page  Requested file
          * @return string
          */
-        public static function contentType(&$page) {
+        public static function contentType(&$page)
+        {
             $allowed = array('html', 'htm', 'txt', 'json', 'xml');
             $ret  = 'html';
             $page = explode('.', $page);
@@ -310,7 +334,8 @@
          * @param string $ctx  Context
          * @return string
          */
-        public static function URL($url, $ctx = null) {
+        public static function URL($url, $ctx = null)
+        {
             if ($ctx === null) $ctx = self::get('context');
             $url = (empty($url) ? '' : ltrim($url, '/'));
             return '/'.((empty($ctx) || ($ctx == 'www')) ? $url : $ctx.'/'.$url);
@@ -322,7 +347,8 @@
          * @param string $ctx  Context
          * @return string
          */
-        public static function canonical($url = null, $ctx = null) {
+        public static function canonical($url = null, $ctx = null)
+        {
             if ($url === null) $url = $_SERVER['REQUEST_URI'];
             $U = 'http' . (self::isHTTPS() ? 's' : '') . '://';
             return $U . self::domain() . self::URL($url, $ctx);
@@ -333,7 +359,8 @@
          * @param string $name  Mailbox
          * @return string
          */
-        public static function mailbox($name) {
+        public static function mailbox($name)
+        {
             return $name.'@'.self::domain(true);
         }
 
@@ -343,7 +370,8 @@
          * @param bool   $multiple  Get multiple files
          * @return array
          */
-        public static function files($name, $multiple = false) {
+        public static function files($name, $multiple = false)
+        {
             $ret = array();
             if (empty($_FILES[$name]['name'])) return array();
             $fld = $_FILES[$name];
@@ -379,7 +407,8 @@
          * @param mixed $d  Default value
          * @return mixed
          */
-        protected static function read(&$r, $a, $d = null) {
+        protected static function read(&$r, $a, $d = null)
+        {
             return empty($r[0]) ? $d : (in_array($r[0], $a) ? array_shift($r) : $d);
         }
 
@@ -389,7 +418,8 @@
          * @param array $a  Allowed values
          * @return mixed
          */
-        protected static function readNodes(&$r, $a) {
+        protected static function readNodes(&$r, $a)
+        {
             if (empty($r[0])) return '';
             if (!array_key_exists($r[0], $a)) return '';
             $k = array_shift($r);
@@ -402,7 +432,8 @@
          * Get user agent
          * @return string|bool
          */
-        public static function userAgent() {
+        public static function userAgent()
+        {
             // TODO
             return false;
         }

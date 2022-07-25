@@ -27,7 +27,8 @@
     /**
      * Class Template
      */
-    class Template {
+    class Template
+    {
         const TPL_MENU_BLOCK = <<<HTML
 <nav class="[+classes+]">
   <h2><span>[+title+]</span></h2>
@@ -57,7 +58,8 @@ HTML;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public static function menu($data = null, $tpls = null, $place = null) {
+        public static function menu($data = null, $tpls = null, $place = null)
+        {
             static $level = -1;
 
             if (empty($data))     $data  = array();
@@ -144,7 +146,8 @@ HTML;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public static function table($path, $data = null, $page = 1, $pages = 1, $order = null) {
+        public static function table($path, $data = null, $page = 1, $pages = 1, $order = null)
+        {
             return self::table_('index', $path, $data, $page, $pages, $order);
         }
 
@@ -159,7 +162,8 @@ HTML;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public static function trash($path, $data = null, $page = 1, $pages = 1, $order = null) {
+        public static function trash($path, $data = null, $page = 1, $pages = 1, $order = null)
+        {
             return self::table_('trash', $path, $data, $page, $pages, $order);
         }
 
@@ -175,7 +179,8 @@ HTML;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        protected static function table_($type, $path, $data = null, $page = 1, $pages = 1, $order = null) {
+        protected static function table_($type, $path, $data = null, $page = 1, $pages = 1, $order = null)
+        {
             /** @var Controller $controller */
             $controller = Controller::create($path);
             $index      = Request::URL($controller->a($type));
@@ -353,7 +358,8 @@ html;
          * @param array  $errors  Errors
          * @return string
          */
-        public static function form($action, $form, $values = null, $errors = null) {
+        public static function form($action, $form, $values = null, $errors = null)
+        {
             $caption = Language::action($action);
             $url     = Request::URL($action);
             $action  = explode('/', $action);
@@ -445,7 +451,8 @@ html;
          * @param array $jslist  List of preloaded JS
          * @return string
          */
-        public static function js($jslist = array()) {
+        public static function js($jslist = array())
+        {
             $js = PipeLine::invoke('js', $jslist);
             $ret = array();
             foreach ($js as $jslink) $ret[] = '<script type="text/javascript" src="'.$jslink.'"></script>';
@@ -457,7 +464,8 @@ html;
          * @param array $csslist  List of preloaded CSS
          * @return string
          */
-        public static function css($csslist = array()) {
+        public static function css($csslist = array())
+        {
             $css = PipeLine::invoke('css', $csslist);
             $ret = array();
             foreach ($css as $csslink) $ret[] = '<link rel="stylesheet" href="'.$csslink.'">';
@@ -469,7 +477,8 @@ html;
          * @param bool $onlyjs  Return only JS code
          * @return string
          */
-        public static function jqueryLoad($onlyjs = false) {
+        public static function jqueryLoad($onlyjs = false)
+        {
             $js = PipeLine::invoke('jqueryLoad', '');
             if (empty($js)) return '';
             $js = <<<JS

@@ -25,7 +25,8 @@
      * @property-read array $rows  Rows
      * @property-read array $row   Row
      */
-    class Update extends Conditioned {
+    class Update extends Conditioned
+    {
         protected $_rows = array();
         protected $_row  = null;
 
@@ -34,7 +35,8 @@
          * @param Model  $model  Model
          * @param string $name   Query name
          */
-        public function __construct(Model $model, $name = null) {
+        public function __construct(Model $model, $name = null)
+        {
             $this->_fields = array();
             $this->_opts   = array(
                 'low_priority' => false,
@@ -48,7 +50,8 @@
          * @param[] mixed  Field name(s)
          * @return $this
          */
-        public function fields() {
+        public function fields()
+        {
             return $this;
         }
 
@@ -59,7 +62,8 @@
          * @return $this
          * @throws \xbweb\NodeError
          */
-        public function field($field, $value) {
+        public function field($field, $value)
+        {
             if (!$this->_model->hasField($field)) return $this;
             $this->_fields[$field] = $this->_model->pack($field, $value);
             return $this;
@@ -73,7 +77,8 @@
          * @return $this
          * @throws \xbweb\NodeError
          */
-        public function cell($id, $field, $value) {
+        public function cell($id, $field, $value)
+        {
             if (!$this->_model->hasField($field)) return $this;
             $this->_rows[$field][$id] = $this->_model->pack($field, $value);
             return $this;
@@ -86,7 +91,8 @@
          * @return Update
          * @throws \xbweb\NodeError
          */
-        public function row(array $row, $id) {
+        public function row(array $row, $id)
+        {
             $this->_row = array();
             foreach ($row as $field => $value) {
                 if (!$this->_model->hasField($field)) continue;
@@ -102,7 +108,8 @@
          * @return string
          * @throws DBError
          */
-        public function sql() {
+        public function sql()
+        {
             if (!empty($this->_row)) {
                 $S = array();
                 foreach ($this->_row as $field => $value) $S[] = "`{$field}` = {$value}";
@@ -144,7 +151,8 @@ sql;
          * @return bool|mixed|Result
          * @throws DBError
          */
-        public function execute() {
+        public function execute()
+        {
             return DB::query($this->sql());
         }
     }

@@ -24,7 +24,8 @@
     /**
      * Class Role
      */
-    class Role extends Field {
+    class Role extends Field
+    {
         const BASE_TYPE = self::T_BYTE;
         const FLAGS     = 'required, sortable';
 
@@ -34,7 +35,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             if (empty($data['name'])) $data['name'] = 'role';
             $data = parent::__correct($data);
             if (empty($data['default'])) $data['default'] = 0;
@@ -47,7 +49,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             return self::__value($data, $value);
         }
 
@@ -57,7 +60,8 @@
          * @param mixed $value  Field value
          * @return array
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             return LibRoles::toArray($value);
         }
 
@@ -67,7 +71,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             return true;
         }
 
@@ -77,7 +82,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             return LibRoles::toInt($value);
         }
     }

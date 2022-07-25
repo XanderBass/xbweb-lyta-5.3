@@ -19,7 +19,8 @@
     /**
      * Access functions library
      */
-    class Access {
+    class Access
+    {
         const AP_DEFAULT  = 0;
         const AP_DISALLOW = 2;
         const AP_ALLOW    = 3;
@@ -51,7 +52,8 @@
          * Library initialization
          * @return bool
          */
-        public static function __init() {
+        public static function __init()
+        {
             if (is_array(self::$_map)) return true;
             self::$_groups = array(
                 static::GN_ANONIMOUS,
@@ -89,7 +91,8 @@
          * @param mixed $v  Input value
          * @return int
          */
-        public static function actionToInt($v) {
+        public static function actionToInt($v)
+        {
             if (is_numeric($v)) $v = intval($v);
             if (is_int($v)) return ($v & 0x7f);
             if ($v == 'all') return 0x7f;
@@ -104,7 +107,8 @@
          * @param mixed $v  Input value
          * @return array
          */
-        public static function actionToArray($v) {
+        public static function actionToArray($v)
+        {
             if (is_numeric($v)) $v = intval($v);
             if ($v == 'all') return self::$_groups;
             $ret = array();
@@ -123,7 +127,8 @@
          * @param mixed  $v  Action value
          * @return bool
          */
-        public static function actionGranted($g, $v = 0) {
+        public static function actionGranted($g, $v = 0)
+        {
             if (empty($g)) return false;
             if (($g == static::GN_ROOT) || ($g == static::GN_SYSTEM)) return true;
             $v = self::actionToInt($v);
@@ -137,7 +142,8 @@
          * @param bool $d  Basic value
          * @return bool
          */
-        public static function actionPersonal($v = 0, $d = false) {
+        public static function actionPersonal($v = 0, $d = false)
+        {
             $o = ($v & 0x03);
             if ($o == static::AP_DEFAULT) return $d;
             if ($o == static::AP_ALLOW)   return true;
@@ -149,7 +155,8 @@
          * @param mixed $v  Input value
          * @return array
          */
-        public static function CRUSValue($v) {
+        public static function CRUSValue($v)
+        {
             if (is_array($v)) return array_values(array_intersect(self::$_rights, $v));
             switch ($v) {
                 case 'read'        : return array('read');
@@ -171,7 +178,8 @@
          * @param mixed $v  Input value
          * @return int
          */
-        public static function CRUSToInt($v) {
+        public static function CRUSToInt($v)
+        {
             if (is_numeric($v)) $v = intval($v);
             if (is_int($v)) return ($v & static::FACL_ALL);
             $ret = 0;
@@ -209,7 +217,8 @@
          * @param mixed $v  Input value
          * @return array
          */
-        public static function CRUSToArray($v) {
+        public static function CRUSToArray($v)
+        {
             if (is_numeric($v)) $v = intval($v);
             $ret = array();
             if (is_array($v)) {
@@ -237,7 +246,8 @@
          * @param mixed  $v  Input value
          * @return bool
          */
-        public static function CRUSGranted($g, $r, $v = 0) {
+        public static function CRUSGranted($g, $r, $v = 0)
+        {
             if (($g == static::GN_ROOT) || ($g == static::GN_SYSTEM)) return true;
             $v   = self::CRUSToInt($v);
             $ret = false;
@@ -256,7 +266,8 @@
          * @param string $entity  Basic group of entity
          * @return bool
          */
-        public static function hasPriority($editor, $entity) {
+        public static function hasPriority($editor, $entity)
+        {
             if ($editor == static::GN_SYSTEM) return true;
             if ($editor == static::GN_ROOT)   return ($entity != 'system');
             return (self::$_priorities[$entity] < self::$_priorities[$editor]);

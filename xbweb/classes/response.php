@@ -19,14 +19,16 @@
     /**
      * Class Response
      */
-    class Response {
+    class Response
+    {
         /**
          * Return "ERROR" result
          * @param mixed  $e      Errors array or error string
          * @param string $title  Page title
          * @return array
          */
-        public static function error($e, $title = null) {
+        public static function error($e, $title = null)
+        {
             $ret = array(
                 'status' => 'error',
                 'errors' => is_array($e) ? $e : array($e)
@@ -42,7 +44,8 @@
          * @param array $errors  Form errors
          * @return array
          */
-        public static function form($form = null, $values =  null, $errors = null) {
+        public static function form($form = null, $values =  null, $errors = null)
+        {
             $ret = array(
                 'form'   => $form,
                 'values' => $values,
@@ -61,7 +64,8 @@
          * @param string $title  Page title
          * @return array
          */
-        public static function success($data = null, $title = null) {
+        public static function success($data = null, $title = null)
+        {
             $ret = array('status' => 'success');
             if ($data  !== null) $ret['result'] = $data;
             if ($title !== null) $ret['title']  = $title;
@@ -74,7 +78,8 @@
          * @param string $url  Redirect URL
          * @return array
          */
-        public static function message($msg, $url = null) {
+        public static function message($msg, $url = null)
+        {
             return array(
                 'status'   => 'redirect',
                 'template' => '/message',
@@ -89,7 +94,8 @@
          * @param array  $query   Query
          * @return array
          */
-        public static function dialog($status, $query) {
+        public static function dialog($status, $query)
+        {
             return array(
                 'status'  => $status,
                 'window'  => empty($query['window']) ? true             : $query['window'],
@@ -102,7 +108,8 @@
          * Redirect to previous URL
          * @return null
          */
-        public static function redirectBack() {
+        public static function redirectBack()
+        {
             $url = Config::get('redirects/login_'.Request::get('context'));
             if (empty($url)) $url = Request::CTX_ADMIN == Request::get('context') ? '/admin' : '/';
             \xbweb::redirect($url); // TODO

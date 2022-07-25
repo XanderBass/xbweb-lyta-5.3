@@ -23,7 +23,8 @@
     /**
      * Class Sendmail
      */
-    class Sendmail extends Mailer {
+    class Sendmail extends Mailer
+    {
         /**
          * Send mail
          * @param string $template  Template
@@ -33,7 +34,8 @@
          * @return bool
          * @throws Error
          */
-        public function send($template, $subject, $data = array(), $files = null) {
+        public function send($template, $subject, $data = array(), $files = null)
+        {
             $rec = array();
             foreach ($this->_to  as $email) $rec[] = $email;
             foreach ($this->_cc  as $email) $rec[] = $email;
@@ -56,7 +58,8 @@
          * @param mixed $config Configuration data
          * @return array
          */
-        public function config($config) {
+        public function config($config)
+        {
             return $config;
         }
     }

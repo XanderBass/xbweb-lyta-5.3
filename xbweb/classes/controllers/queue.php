@@ -24,7 +24,8 @@
     /**
      * Class Queue
      */
-    class Queue extends Controller {
+    class Queue extends Controller
+    {
         const STATUS_IDLE   = 'idle';
         const STATUS_RELOAD = 'reload';
         const STATUS_OK     = 'ok';
@@ -42,7 +43,8 @@
          * @return mixed
          * @throws \Exception
          */
-        public function execute($action = null, $method = null) {
+        public function execute($action = null, $method = null)
+        {
             $dt = Config::get('queue/delaytime', self::DELAY_TIME);
             $st = Config::get('queue/steps', self::STEPS);
             $response = array(

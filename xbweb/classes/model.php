@@ -30,7 +30,8 @@
      * @property-read mixed  $primary  Primary key
      * @property-read array  $options  Model options
      */
-    abstract class Model extends Node {
+    abstract class Model extends Node
+    {
         const NODE_TYPE  = 'Model';
         const OPTIONS    = 'deleted410,norows204';
         const LIMIT      = 20;
@@ -53,7 +54,8 @@
          * @throws NodeError
          * @throws FieldError
          */
-        protected function __construct($path, array $data = null) {
+        protected function __construct($path, array $data = null)
+        {
             parent::__construct($path);
             if (!is_array($data))      throw new NodeError('Model data incorrect', $path);
             if (empty($data['table'])) throw new NodeError('No table specified', $path);
@@ -73,7 +75,8 @@
          * @param string $name  Property name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             switch ($name) {
                 case 'fields':
                     $ret = array();
@@ -91,7 +94,8 @@
          * @param string $name  Field name
          * @return bool
          */
-        public function hasField($name) {
+        public function hasField($name)
+        {
             return !empty($this->_fields[$name]);
         }
 
@@ -99,7 +103,8 @@
          * Get create table SQL
          * @return string
          */
-        public function tableSQL() {
+        public function tableSQL()
+        {
             $query = new Table($this);
             return $query->sql();
         }
@@ -112,7 +117,8 @@
          * @return mixed
          * @throws NodeError
          */
-        public function validate($field, $value, &$error = false) {
+        public function validate($field, $value, &$error = false)
+        {
             if (empty($this->_fields[$field])) throw new NodeError('No field ', $field);
             return Models::validate($this->_fields[$field], $value, $error);
         }
@@ -124,7 +130,8 @@
          * @return mixed
          * @throws NodeError
          */
-        public function pack($field, $value) {
+        public function pack($field, $value)
+        {
             if (empty($this->_fields[$field])) throw new NodeError('No field ', $field);
             $value = Field::value($this->_fields[$field], $value);
             return Field::pack($this->_fields[$field], $value);
@@ -137,7 +144,8 @@
          * @return mixed
          * @throws NodeError
          */
-        public function unpack($field, $value) {
+        public function unpack($field, $value)
+        {
             if (empty($this->_fields[$field])) throw new NodeError('No field ', $field);
             return Field::unpack($this->_fields[$field], $value);
         }
@@ -150,7 +158,8 @@
          * @return array
          * @throws Error
          */
-        public function request($operation, $action = null, $forlist = false) {
+        public function request($operation, $action = null, $forlist = false)
+        {
             if ($action === null) $action = $operation;
             $ret = Models::request($this->_fields, $operation);
             if ($operation == 'update') {
@@ -168,7 +177,8 @@
          * Get ID from REQUEST
          * @return mixed
          */
-        public function getID() {
+        public function getID()
+        {
             if (empty($_POST[$this->_primary])) return Request::get('id');
             $value = $_POST[$this->_primary];
             return Field::value($this->_fields[$this->_primary], $value);
@@ -181,7 +191,8 @@
          * @return array
          * @throws Error
          */
-        public function form($operation, $row = null) {
+        public function form($operation, $row = null)
+        {
             return PipeLine::invoke(
                 $this->pipeName('form'),
                 Models::form($this->_fields, $operation, $row),
@@ -196,7 +207,8 @@
          * @return array
          * @throws Error
          */
-        public function row($row, $unpack = true) {
+        public function row($row, $unpack = true)
+        {
             return Models::row($this->_fields, $row, $unpack);
         }
 
@@ -205,7 +217,8 @@
          * @return array
          * @throws Error
          */
-        public function tableFields() {
+        public function tableFields()
+        {
             return Models::tableFields($this->_fields);
         }
 
@@ -215,7 +228,8 @@
          * @param mixed  $value  Field value
          * @return bool
          */
-        public function exists($field, $value) {
+        public function exists($field, $value)
+        {
             $value = Field::value($this->_fields[$field], $value);
             $table = DB::table($this->_table);
             $curid = $this->getID();
@@ -232,7 +246,8 @@
          * @return string
          * @throws NodeError
          */
-        public function field($field) {
+        public function field($field)
+        {
             if (empty($this->_fields[$field])) throw new NodeError('No field ', $field);
             return $this->_alias.".`{$field}`";
         }
@@ -285,7 +300,8 @@
          * @param bool  $n    Add if TRUE
          * @return bool|null
          */
-        public function save($row, $n = null) {
+        public function save($row, $n = null)
+        {
             $id = empty($row[$this->_primary]) ? null : $row[$this->_primary];
             if (empty($id) || $n) return $this->add($row);
             return $this->update($row, $id) ? $id : false;
@@ -298,7 +314,8 @@
          * @throws Error
          * @throws ErrorNotFound
          */
-        public static function create($data) {
+        public static function create($data)
+        {
             try {
                 $cn   = \xbweb::uses($data, static::NODE_TYPE);
                 $path = $data;
@@ -324,7 +341,8 @@
          * @param string $path  Model path
          * @return string
          */
-        public static function file($path) {
+        public static function file($path)
+        {
             $_      = explode('/', $path);
             $module = array_shift($_);
             $model  = empty($_) ? 'table' : implode('/', $_);

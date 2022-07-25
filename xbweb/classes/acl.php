@@ -19,7 +19,8 @@
     /**
      * ACL component class
      */
-    class ACL {
+    class ACL
+    {
         protected static $_cache = null;
 
         /**
@@ -32,7 +33,8 @@
          * @throws ErrorNotFound
          * @throws \Exception
          */
-        public static function granted($action = null, $user = null, $drop = false) {
+        public static function granted($action = null, $user = null, $drop = false)
+        {
             if ($action === null) {
                 $module = Request::get('module');
                 $action = Request::get('controller').'/'.Request::get('action');
@@ -62,7 +64,8 @@
          * @param string $name  Module name
          * @return mixed
          */
-        public static function module($name = null) {
+        public static function module($name = null)
+        {
             if (self::$_cache === null) self::$_cache = array();
             if (empty($name)) $name = 'system';
             if (empty(self::$_cache[$name])) {

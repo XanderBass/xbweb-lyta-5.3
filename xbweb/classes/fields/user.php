@@ -20,7 +20,8 @@
     /**
      * Class User
      */
-    class User extends Link {
+    class User extends Link
+    {
         const BASE_TYPE = self::T_INT_BIG;
         const FLAGS     = 'required, sortable, table';
 
@@ -30,7 +31,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data['link']['table'] = 'users';
             $data['link']['field'] = 'id';
             if (empty($data['name'])) $data['name'] = 'user';

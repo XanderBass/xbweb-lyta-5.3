@@ -16,12 +16,14 @@
      */
 
     /**** BACKWARD COMPATIBILITY ****/
-    namespace {
+    namespace
+    {
         defined('JSON_PRETTY_PRINT')      or define('JSON_PRETTY_PRINT', 128);
         defined('JSON_UNESCAPED_SLASHES') or define('JSON_UNESCAPED_SLASHES', 64);
 
         if (!function_exists('http_response_code')) {
-            function http_response_code($response_code = 0) {
+            function http_response_code($response_code = 0)
+            {
                 static $code = null;
                 if (empty($code)) $code = 200;
                 if (!empty($response_code)) $code = intval($response_code);
@@ -31,7 +33,8 @@
     }
 
     /**** FOLDERS NAME ****/
-    namespace xbweb\Folders {
+    namespace xbweb\Folders
+    {
         /**** Core folder name ****/
         defined(__NAMESPACE__.'\\CORE') or define(__NAMESPACE__.'\\CORE', 'xbweb');
 
@@ -46,7 +49,8 @@
     }
 
     /**** PATHS ****/
-    namespace xbweb\Paths {
+    namespace xbweb\Paths
+    {
         /**** Root path where core folder is located ****/
         if (!defined(__NAMESPACE__.'\\ROOT')) {
             $root = rtrim(strtr(realpath(rtrim(strtr(dirname(__FILE__), '\\', '/'), '/').'/..'), '\\', '/'), '/').'/';
@@ -117,7 +121,8 @@
         require 'classes/db.php';
         require 'classes/node.php';
 
-        set_error_handler(function($en, $es, $ef, $el, $ec = null){
+        set_error_handler(function($en, $es, $ef, $el, $ec = null)
+        {
             throw new \xbweb\Error(array(
                 'type'    => $en,
                 'message' => $es,
@@ -127,7 +132,8 @@
             ));
         });
 
-        spl_autoload_register(function($classname){
+        spl_autoload_register(function($classname)
+        {
             $cn = explode('/', strtolower(strtr($classname, '\\', '/')));
             if (array_shift($cn) != 'xbweb') return true;
             if (empty($cn)) return true;
@@ -154,8 +160,10 @@
         });
     }
 
-    namespace xbweb {
-        function password($v, $t = null) {
+    namespace xbweb
+    {
+        function password($v, $t = null)
+        {
             if ($t === null) $t = Config::get('password_method', 'md5');
             switch ($t) {
                 default: return md5($v);
@@ -163,7 +171,8 @@
         }
     }
 
-    namespace xbweb\Credits {
+    namespace xbweb\Credits
+    {
         define(__NAMESPACE__.'\\PRODUCT' , 'XBWeb CMF');
         define(__NAMESPACE__.'\\VERSION' , '0.1');
         define(__NAMESPACE__.'\\CORE'    , 'Lyta');

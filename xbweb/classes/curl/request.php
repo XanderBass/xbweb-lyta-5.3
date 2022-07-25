@@ -12,7 +12,8 @@
     /**
      * Class Request
      */
-    class Request {
+    class Request
+    {
         protected $_url     = null;
         protected $_data    = null;
         protected $_method  = 'GET';
@@ -29,7 +30,8 @@
          * @param string $method  Method
          * @param bool   $toJSON  Convert POST data to JSON
          */
-        public function __construct($url, $data = null, $method = 'GET', $toJSON = false) {
+        public function __construct($url, $data = null, $method = 'GET', $toJSON = false)
+        {
             $this->_url    = $url;
             $this->_data   = $data;
             $this->_method = $method;
@@ -42,7 +44,8 @@
          * @param string $value  Header value
          * @return $this
          */
-        public function header($name, $value = null) {
+        public function header($name, $value = null)
+        {
             if ($value === null) {
                 unset($this->_headers[$name]);
             } else {
@@ -56,7 +59,8 @@
          * @param string $path  Cookie filename
          * @return $this
          */
-        public function cookie($path = null) {
+        public function cookie($path = null)
+        {
             $this->_cookie = $path;
             return $this;
         }
@@ -66,7 +70,8 @@
          * @param string $address  Proxy address
          * @return $this
          */
-        public function proxy($address = null) {
+        public function proxy($address = null)
+        {
             $this->_proxy = $address;
             return $this;
         }
@@ -76,7 +81,8 @@
          * @param array $options  CURL options
          * @return $this
          */
-        public function options($options = null) {
+        public function options($options = null)
+        {
             $this->_options = $options;
             return $this;
         }
@@ -85,7 +91,8 @@
          * Execute request
          * @return Response
          */
-        public function execute() {
+        public function execute()
+        {
             $curl = curl_init();
             if ($this->_method == 'GET') {
                 curl_setopt($curl, CURLOPT_URL, self::buildURL($this->_url, $this->_data));
@@ -132,7 +139,8 @@
          * @param array  $data  REQUEST data
          * @return bool|string
          */
-        public static function buildURL($url = null, $data = null) {
+        public static function buildURL($url = null, $data = null)
+        {
             if (empty($url)) return false;
             $url = parse_url($url);
             $url['data'] = empty($url['query']) ? array() : parse_str($url['query']);

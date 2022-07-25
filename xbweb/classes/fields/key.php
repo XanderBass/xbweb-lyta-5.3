@@ -22,14 +22,16 @@
     /**
      * Class Key
      */
-    class Key extends Str {
+    class Key extends Str
+    {
         /**
          * Correct field
          * @param array $data  Field data
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             if (empty($data['name'])) $data['name'] = 'key';
             $data = parent::__correct($data);
             if (empty($data['data']['length'])) $data['data']['length'] = 32;
@@ -42,7 +44,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             $value = DB::escape(self::__value($data, $value));
             return "'{$value}'";
         }
@@ -53,7 +56,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             if ($value === true) return \xbweb::key($data['data']['length']);
             return parent::__value($data, $value);
         }

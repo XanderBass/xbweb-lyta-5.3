@@ -29,7 +29,8 @@
     /**
      * Class Table
      */
-    class Table extends Model {
+    class Table extends Model
+    {
         /**
          * Get one
          * @param mixed $id   ID
@@ -37,7 +38,8 @@
          * @return array|bool
          * @throws \xbweb\Error
          */
-        public function getOne($id, $acl = true) {
+        public function getOne($id, $acl = true)
+        {
             $table = DB::table($this->_table);
             $pkey  = $this->primary;
             $sql   = "select * from `{$table}` where `{$pkey}` = '{$id}'";
@@ -59,7 +61,8 @@
          * @throws \xbweb\Error
          * @throws \xbweb\NodeError
          */
-        public function getByIDs($ids, $acl = true, &$total = null) {
+        public function getByIDs($ids, $acl = true, &$total = null)
+        {
             $ids = \xbweb::arg($ids);
             /** @var QuerySelect $query */
             $query = new QuerySelect($this);
@@ -90,7 +93,8 @@
          * @throws \xbweb\Error
          * @throws \xbweb\NodeError
          */
-        public function get($name = '', $acl = true, DB\Query &$query = null, &$total = null) {
+        public function get($name = '', $acl = true, DB\Query &$query = null, &$total = null)
+        {
             /** @var QuerySelect $query */
             $query = new QuerySelect($this);
             $query->option('get_total_rows', true);
@@ -126,7 +130,8 @@
          * @return array|bool
          * @throws \Exception
          */
-        public function add($row) {
+        public function add($row)
+        {
             $query = new QueryInsert($this);
             $query->row($row);
             if ($result = $query->execute()) {
@@ -144,7 +149,8 @@
          * @throws \xbweb\NodeError
          * @throws \xbweb\DBError
          */
-        public function update($row, $id) {
+        public function update($row, $id)
+        {
             $query = new QueryUpdate($this);
             $query->row($row, $id);
             if ($result = $query->execute()) return $result->success;
@@ -155,7 +161,8 @@
          * Create table
          * @return bool
          */
-        public function table() {
+        public function table()
+        {
             $query = new QueryTable($this);
             return $query->execute();
         }

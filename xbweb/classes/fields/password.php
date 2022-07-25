@@ -22,7 +22,8 @@
     /**
      * Class Password
      */
-    class Password extends Str {
+    class Password extends Str
+    {
         const FLAGS = 'required';
 
         /**
@@ -31,7 +32,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             if (empty($data['name'])) $data['name'] = 'password';
             $data = parent::__correct($data);
             if (empty($data['data']['length'])) $data['data']['length'] = 64;
@@ -44,7 +46,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             $value = DB::escape(\xbweb\password($value));
             return "'{$value}'";
         }

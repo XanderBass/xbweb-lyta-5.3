@@ -24,14 +24,16 @@
     /**
      * Class Install
      */
-    class Install extends Controller {
+    class Install extends Controller
+    {
         /**
          * Constructor
          * @param string $path   Controller path
          * @param mixed  $model  Controller model
          * @throws \xbweb\Error
          */
-        protected function __construct($path, $model = null) {
+        protected function __construct($path, $model = null)
+        {
             parent::__construct($path, $model);
             if (true || !\xbweb\INSTALLED) {
                 $this->_allowed[] = 'index';
@@ -43,7 +45,8 @@
          * @return array
          * @action /install
          */
-        public function do_index() {
+        public function do_index()
+        {
             if (Request::isPost()) {
                 $errors = array();
                 foreach (array('user', 'pass', 'name') as $k) {

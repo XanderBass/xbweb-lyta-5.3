@@ -26,7 +26,8 @@
      * Session component - files class
      * @property-read string $path  Session files path
      */
-    class Files extends \xbweb\Session {
+    class Files extends \xbweb\Session
+    {
         const FOLDER = 'sessions';
 
         protected $_path = null;
@@ -35,7 +36,8 @@
          * Constructor
          * @throws Error
          */
-        public function __construct() {
+        public function __construct()
+        {
             $this->_path = Config::get('session/savepath', \xbweb\Paths\RUNTIME.(static::FOLDER).'/');
             if (!\xbweb\lib\Files::dir($this->_path, 0700, true)) throw new Error(array(
                 'message' => 'Session save path error',
@@ -53,7 +55,8 @@
          * @param string $SID  Session ID
          * @return string
          */
-        protected function _file($SID) {
+        protected function _file($SID)
+        {
             return $this->_path.implode('/', str_split($SID, 2)).'.sess';
         }
 
@@ -61,7 +64,8 @@
          * Open session
          * @return bool
          */
-        public function open() {
+        public function open()
+        {
             if (!$this->_ready) return false;
             if (Request::isCLI()) return true;
             return Events::invoke('sessionOpen');
@@ -71,7 +75,8 @@
          * Close the session
          * @return bool
          */
-        public function close() {
+        public function close()
+        {
             return Events::invoke('sessionClose');
         }
 
@@ -81,7 +86,8 @@
          * @return string
          * @throws Error
          */
-        public function read($SID) {
+        public function read($SID)
+        {
             if ($this->_data === null) $this->select($SID);
             $this->_isNew = empty($this->_data['sid']);
             if ($this->_isNew) $this->_data['sid'] = $SID;
@@ -99,7 +105,8 @@
          * @return bool
          * @throws Error
          */
-        public function write($SID, $data) {
+        public function write($SID, $data)
+        {
             $fn = $this->_file($SID);
             if (!\xbweb\lib\Files::dir(dirname($fn), 0700)) throw new Error(array(
                 'message' => 'Session ID file error (write)',
@@ -114,7 +121,8 @@
          * @param string $SID The session ID being destroyed.
          * @return bool
          */
-        public function destroy($SID) {
+        public function destroy($SID)
+        {
             if ($this->delete($SID)) return unlink($this->_file($SID));
             return false;
         }
@@ -124,7 +132,8 @@
          * @param int $maxlifetime  Max session lifetime
          * @return bool
          */
-        public function gc($maxlifetime) {
+        public function gc($maxlifetime)
+        {
             $sfl = glob($this->_path.'??/??/??/??/??/??/??/??/??/??/??/??/??/??/??/??.sess');
             $sid = array();
             $now = time();
@@ -149,7 +158,8 @@
          * @return string
          * @throws Error
          */
-        public function create_sid() {
+        public function create_sid()
+        {
             if (Request::isCLI())        return 'session_cli';
             if ($bot = Request::isBot()) return 'session_bot_'.strtolower($bot);
             $IP = Request::IP();
@@ -178,7 +188,8 @@
          * @param string $SID  Session ID
          * @return bool
          */
-        public function validate_sid($SID) {
+        public function validate_sid($SID)
+        {
             if (!ctype_alnum(str_replace('_', '', $SID))) return false;
             $fn = $this->_file($SID);
             return file_exists($fn);
@@ -188,7 +199,8 @@
          * @param string $SID Session ID
          * @return bool
          */
-        public function update_timestamp($SID) {
+        public function update_timestamp($SID)
+        {
             if ($this->touch($SID)) return touch($this->_file($SID));
             return false;
         }

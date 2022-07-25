@@ -22,7 +22,8 @@
     /**
      * Class Primary
      */
-    class Primary extends Field {
+    class Primary extends Field
+    {
         const ATTRIBUTES  = 'primary, auto_increment, binary, unsigned';
 
         /**
@@ -31,7 +32,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             if (empty($data['name']))   $data['name']   = 'id';
             if (empty($data['access'])) $data['access'] = 'read';
             $data = parent::__correct($data);
@@ -55,7 +57,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             if (in_array($data['base_type'], array(self::T_SERIAL, self::T_INT))) return intval($value);
             $value = DB::escape($value);
             return "'{$value}'";
@@ -67,7 +70,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             if (in_array($data['base_type'], array(self::T_SERIAL, self::T_INT))) return intval($value);
             return $value;
         }
@@ -78,7 +82,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             if (empty($data['data']['regexp'])) return true;
             if (preg_match($data['data']['regexp'], $value)) return true;
             return 'invalid';
@@ -90,7 +95,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             if (!empty($data['type']['strip'])) $value = preg_replace($data['type']['strip'], '', $value);
             return $value;
         }

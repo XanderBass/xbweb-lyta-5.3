@@ -22,13 +22,15 @@
     /**
      * Class Delete
      */
-    class Delete extends Conditioned {
+    class Delete extends Conditioned
+    {
         /**
          * Constructor
          * @param Model  $model  Model
          * @param string $name   Query name
          */
-        public function __construct(Model $model, $name = null) {
+        public function __construct(Model $model, $name = null)
+        {
             $this->_opts = array(
                 'low_priority' => false,
                 'quick'        => false
@@ -41,7 +43,8 @@
          * @param[] mixed  Field name(s)
          * @return $this
          */
-        public function fields() {
+        public function fields()
+        {
             return $this;
         }
 
@@ -49,7 +52,8 @@
          * Get SQL string
          * @return string
          */
-        public function sql() {
+        public function sql()
+        {
             $A     = $this->_model->alias;
             $opts  = $this->_opts('low_priority', 'quick');
             $where = $this->_where();
@@ -64,7 +68,8 @@ sql;
          * Execute query
          * @return mixed
          */
-        public function execute() {
+        public function execute()
+        {
             return DB::query($this->sql());
         }
     }

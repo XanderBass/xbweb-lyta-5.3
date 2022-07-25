@@ -21,7 +21,8 @@
     /**
      * Filesystem functions library
      */
-    class Files {
+    class Files
+    {
         const R_COPIED     = 0700;
         const R_CREATED    = 0700;
         const REX_PHP_TAGS = '~^(\<\?php|\<\?)(.*)(\?\>|)$~siu';
@@ -31,7 +32,8 @@
          * @param string $fn  File name
          * @return string
          */
-        public static function getPHPCode($fn) {
+        public static function getPHPCode($fn)
+        {
             return preg_replace(self::REX_PHP_TAGS, '\2', file_get_contents($fn));
         }
 
@@ -41,7 +43,8 @@
          * @param array  $data  Data
          * @return bool
          */
-        public static function isValidImage($fn, &$data) {
+        public static function isValidImage($fn, &$data)
+        {
             $ret = @getimagesize($fn);
             if (!$ret) return false;
             $data = array(
@@ -62,7 +65,8 @@
          * @param array  $exclude  Exclude nodes names
          * @return mixed
          */
-        public static function nodes($dir, $ext = null, $exclude = null) {
+        public static function nodes($dir, $ext = null, $exclude = null)
+        {
             $exclude = empty($exclude) ? array() : xbweb::arg($exclude);
             if ($dh = scandir($dir)) {
                 $ret = array();
@@ -94,7 +98,8 @@
          * @param bool   $safe    Deny directory
          * @return bool
          */
-        public static function dir($dir, $rights = self::R_CREATED, $safe = false) {
+        public static function dir($dir, $rights = self::R_CREATED, $safe = false)
+        {
             $dir = rtrim(xbweb::slash($dir), '/');
             if (!is_dir($dir)) {
                 if (!mkdir($dir, $rights, true)) return false;
@@ -117,7 +122,8 @@ APACHE;
          * @param array  $errors  Files with errors
          * @return bool
          */
-        public static function copy($src, $dst, $over = false, &$errors = array()) {
+        public static function copy($src, $dst, $over = false, &$errors = array())
+        {
             if (is_file($src)) return self::copy_($src, $dst, $over, $errors);
             if (!is_dir($dst)) if (!mkdir($dst, self::R_COPIED, true)) {
                 $errors[$dst] = false;
@@ -153,7 +159,8 @@ APACHE;
          * @param array  $errors  Copy file errors
          * @return bool
          */
-        protected static function copy_($src, $dst, $over = false, &$errors = array()) {
+        protected static function copy_($src, $dst, $over = false, &$errors = array())
+        {
             if ($over || !file_exists($dst)) {
                 if (copy($src, $dst)) return true;
                 $errors[$src] = $dst;
@@ -167,7 +174,8 @@ APACHE;
          * @param string $fn  Files path
          * @return bool
          */
-        public static function remove($fn) {
+        public static function remove($fn)
+        {
             if (is_file($fn)) return unlink($fn);
             if ($c = glob($fn.'/{.[!.],}*', GLOB_BRACE))
                 foreach ($c as $i) is_dir($i) ? self::remove($i) : unlink($i);
@@ -179,7 +187,8 @@ APACHE;
          * @param string $name  File name
          * @return string
          */
-        public static function getMIMEByExt($name) {
+        public static function getMIMEByExt($name)
+        {
             $name = explode('.', $name);
             $ext  = array_pop($name);
             return \xbweb::MIMEType($ext);
@@ -190,7 +199,8 @@ APACHE;
          * @param string $name  File name
          * @return string
          */
-        public static function dataURI($name) {
+        public static function dataURI($name)
+        {
             $mime = self::getMIMEByExt($name);
             $f    = fopen($name, "rb");
             $data = fread($f, filesize($name));
@@ -204,7 +214,8 @@ APACHE;
          * @param callable $get   Callback for getting data
          * @return bool|string
          */
-        public static function cached($file, $get) {
+        public static function cached($file, $get)
+        {
             $fn = \xbweb\Paths\RUNTIME.$file;
             if (file_exists($fn)) return file_get_contents($fn);
             if (is_callable($get)) {

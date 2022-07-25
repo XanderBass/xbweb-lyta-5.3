@@ -23,7 +23,8 @@
     /**
      * Common view functions
      */
-    class Content {
+    class Content
+    {
         const EXT_PAGE = 'php';
         const EXT_TPL  = 'php';
 
@@ -34,7 +35,8 @@
          * @param string $ctx     Context
          * @return string
          */
-        public static function path($folder, $module = null, $ctx = null) {
+        public static function path($folder, $module = null, $ctx = null)
+        {
             if ($ctx === null) $ctx = Request::get('context');
             $ret = empty($module) ? \xbweb\Paths\WEBROOT : \xbweb\Paths\MODULES.$module.'/';
             return $ret.(empty($ctx) ? '' : $ctx.'/').$folder.'/';
@@ -49,10 +51,10 @@
          * @param array  $list    List of processed files
          * @return mixed
          */
-        public static function file($file, $folder, $module = null, $sys = true, &$list = array()) {
+        public static function file($file, $folder, $module = null, $sys = true, &$list = array())
+        {
             $paths   = empty($module) ? array() : array(self::path($folder, $module));
             $paths[] = self::path($folder).(empty($module) ? '' : $module.'/');
-            if (Request::get('context') == Request::CTX_ADMIN) $paths[] = \xbweb\Paths\CORE.'content/'.$folder.'/admin/';
             if ($sys) $paths[] = \xbweb\Paths\CORE.'content/'.$folder.'/';
             if (!is_array($file)) $file = array($file);
             foreach ($file as $fn) {
@@ -71,13 +73,14 @@
          * @param array  $list  File search list
          * @return mixed
          */
-        public static function chunk($path, $sys = true, &$list) {
+        public static function chunk($path, $sys = true, &$list = array())
+        {
             $fn = explode(':', $path);
             $fc = count($fn) > 1 ? array_shift($fn) : Request::get('context');
             $fn = explode('/', implode('', $fn));
             $mn = array_shift($fn);
             $fn = implode('/', $fn);
-            $paths   = empty($mn) ? array() : array(
+            $paths = empty($mn) ? array() : array(
                 self::path('chunks', $mn, $fc),
                 self::path('chunks', $mn, '')
             );
@@ -97,7 +100,8 @@
          * @param mixed  $__files  Debug files
          * @return string
          */
-        public static function render($__path, $__data = null, $__files = null) {
+        public static function render($__path, $__data = null, $__files = null)
+        {
             if (!empty($__path) && file_exists($__path)) {
                 ob_start();
                 if (is_array($__data)) extract($__data);

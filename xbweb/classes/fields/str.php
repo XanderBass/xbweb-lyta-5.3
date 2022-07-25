@@ -25,7 +25,8 @@
     /**
      * Class Str
      */
-    class Str extends Field {
+    class Str extends Field
+    {
         const ATTRIBUTES  = 'primary, isnull, binary, index, node, fixed, system';
 
         /**
@@ -34,7 +35,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data = parent::__correct($data);
             $data['base_type'] = in_array('fixed', $data['attributes']) ? self::T_STR : self::T_VAR;
             if (!empty($data['data']['regexp'])) if (!\xbweb::rexValid($data['data']['regexp']))
@@ -53,7 +55,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             $value = DB::escape($value);
             return "'{$value}'";
         }
@@ -64,7 +67,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             return $value;
         }
 
@@ -74,7 +78,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             if (in_array('unique', $data['flags']))
                 if ($data['model'] instanceof Model)
                     if ($data['model']->exists($data['name'], $value)) return 'exists';
@@ -91,7 +96,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             if (!empty($data['type']['strip'])) $value = preg_replace($data['type']['strip'], '', $value);
             return $value;
         }

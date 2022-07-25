@@ -21,7 +21,8 @@
     /**
      * Class Settings
      */
-    class Settings {
+    class Settings
+    {
         protected static $_cache = array();
 
         const TABLE = <<<SQL
@@ -36,7 +37,8 @@ create table if not exists `[+prefix+]settings` (
 ) engine = InnoDB
 SQL;
 
-        public static function allFields() {
+        public static function allFields()
+        {
             return self::$_cache;
         }
 
@@ -45,7 +47,8 @@ SQL;
          * @param string $path  Unified path
          * @return string
          */
-        public static function id($path) {
+        public static function id($path)
+        {
             return md5($path);
         }
 
@@ -55,7 +58,8 @@ SQL;
          * @return array
          * @throws FieldError
          */
-        public static function get($module) {
+        public static function get($module)
+        {
             $fields = self::_fields($module);
             $values = array();
             if ($rows = DB::rows("select * from `[+prefix+]settings` where `module` = '{$module}'")) {
@@ -73,7 +77,8 @@ SQL;
          * @return array
          * @throws FieldError
          */
-        public static function getAll() {
+        public static function getAll()
+        {
             $values = array();
             if ($rows = DB::rows("select * from `[+prefix+]settings`")) {
                 foreach ($rows as $row) {
@@ -96,7 +101,8 @@ SQL;
          * @throws Error
          * @throws FieldError
          */
-        public static function save($module, &$values = null, &$errors = null) {
+        public static function save($module, &$values = null, &$errors = null)
+        {
             if (empty($_POST[$module])) return true;
             $fields  = self::_fields($module);
             $REQ     = Models::request($fields, 'update', $_POST[$module]);
@@ -128,7 +134,8 @@ sql;
          * @throws Error
          * @throws FieldError
          */
-        public static function form($module) {
+        public static function form($module)
+        {
             $fields = Models::form(self::_fields($module), 'update', self::get($module));
             $form   = array();
             foreach ($fields as $fn => $field) {
@@ -145,7 +152,8 @@ sql;
          * @return array
          * @throws FieldError
          */
-        protected static function _fields($module) {
+        protected static function _fields($module)
+        {
             if (!isset(self::$_cache[$module])) {
                 $fields = PipeLine::invoke('settings'.ucfirst($module), array());
                 self::$_cache[$module] = Models::fields($fields);

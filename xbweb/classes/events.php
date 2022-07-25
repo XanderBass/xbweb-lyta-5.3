@@ -19,7 +19,8 @@
     /**
      * Events component class
      */
-    class Events {
+    class Events
+    {
         const REX  = '/^on(\w+)$/si';
         const TYPE = 'event';
         const KEY  = 'events';
@@ -35,7 +36,8 @@
          * @param bool     $status   Event status
          * @return bool
          */
-        public static function handler($service, $name, $func, $status = true) {
+        public static function handler($service, $name, $func, $status = true)
+        {
             if (empty($service) || empty($name) || !is_callable($func)) return false;
             $name = explode(',', $name);
             foreach ($name as $name_i) {
@@ -54,7 +56,8 @@
          * @param bool   $status   Status value
          * @return bool
          */
-        protected static function _status($name, $service = null, $status = false) {
+        protected static function _status($name, $service = null, $status = false)
+        {
             if (empty($name)) return false;
             $status = filter_var($status, FILTER_VALIDATE_BOOLEAN);
             if (empty($service)) {
@@ -75,7 +78,8 @@
          * @param string $service  Service name
          * @return bool
          */
-        public static function on($name, $service = null) {
+        public static function on($name, $service = null)
+        {
             return static::_status($name, $service, true);
         }
 
@@ -85,7 +89,8 @@
          * @param string $service  Service name
          * @return bool
          */
-        public static function off($name, $service = null) {
+        public static function off($name, $service = null)
+        {
             return static::_status($name, $service, false);
         }
 
@@ -94,7 +99,8 @@
          * @param string $map  Map
          * @return array
          */
-        public static function setMap($map = null) {
+        public static function setMap($map = null)
+        {
             self::$map[static::KEY] = is_array($map) ? $map : array();
             return static::getMap(true);
         }
@@ -104,7 +110,8 @@
          * @param bool $refresh  Force refresh map
          * @return array
          */
-        public static function getMap($refresh = false) {
+        public static function getMap($refresh = false)
+        {
             static $indexed = false;
             if ($refresh) $indexed = false;
             if (empty(self::$handlers[static::KEY])) return array();
@@ -143,7 +150,8 @@
          * @param string $path  Path
          * @return string
          */
-        public static function name($name, $path = '') {
+        public static function name($name, $path = '')
+        {
             return $name.strtr(ucwords($path, '/'), array('/' => ''));
         }
 
@@ -151,7 +159,8 @@
          * Invoke event. First argument - event name. Another arguments - additional data
          * @return bool
          */
-        public static function invoke() {
+        public static function invoke()
+        {
             $M = static::getMap();
             $a = func_get_args();
             if (empty($a[0])) throw new \BadMethodCallException('Empty event name');

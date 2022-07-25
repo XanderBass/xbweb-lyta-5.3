@@ -26,7 +26,8 @@
      * @property-read int   $limit
      * @property-read int   $offset
      */
-    abstract class Conditioned extends Query {
+    abstract class Conditioned extends Query
+    {
         protected $_where  = null;
         protected $_order  = array();
         protected $_limit  = null;
@@ -40,7 +41,8 @@
          * @param Model  $model  Model
          * @param string $name   Query name
          */
-        public function __construct(Model $model, $name = null) {
+        public function __construct(Model $model, $name = null)
+        {
             parent::__construct($model, $name);
         }
 
@@ -50,7 +52,8 @@
          * @param string $dir    Direction
          * @return $this
          */
-        public function order($field, $dir = 'asc') {
+        public function order($field, $dir = 'asc')
+        {
             if (!$this->_model->hasField($field)) return $this;
             if ($dir != 'desc') $dir = 'asc';
             $this->_order[$field] = $dir;
@@ -62,7 +65,8 @@
          * @param Where $where  Condition object
          * @return $this
          */
-        public function where(Where $where) {
+        public function where(Where $where)
+        {
             $this->_where = $where;
             return $this;
         }
@@ -73,7 +77,8 @@
          * @param int $offset  Offset
          * @return $this
          */
-        public function limit($limit, $offset = null) {
+        public function limit($limit, $offset = null)
+        {
             $this->_limit  = intval($limit);
             $this->_offset = intval($offset);
             return $this;
@@ -83,7 +88,8 @@
          * Get limit from REQUEST
          * @return Conditioned
          */
-        public function limitFromRequest() {
+        public function limitFromRequest()
+        {
             $page = intval(Request::get('id'));
             if (!empty($_REQUEST['page'])) $page = intval($_REQUEST['page']);
             if (empty($page)) $page = 1;
@@ -96,7 +102,8 @@
          * Get order from REQUEST
          * @return Conditioned
          */
-        public function orderFromRequest() {
+        public function orderFromRequest()
+        {
             $field = empty($_REQUEST['order']) ? ''    : $_REQUEST['order'];
             $dir   = empty($_REQUEST['dir'])   ? 'asc' : $_REQUEST['dir'];
             if (!$this->_model->hasField($field)) return $this;
@@ -109,7 +116,8 @@
          * @param array $on     ON conditions
          * @return Join
          */
-        public function join($model, $on = array()) {
+        public function join($model, $on = array())
+        {
             $join = new Join($this->_model, $model, $on);
             $this->_joins[] = $join;
             return $join;
@@ -121,7 +129,8 @@
          * @return $this
          * @throws \xbweb\NodeError
          */
-        public function group($field) {
+        public function group($field)
+        {
             $this->_groups[] = $this->_model->field($field);
             return $this;
         }
@@ -130,7 +139,8 @@
          * Get ORDER string
          * @return string
          */
-        protected function _order() {
+        protected function _order()
+        {
             $A     = $this->_model->alias;
             $order = array();
             foreach ($this->_order as $fn => $dir) $order[] = "{$A}.`{$fn}` {$dir}";
@@ -142,7 +152,8 @@
          * Get WHERE string
          * @return string
          */
-        protected function _where() {
+        protected function _where()
+        {
             $where = ($this->_where instanceof Where) ? strval($this->_where) : '';
             return empty($where) ? '' : ' where '.$where;
         }
@@ -151,7 +162,8 @@
          * Get JOIN string
          * @return string
          */
-        protected function _joins() {
+        protected function _joins()
+        {
             $joins = array();
             foreach ($this->_joins as $join) {
                 $joins[] = strval($join);

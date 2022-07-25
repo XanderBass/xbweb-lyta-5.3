@@ -20,7 +20,8 @@
      * CMF node prototype class
      * @property-read string $path  Node path
      */
-    abstract class Node extends BasicObject {
+    abstract class Node extends BasicObject
+    {
         const NODE_TYPE = '';
 
         protected $_path = null;
@@ -29,7 +30,8 @@
          * Constructor
          * @param string $path  Node path
          */
-        protected function __construct($path) {
+        protected function __construct($path)
+        {
             $this->_path = $path;
         }
 
@@ -37,7 +39,8 @@
          * Property: mid
          * @return string
          */
-        public function getMID() {
+        public function getMID()
+        {
             return strtr(ucwords($this->_path, '/'), array('/' => ''));
         }
 
@@ -46,7 +49,8 @@
          * @param string $name  Pipe name
          * @return string
          */
-        public function pipeName($name) {
+        public function pipeName($name)
+        {
             return PipeLine::name($name, $this->_path);
         }
 
@@ -56,7 +60,8 @@
          * @return Node
          * @throws \Exception
          */
-        public static function create($path) {
+        public static function create($path)
+        {
             $cn = \xbweb::uses($path, static::NODE_TYPE);
             return new $cn($path);
         }

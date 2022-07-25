@@ -27,7 +27,8 @@
      * @property-read string $role         Role
      * @property-read bool   $canModerate  Can moderate
      */
-    class User {
+    class User
+    {
         /** @var User */
         protected static $_current = null;
 
@@ -38,7 +39,8 @@
          * @param mixed $id  User ID or data
          * @throws Error
          */
-        public function __construct($id = null) {
+        public function __construct($id = null)
+        {
             if (empty($id)) {
                 // Anonimous
                 $this->_data = Users::correct();
@@ -62,7 +64,8 @@
          * @param string $name  Property name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             switch ($name) {
                 case 'authorized'  : return !empty($this->_data['id']);
                 case 'role'        : return Users::role($this->_data);
@@ -83,7 +86,8 @@
          * @throws Error
          * @throws ErrorNotFound
          */
-        public function __set($name, $value) {
+        public function __set($name, $value)
+        {
             switch ($name) {
                 case 'id':
                     $value = intval($value);
@@ -108,7 +112,8 @@
          * @return User
          * @throws Error
          */
-        public static function current($data = null, $safe = false) {
+        public static function current($data = null, $safe = false)
+        {
             if (empty(self::$_current)) {
                 if ($data === null) {
                     $id = intval(Session::instance()->user);
@@ -135,7 +140,8 @@
          * @return bool
          * @throws Error
          */
-        public static function checkAuthorized() {
+        public static function checkAuthorized()
+        {
             if (Request::get('context') == Request::CTX_API) {
 
             } else {
@@ -152,7 +158,8 @@
          * @throws Error
          * @throws ErrorForbidden
          */
-        public static function checkAdminAllowed() {
+        public static function checkAdminAllowed()
+        {
             if (static::checkAuthorized()) {
                 $g = static::current()->role;
                 if (in_array($g, array(
@@ -171,7 +178,8 @@
          * @return bool
          * @throws Error
          */
-        public static function CRUSGranted($r, $f) {
+        public static function CRUSGranted($r, $f)
+        {
             static $ug = null;
             if ($ug === null) $ug = static::current()->role;
             return Access::CRUSGranted($ug, $r, $f);

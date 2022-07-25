@@ -19,7 +19,8 @@
     /**
      * Class Language
      */
-    class Language {
+    class Language
+    {
         protected static $_allowed    = null;
         protected static $_current    = null;
         protected static $_dictionary = null;
@@ -31,7 +32,8 @@
          * Get language paths
          * @return array
          */
-        public static function paths() {
+        public static function paths()
+        {
             if (empty(self::$_paths)) {
                 self::$_paths = array();
                 if ($mods = scandir(Paths\CORE.'data/lang')) {
@@ -56,7 +58,8 @@
          * @param string $def    Default language
          * @return array|null
          */
-        public static function accepted($renew = false, $def = 'en') {
+        public static function accepted($renew = false, $def = 'en')
+        {
             static $ret = null;
             if (is_array($ret) && !$renew) return $ret;
             if (empty($def)) $def = 'en'; // Foolproof
@@ -88,7 +91,8 @@
          * @param mixed $v  New value
          * @return mixed
          */
-        public static function allowed($v = null) {
+        public static function allowed($v = null)
+        {
             if ($v === null) return self::$_allowed;
             if (empty($v)) {
                 self::$_allowed = null;
@@ -108,7 +112,8 @@
          * @param mixed $v  Language sign
          * @return bool|null
          */
-        public static function current($v = null) {
+        public static function current($v = null)
+        {
             if (self::$_accepted === null) self::accepted();
             if ($v === null) {
                 if (self::$_current === null) return self::current(self::$_accepted);
@@ -123,7 +128,8 @@
          * @param mixed $v  Language sign
          * @return bool|null
          */
-        public static function load($v = null) {
+        public static function load($v = null)
+        {
             if (self::$_accepted === null) self::accepted();
             if ($v === null) {
                 if (self::$_current === null) return self::current(self::$_accepted);
@@ -136,7 +142,8 @@
          * Get dictionary
          * @return array
          */
-        public static function dictionary() {
+        public static function dictionary()
+        {
             if (empty(self::$_dictionary)) self::load();
             return self::$_dictionary;
         }
@@ -147,7 +154,8 @@
          * @param mixed  $def  Default value
          * @return string
          */
-        public static function translate($k, $def = true) {
+        public static function translate($k, $def = true)
+        {
             if (empty(self::$_dictionary)) self::load();
             $k = explode('/', $k);
             $p = empty($k[1]) ? 'title' : $k[1];
@@ -169,7 +177,8 @@
          * @param mixed $v  Language sign
          * @return bool
          */
-        protected static function set($v) {
+        protected static function set($v)
+        {
             if (empty(self::$_allowed)) {
                 if (!ctype_alnum($v)) return false;
             } else {
@@ -204,7 +213,8 @@
          * @param array  $data  Some data
          * @return array
          */
-        public static function field($k, array $data) {
+        public static function field($k, array $data)
+        {
             foreach (self::$_supported as $p) {
                 if (empty(self::$_dictionary[$k][$p])) {
                     $data[$p] = $p == 'title' ? ucfirst(strtr($k, '_-', '  ')) : '';
@@ -221,7 +231,8 @@
          * @param bool   $def     Default
          * @return string
          */
-        public static function action($action, $def = true) {
+        public static function action($action, $def = true)
+        {
             return Language::translate(strtr(trim($action, '/'), '/', '-'), $def);
         }
     }

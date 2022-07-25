@@ -27,7 +27,8 @@
      * @property-read Model  $modelB      Model
      * @property-read Int    $type        Join type
      */
-    class Join extends BasicObject {
+    class Join extends BasicObject
+    {
         const JT_INNER = 0;
         const JT_LEFT  = 1;
         const JT_RIGHT = 2;
@@ -44,7 +45,8 @@
          * @param array $on      Conditions
          * @param int   $type    Join type
          */
-        public function __construct(Model $modelA, Model $modelB , $on = array(), $type = self::JT_INNER) {
+        public function __construct(Model $modelA, Model $modelB , $on = array(), $type = self::JT_INNER)
+        {
             $this->_modelA = $modelA;
             $this->_modelB = $modelB;
             $this->_type   = $type;
@@ -64,7 +66,8 @@
          * @param string $operation  Operation
          * @return $this
          */
-        public function on($fieldA, $fieldB, $operation = '=') {
+        public function on($fieldA, $fieldB, $operation = '=')
+        {
             $A = $this->_modelA->alias;
             $B = $this->_modelB->alias;
             if (!$this->_modelA->hasField($fieldA)) return $this;
@@ -83,7 +86,8 @@
          * @param Where $where  Where block
          * @return $this
          */
-        public function where($where) {
+        public function where($where)
+        {
             if ($where instanceof Where) $this->_conditions[] = $where;
             return $this;
         }
@@ -92,7 +96,8 @@
          * String value
          * @return string
          */
-        public function __toString() {
+        public function __toString()
+        {
             $ret = array();
             foreach ($this->_conditions as $cond) {
                 if ($cond instanceof Where) {
@@ -119,7 +124,8 @@
          * @param array $on      Conditions
          * @return Join
          */
-        public static function create(Model $modelA, Model $modelB, $on = array()) {
+        public static function create(Model $modelA, Model $modelB, $on = array())
+        {
             return new self($modelA, $modelB, $on);
         }
     }

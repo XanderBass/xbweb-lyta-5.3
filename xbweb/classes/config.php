@@ -19,7 +19,8 @@
     /**
      * Configuration component class
      */
-    class Config {
+    class Config
+    {
         protected static $_registry = array();
 
         /**
@@ -28,7 +29,8 @@
          * @param mixed  $def   Default value
          * @return mixed
          */
-        public static function get($name = null, $def = null) {
+        public static function get($name = null, $def = null)
+        {
             $name = trim($name, '/');
             if (empty($name)) return self::$_registry;
             $k = explode('/', $name);
@@ -56,7 +58,8 @@
          * @param mixed $value  Value
          * @return mixed
          */
-        public static function set($name, $value = null) {
+        public static function set($name, $value = null)
+        {
             if (is_array($name)) {
                 if (empty($value)) {
                     self::$_registry = array_merge_recursive(self::$_registry, $name);
@@ -98,7 +101,8 @@
          * @return array
          * @throws Error
          */
-        public static function load($fn) {
+        public static function load($fn)
+        {
             if (!file_exists($fn)) throw new Error(array(
                 'message' => 'No configuration file',
                 'file'    => $fn
@@ -132,7 +136,8 @@
          * @return null|string
          * @throws Error
          */
-        public static function save($fn) {
+        public static function save($fn)
+        {
             $data = json_encode(self::$_registry);
             if (json_last_error() == JSON_ERROR_NONE) {
                 $dn = dirname($fn);

@@ -21,7 +21,8 @@
     /**
      * Class Vars
      */
-    class Vars {
+    class Vars
+    {
         protected static $_vars = array();
 
         /**
@@ -29,7 +30,8 @@
          * @param string $file  File name
          * @return bool
          */
-        public static function load($file) {
+        public static function load($file)
+        {
             if (file_exists($file)) {
                 self::$_vars = json_decode(file_get_contents($file), true);
                 self::$_vars['__status'] = 'loaded from '.$file;
@@ -43,7 +45,8 @@
          * @param string $file  File name
          * @return bool
          */
-        public static function save($file) {
+        public static function save($file)
+        {
             if (Files::dir(dirname($file))) return (file_put_contents($file, json_encode(self::$_vars, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)) !== false);
             return false;
         }
@@ -54,7 +57,8 @@
          * @param mixed  $value  Value
          * @return mixed
          */
-        public static function set($name, $value) {
+        public static function set($name, $value)
+        {
             if (is_array($name)) {
                 self::$_vars = $name;
                 return self::$_vars;
@@ -92,7 +96,8 @@
          * @param mixed  $def   Default value
          * @return mixed
          */
-        public static function get($name = null, $def = null) {
+        public static function get($name = null, $def = null)
+        {
             $name = trim($name, '/');
             if (empty($name)) return self::$_vars;
             $k = explode('/', $name);
@@ -118,7 +123,8 @@
          * @param mixed  $cond  Allowed or not
          * @return string
          */
-        public static function v($name, $cond = null) {
+        public static function v($name, $cond = null)
+        {
             if ($cond === null) {
                 try {
                     $cond = ACL::granted('/vars/set');
@@ -135,7 +141,8 @@
          * @param string $class  CSS class
          * @return string
          */
-        public static function span($name, $class = null) {
+        public static function span($name, $class = null)
+        {
             return self::tag('span', $name, $class);
         }
 
@@ -145,7 +152,8 @@
          * @param string $class  CSS class
          * @return string
          */
-        public static function div($name, $class = null) {
+        public static function div($name, $class = null)
+        {
             return self::tag('div', $name, $class);
         }
 
@@ -155,7 +163,8 @@
          * @param string $class  CSS class
          * @return string
          */
-        public static function p($name, $class = null) {
+        public static function p($name, $class = null)
+        {
             return self::tag('p', $name, $class);
         }
 
@@ -166,7 +175,8 @@
          * @param string $class  CSS class
          * @return string
          */
-        public static function tag($tag, $name, $class = null) {
+        public static function tag($tag, $name, $class = null)
+        {
             $class = empty($class) ? '' : ' class="'.$class.'"';
             return '<'.$tag.' '.$class.self::v($name).'>'.self::get($name).'</'.$tag.'>';
         }

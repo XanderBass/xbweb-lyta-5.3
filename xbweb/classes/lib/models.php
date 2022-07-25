@@ -23,7 +23,8 @@
     /**
      * Class Models
      */
-    class Models {
+    class Models
+    {
         /**
          * Get fields from REQUEST
          * @param array  $fields     Fields
@@ -32,7 +33,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public static function request($fields, $operation, $post = null) {
+        public static function request($fields, $operation, $post = null)
+        {
             $ug     = User::current()->role;
             $errors = array();
             $values = array();
@@ -65,7 +67,8 @@
          * @param mixed $error  Error
          * @return bool
          */
-        public static function validate($field, $value, &$error = false) {
+        public static function validate($field, $value, &$error = false)
+        {
             $value = Field::value($field, $value);
             if (empty($value)) {
                 if (!in_array('required', $field['flags'])) return true;
@@ -88,7 +91,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public static function form($fields, $operation, $row = null) {
+        public static function form($fields, $operation, $row = null)
+        {
             $ug  = User::current()->role;
             $ret = array();
             foreach ($fields as $key => $field) {
@@ -109,7 +113,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public static function row($fields, $row, $unpack = true) {
+        public static function row($fields, $row, $unpack = true)
+        {
             $ug   = User::current()->role;
             $data = array();
             foreach ($fields as $key => $field) {
@@ -130,7 +135,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public static function tableFields($fields) {
+        public static function tableFields($fields)
+        {
             $ug   = User::current()->role;
             $data = array();
             foreach ($fields as $key => $field) {
@@ -149,7 +155,8 @@
          * @return array
          * @throws FieldError
          */
-        public static function fields($rows, $model = null, &$pri = null) {
+        public static function fields($rows, $model = null, &$pri = null)
+        {
             $ret = array();
             foreach ($rows as $fid => $field) {
                 if (!empty($field['std'])) $field = Field::std($field);

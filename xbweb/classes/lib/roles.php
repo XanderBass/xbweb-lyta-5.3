@@ -21,7 +21,8 @@
     /**
      * Flags functions library
      */
-    class Roles {
+    class Roles
+    {
         const ROLES = 'r01,r02,r03,r04,moderator,admin,root,neo';
 
         /**
@@ -29,7 +30,8 @@
          * @param mixed $value  Input value
          * @return int
          */
-        public static function toInt($value) {
+        public static function toInt($value)
+        {
             if (is_numeric($value)) return intval($value);
             $ret  = 0;
             $keys = self::keyValues();
@@ -46,7 +48,8 @@
          * @param mixed $value  Input value
          * @return array
          */
-        public static function toArray($value) {
+        public static function toArray($value)
+        {
             $keys = self::keyValues();
             $ret  = array();
             if (is_numeric($value)) {
@@ -69,7 +72,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function is($key, $value) {
+        public static function is($key, $value)
+        {
             $keys = self::keyValues();
             if (empty($keys[$key])) return false;
             if (is_numeric($value)) {
@@ -88,7 +92,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function oneOf($key, $value) {
+        public static function oneOf($key, $value)
+        {
             $keys = self::keyValues();
             $key  = xbweb::arg($key);
             if (is_numeric($value)) {
@@ -113,7 +118,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function allOf($key, $value) {
+        public static function allOf($key, $value)
+        {
             $keys = self::keyValues();
             $key  = xbweb::arg($key);
             $ec   = 0;
@@ -140,7 +146,8 @@
          * @param mixed $key  All checked flags
          * @return bool
          */
-        public static function in($key) {
+        public static function in($key)
+        {
             $keys = self::keyValues();
             if (empty($key)) return false;
             return in_array($key, $keys);
@@ -150,7 +157,8 @@
          * Correct flags keylist
          * @return array
          */
-        public static function keyValues() {
+        public static function keyValues()
+        {
             static $ret = null;
             if ($ret === null) {
                 $keys = explode(',', static::ROLES);
@@ -165,7 +173,8 @@
          * @param mixed $key  All checked flags
          * @return int
          */
-        public static function keyValue($key) {
+        public static function keyValue($key)
+        {
             $keys = self::keyValues();
             $key  = xbweb::arg($key);
             $ret  = 0;

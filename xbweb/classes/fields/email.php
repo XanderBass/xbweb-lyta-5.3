@@ -20,14 +20,16 @@
     /**
      * Class Email
      */
-    class Email extends Str {
+    class Email extends Str
+    {
         /**
          * Correct field
          * @param array $data  Field data
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             if (empty($data['data']['regexp'])) $data['data']['regexp'] = \xbweb::REX_EMAIL;
             return parent::__correct($data);
         }

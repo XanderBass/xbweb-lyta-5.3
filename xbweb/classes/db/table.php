@@ -23,7 +23,8 @@
     /**
      * Class Table
      */
-    class Table extends Query {
+    class Table extends Query
+    {
         /**
          * Constructor
          * @param Model  $model  Model object
@@ -41,7 +42,8 @@
          * @param array $data  Field data
          * @return bool
          */
-        protected function _field($data) {
+        protected function _field($data)
+        {
             $ai       = in_array('auto_increment', $data['attributes']) ? ' auto_increment' : '';
             $isnull   = $ai ? false : in_array('isnull', $data['attributes']);
             $unsigned = in_array('unsigned', $data['attributes']) ? ' unsigned' : '';
@@ -94,7 +96,8 @@
          * SQL query
          * @return string
          */
-        public function sql() {
+        public function sql()
+        {
             $fl = array();
             $pk = array();
             $un = array();
@@ -145,7 +148,8 @@ sql;
          * Execute query
          * @return bool
          */
-        public function execute() {
+        public function execute()
+        {
             $sql = $this->sql();
             if ($result = DB::query($sql, null, $this->_name)) return $result->success;
             return false;
@@ -156,7 +160,8 @@ sql;
          * @param[] mixed  Field name(s)
          * @return $this
          */
-        public function fields() {
+        public function fields()
+        {
             return $this;
         }
     }

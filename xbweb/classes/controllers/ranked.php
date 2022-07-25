@@ -23,7 +23,8 @@
     use xbweb\Request;
     use xbweb\Response;
 
-    class Ranked extends Entity {
+    class Ranked extends Entity
+    {
         /**
          * Constructor
          * @param string $path Controller path
@@ -31,7 +32,8 @@
          * @param string $entity Entity
          * @throws \xbweb\Error
          */
-        protected function __construct($path, $model, $entity = null) {
+        protected function __construct($path, $model, $entity = null)
+        {
             parent::__construct($path, $model, $entity);
             $this->_queries['reset_rank'] = array(
                 'title'   => Language::translate($this->_entity.'_reset_rank', 'Reset rank'),
@@ -59,7 +61,8 @@
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public function query_reset_rank() {
+        public function query_reset_rank()
+        {
             $sql = <<<sql
 update `[+table+]` set `rank` = @r := (@r + 1) order by `rank` asc
 sql;
@@ -74,7 +77,8 @@ sql;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public function query_move_up() {
+        public function query_move_up()
+        {
             return $this->_move_('up');
         }
 
@@ -84,7 +88,8 @@ sql;
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public function query_move_down() {
+        public function query_move_down()
+        {
             return $this->_move_('down');
         }
 
@@ -95,7 +100,8 @@ sql;
          * @throws ErrorNotFound
          * @throws \xbweb\Error
          */
-        protected function _move_($dir) {
+        protected function _move_($dir)
+        {
             $model = Model::create($this->_modelPath);
             $pk    = $model->primary;
             $id    = Request::get('id');

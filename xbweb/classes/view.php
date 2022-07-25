@@ -22,14 +22,16 @@
     /**
      * Basic view system class
      */
-    class View {
+    class View
+    {
         protected static $_template = null;
 
         /**
          * Set template for output
          * @param string $path  Template path
          */
-        public static function setTemplate($path) {
+        public static function setTemplate($path)
+        {
             self::$_template = $path;
         }
 
@@ -39,7 +41,8 @@
          * @param mixed  $data  Data
          * @return string
          */
-        public static function template($path = null, $data = null) {
+        public static function template($path = null, $data = null)
+        {
             $req = ($path === null) ? Request::get() : Request::route($path);
             $sys = false;
             if (empty($data['template'])) {
@@ -78,7 +81,8 @@
          * @param mixed  $data  Data
          * @return string
          */
-        public static function content($path = null, $data = null) {
+        public static function content($path = null, $data = null)
+        {
             if (CMF::isError()) return self::_error($data);
             $req = ($path === null) ? Request::get() : Request::route($path);
             $sys = (
@@ -104,7 +108,8 @@
          * @param bool   $sys   Include system content folder
          * @return string
          */
-        public static function chunk($path, $data = null, $sys = false) {
+        public static function chunk($path, $data = null, $sys = false)
+        {
             $fn  = Content::chunk($path, $sys, $_fl);
             return Content::render($fn, $data, $_fl);
         }
@@ -115,7 +120,8 @@
          * @param string $tpl   Template
          * @return string
          */
-        public static function rows($rows, $tpl) {
+        public static function rows($rows, $tpl)
+        {
             $ret = array();
             foreach ($rows as $name => $row) {
                 $r = str_replace('[+name+]', $name, $tpl);
@@ -132,7 +138,8 @@
          * @return string
          * @throws Error
          */
-        public static function menu($place, $tpls = null) {
+        public static function menu($place, $tpls = null)
+        {
             $data = array();
             switch ($place) {
                 case 'adminleft':
@@ -164,7 +171,8 @@
          * @param string $path  Render path
          * @return string
          */
-        public static function render($data = null, $path = null) {
+        public static function render($data = null, $path = null)
+        {
             if (CMF::isError()) {
                 render_error:
                 // Content
@@ -205,7 +213,8 @@
          * @param string $u  Units
          * @return string
          */
-        public static function seconds($v, $u = '') {
+        public static function seconds($v, $u = '')
+        {
             $v = floatval($v);
             switch ($u) {
                 case 'ms': $v *= 1000; break;
@@ -221,7 +230,8 @@
          * @param string $u  Units
          * @return string
          */
-        public static function bytes($v, $u = '') {
+        public static function bytes($v, $u = '')
+        {
             $v = intval($v);
             switch ($u) {
                 case 'kb': $v /= 1024; break;
@@ -236,7 +246,8 @@
          * @param mixed  $data  Data
          * @return string
          */
-        protected static function _error($data = null) {
+        protected static function _error($data = null)
+        {
             // Current vars
             $fnc = Content::file(array(
                 'errors/'.http_response_code().'.'.Content::EXT_PAGE,

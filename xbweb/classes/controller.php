@@ -21,7 +21,8 @@
      * @property-read string $modelPath  Model path
      * @property-read bool   $isGeneric  Controller is generic
      */
-    abstract class Controller extends Node {
+    abstract class Controller extends Node
+    {
         const NODE_TYPE      = 'Controller';
         const DEFAULT_ACTION = 'index';
 
@@ -39,7 +40,8 @@
          * @param mixed $model  Model path
          * @throws Error
          */
-        protected function __construct($path, $model = null) {
+        protected function __construct($path, $model = null)
+        {
             if (is_array($path)) {
                 $this->_gdata = $path;
                 if (!isset($path['path'])) throw new Error(Language::translate('invalid_generic_data'));
@@ -56,7 +58,8 @@
          * @param string $name  Property name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             switch ($name) {
                 case 'isGeneric': return !empty($this->_gdata);
             }
@@ -71,7 +74,8 @@
          * @throws Error
          * @throws ErrorForbidden
          */
-        public function execute($action = null, $method = null) {
+        public function execute($action = null, $method = null)
+        {
             // Prepare params
             if ($action === null) {
                 $action = Request::get('action');
@@ -119,7 +123,8 @@
          * @throws Error
          * @throws ErrorForbidden
          */
-        protected function _a($action) {
+        protected function _a($action)
+        {
             if (in_array($action, $this->_allowed)) return true;
             $a = $this->a($action);
             if (!ACL::granted($a)) {
@@ -136,7 +141,8 @@
          * @throws ErrorNotFound
          * @throws \xbweb\Error
          */
-        protected function _q($sql) {
+        protected function _q($sql)
+        {
             $model = Model::create($this->_modelPath);
             $ids   = empty($_POST['id']) ? Request::get('id') : $_POST['id'];
             $ret   = array();
@@ -162,7 +168,8 @@
          * @param string $action  Action
          * @return string
          */
-        public function a($action) {
+        public function a($action)
+        {
             return $this->_path.'/'.$action;
         }
 
@@ -170,7 +177,8 @@
          * Redirect
          * @param string $action  Action
          */
-        public function r($action = 'index') {
+        public function r($action = 'index')
+        {
             $URL = Request::URL($this->a($action));
             if (Request::isAJAX()) $URL .= '?is-ajax=true';
             \xbweb::redirect($URL);
@@ -184,7 +192,8 @@
          * @return array
          * @throws \Exception
          */
-        public static function executeAction($controller = null, $action = null, $method = null) {
+        public static function executeAction($controller = null, $action = null, $method = null)
+        {
             if ($controller === null) $controller = Request::get('node');
             /** @var Controller $obj */
             $obj = self::create($controller);
@@ -197,7 +206,8 @@
          * @param string $action  Action
          * @return string
          */
-        public static function correctAction($path, $action = null) {
+        public static function correctAction($path, $action = null)
+        {
             $cn = static::classname($path);
             /** @var self $cn */
             if (empty($action)) return $path.'/'.$cn::DEFAULT_ACTION;
@@ -212,7 +222,8 @@
          * @param string $entity  Entity name
          * @return bool
          */
-        public static function registerGeneric($path, $type = null, $model = null, $entity = null) {
+        public static function registerGeneric($path, $type = null, $model = null, $entity = null)
+        {
             if (is_array($path)) {
                 $type   = empty($path['type'])   ? null : $path['type'];
                 $model  = empty($path['model'])  ? null : $path['model'];
@@ -234,7 +245,8 @@
          * @param string $path  Model path
          * @return string
          */
-        public static function genericFile($path) {
+        public static function genericFile($path)
+        {
             $_      = explode('/', $path);
             $module = array_shift($_);
             $model  = empty($_) ? 'main' : implode('/', $_);
@@ -247,7 +259,8 @@
          * @param mixed  $generic  Generic data
          * @return string
          */
-        public static function classname($path, &$generic = null) {
+        public static function classname($path, &$generic = null)
+        {
             if (is_array($path)) {
                 if (empty($path['path'])) $path['path'] = 'entity';
                 $generic = $path;
@@ -276,7 +289,8 @@
          * @param string $model  Model path
          * @return mixed
          */
-        public static function create($path, $model = null) {
+        public static function create($path, $model = null)
+        {
             $cn = self::classname($path, $generic);
             if (empty($generic)) return new $cn($path, $model);
             $mn  = empty($generic['model'])  ? $model : $generic['model'];

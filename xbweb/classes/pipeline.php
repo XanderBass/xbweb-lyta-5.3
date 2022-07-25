@@ -19,7 +19,8 @@
     /**
      * Pipeline component class
      */
-    class PipeLine extends Events {
+    class PipeLine extends Events
+    {
         const REX  = '/^pipe(\w+)$/si';
         const TYPE = 'pipe';
         const KEY  = 'pipeline';
@@ -28,7 +29,8 @@
          * Process pipeline. First argument - pipe name. Another arguments - additional data
          * @return mixed
          */
-        public static function invoke() {
+        public static function invoke()
+        {
             static $c = 0;
             $M = static::getMap();
             $a = func_get_args();

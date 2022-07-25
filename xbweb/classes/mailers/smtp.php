@@ -23,7 +23,8 @@
     /**
      * Class SMTP
      */
-    class SMTP extends Mailer {
+    class SMTP extends Mailer
+    {
         /**
          * Socket operation
          * @param resource $socket  Socket
@@ -33,7 +34,8 @@
          * @return bool
          * @throws Error
          */
-        protected function _socket($socket, $resp, $str = '', $d = null) {
+        protected function _socket($socket, $resp, $str = '', $d = null)
+        {
             $sresp = null;
             $data  = empty($d) ? '' : ' ('.htmlspecialchars($d).')';
             while (@substr($sresp, 3, 1) != ' ') {
@@ -58,7 +60,8 @@
          * @return bool
          * @throws Error
          */
-        public function send($template, $subject, $data = array(), $files = null) {
+        public function send($template, $subject, $data = array(), $files = null)
+        {
             $rec = array();
             foreach ($this->_to  as $email) if (!in_array($email, $rec)) $rec[] = $email;
             foreach ($this->_cc  as $email) if (!in_array($email, $rec)) $rec[] = $email;
@@ -126,7 +129,8 @@
          * @return array
          * @throws Error
          */
-        public function config($config) {
+        public function config($config)
+        {
             if (!is_array($config)) throw new Error('Invalid SMTP config');
             $ret = $config;
             foreach (array('host', 'user', 'pass') as $k) {

@@ -29,7 +29,8 @@
      * @property-read string $prefix  Prefix
      * @property-read array  $log     Log
      */
-    class Provider {
+    class Provider
+    {
         protected $_config = array();
         protected $_type   = null;
         protected $_ready  = false;
@@ -43,7 +44,8 @@
          * @param array $config Configuration
          * @throws DBError
          */
-        protected function __construct(array $config) {
+        protected function __construct(array $config)
+        {
             $this->_config = static::config($config);
             $this->_type   = 'MySQL';
             $this->_prefix = empty($config['prefix']) ? '' : $config['prefix'];
@@ -69,14 +71,16 @@
          * @param string $name  Parameter name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             return property_exists($this, "_{$name}") ? $this->{"_{$name}"} : null;
         }
 
         /**
          * Destructor
          */
-        public function __destruct() {
+        public function __destruct()
+        {
             $this->_db->close();
         }
 
@@ -90,7 +94,8 @@
          * @throws DuplicateError
          * @throws NoTableError
          */
-        public function do_query($q, $obj = null, $point = null) {
+        public function do_query($q, $obj = null, $point = null)
+        {
             try {
                 $R = $this->_db->query(strtr($q, $this->_ph));
                 if ($obj instanceof Select) {
@@ -131,7 +136,8 @@
          * @param string $v  Value
          * @return mixed
          */
-        public function escape($v) {
+        public function escape($v)
+        {
             return $this->_db->real_escape_string($v);
         }
 
@@ -140,7 +146,8 @@
          * @param string $name  Transaction point name
          * @return bool
          */
-        public function startTransaction($name = null) {
+        public function startTransaction($name = null)
+        {
             if ($this->_db->autocommit(false)) {
                 return $this->_db->begin_transaction(0, $name);
             }
@@ -152,7 +159,8 @@
          * @param string $name  Transaction point name
          * @return bool
          */
-        public function applyTransaction($name = null) {
+        public function applyTransaction($name = null)
+        {
             if ($this->_db->commit(0, $name)) {
                 return $this->_db->autocommit(true);
             }
@@ -164,7 +172,8 @@
          * @param string $name  Transaction point name
          * @return bool
          */
-        public function cancelTransaction($name = null) {
+        public function cancelTransaction($name = null)
+        {
             /** @noinspection PhpMethodParametersCountMismatchInspection */
             if ($this->_db->rollback(0, $name)) {
                 return $this->_db->autocommit(true);
@@ -182,7 +191,8 @@
          * @throws DuplicateError
          * @throws Error
          */
-        public function query($q, $install = null, $point = null) {
+        public function query($q, $install = null, $point = null)
+        {
             $sql  = ($q instanceof Query) ? $q->sql() : $q;
             $obj  = ($q instanceof Query) ? $q        : null;
             $qkey = null;
@@ -217,7 +227,8 @@
          * @param string $n  Table name
          * @return string
          */
-        public function table($n) {
+        public function table($n)
+        {
             return $this->_prefix.$n;
         }
 
@@ -230,7 +241,8 @@
          * @throws DuplicateError
          * @throws Error
          */
-        public function row($q, $point = null) {
+        public function row($q, $point = null)
+        {
             if ($result = $this->query($q, true, $point)) return $result->row();
             return false;
         }
@@ -245,7 +257,8 @@
          * @throws DBError
          * @throws Error
          */
-        public function rows($q, $primary = null, $cb = null, $point = null) {
+        public function rows($q, $primary = null, $cb = null, $point = null)
+        {
             if ($result = $this->query($q, true, $point)) return $result->rows($primary, $cb);
             return false;
         }
@@ -260,7 +273,8 @@
          * @throws DBError
          * @throws Error
          */
-        public function apply($q, $data, $cb, $point = null) {
+        public function apply($q, $data, $cb, $point = null)
+        {
             if ($result = $this->query($q, true, $point)) return $result->apply($data, $cb);
             return $data;
         }
@@ -272,7 +286,8 @@
          * @param string $key    Query key
          * @return string
          */
-        public function log($q, $point = null, $key = null) {
+        public function log($q, $point = null, $key = null)
+        {
             if ($key === null) $key = \xbweb::id('sqllog');
             $this->_log[$key] = array('query' => $q, 'point' => $point);
             return $key;
@@ -284,7 +299,8 @@
          * @param string $key     Query key
          * @return string
          */
-        public function log_result($result, $key = null) {
+        public function log_result($result, $key = null)
+        {
             if ($key === null) $key = \xbweb::id('sqllog');
             $this->_log[$key]['result'] = $result;
             return $key;
@@ -295,7 +311,8 @@
          * @param array $config  Configuration
          * @return Provider
          */
-        public static function create(array $config) {
+        public static function create(array $config)
+        {
             $cn = '\\xbweb\\DB\\Provider';
             return new $cn($config);
         }
@@ -305,7 +322,8 @@
          * @param array $config  Configuration
          * @return array
          */
-        public static function config(array $config) {
+        public static function config(array $config)
+        {
             $r = array();
             $d = array(
                 'user'    => '',

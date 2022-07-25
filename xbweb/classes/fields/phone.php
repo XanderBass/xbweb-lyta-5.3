@@ -22,7 +22,8 @@
     /**
      * Class Phone
      */
-    class Phone extends Field {
+    class Phone extends Field
+    {
         const BASE_TYPE  = self::T_INT_BIG;
         const ATTRIBUTES = 'primary, isnull, index, node';
 
@@ -32,7 +33,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             return parent::__correct($data);
         }
 
@@ -42,7 +44,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack($data, $value) {
+        protected static function __pack($data, $value)
+        {
             return self::__value($data, $value);
         }
 
@@ -52,7 +55,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __unpack($data, $value) {
+        protected static function __unpack($data, $value)
+        {
             return $value;
         }
 
@@ -62,7 +66,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid($data, $value) {
+        protected static function __valid($data, $value)
+        {
             if (preg_match(\xbweb::REX_PHONE, $value)) return true;
             return 'invalid';
         }
@@ -73,7 +78,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value($data, $value) {
+        protected static function __value($data, $value)
+        {
             $value = preg_replace('~([^\-\+\d]+)~si', '', $value);
             return intval($value);
         }

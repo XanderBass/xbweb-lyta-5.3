@@ -27,7 +27,8 @@
      * @property-read bool  $IPValid       IP valid
      * @property-read bool  $brutforce     Brutforce flag
      */
-    abstract class Session {
+    abstract class Session
+    {
         const DEFCLASS  = 'Files';
         const TABLE     = 'users_sessions';
         const NAME      = 'XBWEBSESSID';
@@ -50,7 +51,8 @@
          * Constructor
          * @throws Error
          */
-        public function __construct() {
+        public function __construct()
+        {
             $this->_table  = Config::get('session/table', static::TABLE);
             $this->_config = array(
                 'name'            => Config::get('session/name', static::NAME),
@@ -90,7 +92,8 @@
          * @param string $name  Property name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             $IP = Request::IP();
             $IT = Request::IPType();
             $T  = self::tableName();
@@ -135,7 +138,8 @@ sql;
          * @return mixed
          * @throws \Exception
          */
-        public function __set($name, $value) {
+        public function __set($name, $value)
+        {
             if (method_exists($this, "set_{$name}")) {
                 $ret = $this->{"set_{$name}"}($value);
                 $this->_data['last'] = null;
@@ -150,7 +154,8 @@ sql;
          * @return bool
          * @throws \Exception
          */
-        protected function set_blocked($value) {
+        protected function set_blocked($value)
+        {
             if (empty($value)) {
                 $this->_data['blockuntil'] = null;
                 $this->_data['failcount']  = 0;
@@ -172,7 +177,8 @@ sql;
          * @param bool $safe
          * @return int
          */
-        protected function set_user($value, $safe = false) {
+        protected function set_user($value, $safe = false)
+        {
             $value   = intval($value);
             $current = intval($this->_data['user']);
             if ($value == $current) return $current;
@@ -190,7 +196,8 @@ sql;
         /**
          * "Failed" signal
          */
-        public function failed() {
+        public function failed()
+        {
             $this->_data['failcount'] = intval($this->_data['failcount']) + 1;
             $this->_data['last']      = null;
         }
@@ -200,7 +207,8 @@ sql;
          * @return bool
          * @throws \Exception
          */
-        public function save() {
+        public function save()
+        {
             $renew = false;
             if (empty($this->_data['sid'])) return false;
             if (!$this->_isNew) {
@@ -256,7 +264,8 @@ sql;
          * Read session data
          * @param $SID
          */
-        public function select($SID) {
+        public function select($SID)
+        {
             $table = self::tableName();
             $sql = "select * from `{$table}` where `sid` = '{$SID}'";
             if ($row = DB::row($sql, __METHOD__)) {
@@ -273,7 +282,8 @@ sql;
          * @param mixed $SID  Session IDs
          * @return bool
          */
-        public function delete($SID) {
+        public function delete($SID)
+        {
             $table = self::tableName();
             $SID = is_array($SID) ? implode("','", $SID) : $SID;
             $sql = "delete from `{$table}` where `sid` in ('{$SID}')";
@@ -286,7 +296,8 @@ sql;
          * @param mixed $SID  Session IDs
          * @return bool
          */
-        public function touch($SID) {
+        public function touch($SID)
+        {
             $table = self::tableName();
             $sql = "update `{$table}` set `last` = now() where `sid` = '{$SID}'";
             if ($result = DB::query($sql, true, __METHOD__)) return $result->success;
@@ -298,7 +309,8 @@ sql;
          * @param string $SID  Session ID
          * @return bool
          */
-        public function create($SID) {
+        public function create($SID)
+        {
             $table = self::tableName();
             $IP = Request::IP();
             $IT = Request::IPType();
@@ -325,7 +337,8 @@ sql;
         /**
          * Purge session table
          */
-        public function purge() {
+        public function purge()
+        {
             // TODO
         }
 
@@ -405,7 +418,8 @@ sql;
          * @param bool  $fromdb  Data from DB
          * @return array
          */
-        public static function correct($data = null, $fromdb = false) {
+        public static function correct($data = null, $fromdb = false)
+        {
             $IP = Request::IP();
             $IT = Request::IPType();
             $def = array(
@@ -432,7 +446,8 @@ sql;
          * @return Session
          * @throws Error
          */
-        public static function instance() {
+        public static function instance()
+        {
             $cn = '\\xbweb\\Sessions\\'.Config::get('session/class', static::DEFCLASS);
             if (empty(self::$_session)) {
                 self::$_session = new $cn();
@@ -455,7 +470,8 @@ sql;
          * @throws Error
          * @return bool
          */
-        public static function init() {
+        public static function init()
+        {
             static $started = false;
             if ($started && (self::$_session instanceof self)) return true;
             $session = static::instance();
@@ -475,7 +491,8 @@ sql;
          * @param mixed  $def  Default value
          * @return mixed
          */
-        public static function get($key, $def = null) {
+        public static function get($key, $def = null)
+        {
             return lib\Arrays::get($_SESSION, $key, $def);
         }
 
@@ -486,7 +503,8 @@ sql;
          * @return mixed
          * @throws Error
          */
-        public static function set($key, $val = null) {
+        public static function set($key, $val = null)
+        {
             $key = trim($key, '/');
             if (empty($key)) return $_SESSION;
             session_start();
@@ -511,7 +529,8 @@ sql;
          * @return mixed
          * @throws Error
          */
-        public static function setUser($data, $safe = false) {
+        public static function setUser($data, $safe = false)
+        {
             session_start();
             $_SESSION['user'] = $data;
             self::instance()->set_user(empty($data['id']) ? null : intval($data['id'], $safe));
@@ -523,7 +542,8 @@ sql;
          * Table name
          * @return string
          */
-        public static function tableName() {
+        public static function tableName()
+        {
             static $t = null;
             if ($t === null) $t = DB::table(Config::get('session/table', static::TABLE));
             return $t;
@@ -533,7 +553,8 @@ sql;
          * SQL table
          * @return string
          */
-        public static function table() {
+        public static function table()
+        {
             $ts = self::tableName();
             $tu = DB::table('users');
             return <<<sql

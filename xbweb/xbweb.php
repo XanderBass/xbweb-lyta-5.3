@@ -14,7 +14,8 @@
      * @subcore      5.3
      */
 
-    class xbweb {
+    class xbweb
+    {
         const EMERGENCY_COUNTER = 30;
         const RANDOM_SYMBOLS    = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
@@ -30,7 +31,8 @@
          * @param bool  $i  Return integer values
          * @return array
          */
-        public static function arg($v, $i = false) {
+        public static function arg($v, $i = false)
+        {
             if (empty($v)) return array();
             $r = is_array($v) ? $v : explode(',', strval($v));
             $r = array_map('trim', $r);
@@ -45,7 +47,8 @@
          * @param mixed $d  Default
          * @return mixed
          */
-        public static function v(array $l, $v, $d) {
+        public static function v(array $l, $v, $d)
+        {
             foreach ($l as $k => $kv) if ($v == $k) return $kv;
             return $d;
         }
@@ -56,7 +59,8 @@
          * @param int    $e  Error code
          * @return bool
          */
-        public static function rexValid($v, &$e = 0) {
+        public static function rexValid($v, &$e = 0)
+        {
             try {
                 preg_match($v, null);
                 $e = preg_last_error();
@@ -72,13 +76,15 @@
          * @param int $c  Symbols count
          * @return string
          */
-        public static function key($c = 32) {
+        public static function key($c = 32)
+        {
             $sym = self::RANDOM_SYMBOLS;
             for ($_ = 0, $r = ''; $_ < $c; $_++) $r.= $sym[mt_rand(0, 61)];
             return $r;
         }
 
-        public static function b64hash($s) {
+        public static function b64hash($s)
+        {
             return trim(strtr(base64_encode(pack("H*" , md5($s))), '+/', '-_'), '=');
         }
 
@@ -87,7 +93,8 @@
          * @param string $s  Input string
          * @return string
          */
-        public static function id($s = '') {
+        public static function id($s = '')
+        {
             return md5($s.(\xbweb::now()).(\xbweb::key()));
         }
 
@@ -96,7 +103,8 @@
          * @param string $v  Input string
          * @return string
          */
-        public static function slash($v) {
+        public static function slash($v)
+        {
             return preg_replace('~([\/]{2,})~', '/', strtr($v, '\\', '/'));
         }
 
@@ -106,7 +114,8 @@
          * @param bool   $l  To lower case
          * @return string
          */
-        public static function path($v, $l = true) {
+        public static function path($v, $l = true)
+        {
             $v = rtrim(self::slash($v), '/').'/';
             return $l ? strtolower($v) : $v;
         }
@@ -116,7 +125,8 @@
          * @param string $s  Rights string
          * @return int
          */
-        public static function rights($s) {
+        public static function rights($s)
+        {
             if (strlen($s) < 3) return 0;
             $z = floor(strlen($s) / 3);
             $v = 0;
@@ -132,7 +142,8 @@
          * @param string $t  Format
          * @return string
          */
-        public static function now($t = null) {
+        public static function now($t = null)
+        {
             if ($t == null) $t = 'Y-m-d H:i:s';
             $dto = new DateTime();
             return $dto->format($t);
@@ -143,7 +154,8 @@
          * @param string $url   URL
          * @param bool   $h301  Send 301
          */
-        public static function redirect($url, $h301 = false) {
+        public static function redirect($url, $h301 = false)
+        {
             if ($h301) header($_SERVER['SERVER_PROTOCOL'].' 301 Moved Permanently');
             header('Location: '.$url);
             exit;
@@ -154,7 +166,8 @@
          * @param int $key  HTTP code
          * @return string
          */
-        public static function HTTPStatus($key) {
+        public static function HTTPStatus($key)
+        {
             static $data = null;
             if (empty($data)) $data = self::data_('http');
             return empty($data[$key]) ? 'Unknown' : $data[$key];
@@ -165,7 +178,8 @@
          * @param string $key  Extension
          * @return string
          */
-        public static function MIMEType($key) {
+        public static function MIMEType($key)
+        {
             static $data = null;
             if (empty($data)) $data = self::data_('mime');
             return empty($data[$key]) ? 'application/octet-stream' : $data[$key];
@@ -176,7 +190,8 @@
          * @param bool $base64  Return base64 data
          * @return string
          */
-        public static function icon($base64 = null) {
+        public static function icon($base64 = null)
+        {
             if ($base64 === null) $base64 = xbweb\Paths\COREINWEB;
             if ($base64) return 'data:image/png;base64,'.base64_encode(file_get_contents(xbweb\Paths\CORE.'content/logo.png'));
             return '/xbweb/content/logo.png';
@@ -187,7 +202,8 @@
          * @param bool $reload  Reload
          * @return array
          */
-        public static function modules($reload = false) {
+        public static function modules($reload = false)
+        {
             static $modules = null;
             if (($modules === null) || $reload) {
                 defined('xbweb\\CONFIG\\Modules') or define('xbweb\\CONFIG\\Modules', true);
@@ -211,7 +227,8 @@
          * @param string $module  Name of module. NULL for system
          * @return array
          */
-        public static function controllers($module = null) {
+        public static function controllers($module = null)
+        {
             $ret = self::nodes('controller', $module, (empty($module) ? array(
                 'entity', 'table', 'fields', 'fieldsets'
             ) : array(
@@ -233,7 +250,8 @@
          * @param array $ret   Return
          * @param array $path  Path
          */
-        protected static function _a(&$ret, &$path) {
+        protected static function _a(&$ret, &$path)
+        {
             if (count($path) > 1) {
                 $f = array_shift($path);
                 if (empty($ret[$f])) $ret[$f] = array();
@@ -251,7 +269,8 @@
          * @return string
          * @throws Exception
          */
-        public static function uses($path, $type = null) {
+        public static function uses($path, $type = null)
+        {
             $cn = self::realClass($path, $type, $fn);
             if (!class_exists($cn, false)) {
                 if (!file_exists($fn)) {
@@ -272,7 +291,8 @@
          * @param mixed  $fn    File name
          * @return string
          */
-        public static function realClass($path, $type = null, &$fn = false) {
+        public static function realClass($path, $type = null, &$fn = false)
+        {
             static $cache = null;
             if ($cache === null) $cache = array();
             $type = empty($type) ? 'Controller' : $type;
@@ -312,7 +332,8 @@
          * @param array  $exclude  Exclude list
          * @return array
          */
-        public static function nodes($type, $module = null, $exclude = array()) {
+        public static function nodes($type, $module = null, $exclude = array())
+        {
             $path = (empty($module) ? xbweb\Paths\CORE : xbweb\Paths\MODULES.strtolower($module).'/').'classes/';
             $type = strtolower($type);
             if (!is_dir($path)) return array();
@@ -331,7 +352,8 @@
          * @param array  $exclude  Exclude list
          * @return array
          */
-        protected static function nodes_($path, $exclude = array()) {
+        protected static function nodes_($path, $exclude = array())
+        {
             $nodes = array();
             if ($files = scandir($path)) foreach ($files as $i) {
                 if (($i == '.') || ($i == '..')) continue;
@@ -352,7 +374,8 @@
          * @param string $name  Name of data file
          * @return mixed
          */
-        protected static function data_($name) {
+        protected static function data_($name)
+        {
             $filename = xbweb\Paths\CORE . 'data/' . $name . '.json';
             if (!file_exists($filename)) return false;
             return json_decode(file_get_contents($filename), true);
@@ -372,7 +395,8 @@
          * @param string $path  Path
          * @return bool
          */
-        public static function getGeneric($type, $path) {
+        public static function getGeneric($type, $path)
+        {
             list($m, $p) = self::MN($type, $path);
             return empty(self::$_generic[$type][$m][$p]) ? false : self::$_generic[$type][$m][$p];
         }
@@ -384,7 +408,8 @@
          * @param mixed  $data  Generic data
          * @return bool
          */
-        public static function registerGeneric($type, $path, $data = null) {
+        public static function registerGeneric($type, $path, $data = null)
+        {
             list($m, $p) = self::MN($type, $path);
             self::$_generic[$type][$m][$p] = empty($data) ? true : $data;
             return true;
@@ -396,7 +421,8 @@
          * @param string $path  Path
          * @return array
          */
-        public static function MN($type, $path) {
+        public static function MN($type, $path)
+        {
             $p = explode('/', $path);
             $m = array_shift($p) ; if (empty($m)) $m = 'system';
             $p = implode('/', $p); if (empty($p)) $p = $type;
@@ -410,7 +436,8 @@
          * @param string $pref  Prefix
          * @return string
          */
-        public static function placeholders($html, $data, $pref = '') {
+        public static function placeholders($html, $data, $pref = '')
+        {
             foreach ($data as $k => $v) {
                 $k = $pref.$k;
                 if (is_array($v)) {

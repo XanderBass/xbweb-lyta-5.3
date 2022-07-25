@@ -21,7 +21,8 @@
     /**
      * Flags functions library
      */
-    class Flags {
+    class Flags
+    {
         /**
          * Flags value to int
          * @param mixed $keys     All allowed flags
@@ -29,7 +30,8 @@
          * @param bool  $empties  Fill empty keys
          * @return int
          */
-        public static function toInt($keys, $value, $empties = true) {
+        public static function toInt($keys, $value, $empties = true)
+        {
             if (is_numeric($value)) return intval($value);
             $ret  = 0;
             $keys = self::keyValues($keys, $empties);
@@ -48,7 +50,8 @@
          * @param bool  $empties  Fill empty keys
          * @return array
          */
-        public static function toArray($keys, $value, $empties = true) {
+        public static function toArray($keys, $value, $empties = true)
+        {
             $keys = self::keyValues($keys, $empties);
             $ret  = array();
             if (is_numeric($value)) {
@@ -72,7 +75,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function is($keys, $key, $value) {
+        public static function is($keys, $key, $value)
+        {
             $keys = self::keyValues($keys);
             if (empty($keys[$key])) return false;
             if (is_numeric($value)) {
@@ -92,7 +96,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function oneOf($keys, $key, $value) {
+        public static function oneOf($keys, $key, $value)
+        {
             $keys = self::keyValues($keys);
             $key  = xbweb::arg($key);
             if (is_numeric($value)) {
@@ -118,7 +123,8 @@
          * @param mixed $value  Input value
          * @return bool
          */
-        public static function allOf($keys, $key, $value) {
+        public static function allOf($keys, $key, $value)
+        {
             $keys = self::keyValues($keys);
             $key  = xbweb::arg($key);
             $ec   = 0;
@@ -146,7 +152,8 @@
          * @param mixed $key   All checked flags
          * @return bool
          */
-        public static function in($keys, $key) {
+        public static function in($keys, $key)
+        {
             $keys = xbweb::arg($keys);
             if (empty($key)) return false;
             return in_array($key, $keys);
@@ -158,7 +165,8 @@
          * @param mixed $empties  Fill empty keys
          * @return array
          */
-        public static function keyValues($keys, $empties = true) {
+        public static function keyValues($keys, $empties = true)
+        {
             $keys = xbweb::arg($keys);
             $ret  = array();
             $p    = 0;
@@ -184,7 +192,8 @@
          * @param mixed $key   All checked flags
          * @return int
          */
-        public static function keyValue($keys, $key) {
+        public static function keyValue($keys, $key)
+        {
             $keys = self::keyValues($keys);
             $key  = xbweb::arg($key);
             $ret  = 0;

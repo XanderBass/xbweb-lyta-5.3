@@ -38,7 +38,8 @@
     /**
      * User controller class
      */
-    class Users extends Entity {
+    class Users extends Entity
+    {
         const MODEL  = '/users';
         const ENTITY = 'user';
 
@@ -48,7 +49,8 @@
          * @param string $model Model path
          * @throws \xbweb\Error
          */
-        protected function __construct($path, $model) {
+        protected function __construct($path, $model)
+        {
             parent::__construct($path, $model);
             $where = $this->_fused_where();
             $rmask = ~ LibRoles::toInt('moderator,admin,root');
@@ -78,7 +80,8 @@
          * @throws \xbweb\ErrorNotFound
          * @throws \xbweb\NodeError
          */
-        protected function onConstruct() {
+        protected function onConstruct()
+        {
             $model = Model::create($this->_modelPath);
             $this->_fuse = Where::create($model);
             switch (User::current()->role) {
@@ -96,7 +99,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public function do_login() {
+        public function do_login()
+        {
             if (User::current()->authorized) Response::redirectBack();
             if (Request::isPost()) {
                 $errors = array();
@@ -125,7 +129,8 @@
          * @action /users/logout
          * @throws \xbweb\Error
          */
-        public function do_logout() {
+        public function do_logout()
+        {
             if (!User::current()->authorized) \xbweb::redirect('/');
             User::current(false);
             if (Request::isAJAX()) return Response::success();
@@ -138,7 +143,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public function do_register() {
+        public function do_register()
+        {
             if (User::current()->authorized) Response::redirectBack();
             $errors  = null;
             $request = null;
@@ -163,7 +169,8 @@
          * @throws ErrorNotFound
          * @throws \xbweb\Error
          */
-        public function do_activation() {
+        public function do_activation()
+        {
             if (empty($_GET['user']) || empty($_GET['key'])) throw new ErrorForbidden('No key or user for activation');
             $user = LibUsers::getByID(intval($_GET['user']));
             if (empty($user)) throw new ErrorNotFound('User not found');
@@ -180,7 +187,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        public function do_remainpass() {
+        public function do_remainpass()
+        {
             if (Request::isPost()) {
                 if (empty($_POST['email'])) return Response::error('Email not sent');
                 try {
@@ -212,7 +220,8 @@
          * @throws ErrorNotFound
          * @throws \xbweb\Error
          */
-        public function do_changepass() {
+        public function do_changepass()
+        {
             if (empty($_REQUEST['user']) || empty($_REQUEST['key'])) throw new ErrorForbidden('No key or user for change password');
             $user = intval($_REQUEST['user']);
             $user = LibUsers::getByID($user);
@@ -240,7 +249,8 @@
          * @throws ErrorNotFound
          * @throws \xbweb\Error
          */
-        public function do_profile() {
+        public function do_profile()
+        {
             User::checkAuthorized();
             $model  = Model::create($this->_modelPath);
             $values = $model->getOne(User::current()->id);
@@ -272,7 +282,8 @@
          * @param $id
          * @return bool
          */
-        protected function _ukey($cq, $id) {
+        protected function _ukey($cq, $id)
+        {
             $k = \xbweb::key();
             $q = <<<sql
 update `[+prefix+]users` set `key` = '{$k}', {$cq} where `id` = '{$id}'
@@ -288,7 +299,8 @@ sql;
          * @return array
          * @throws \xbweb\Error
          */
-        protected function _logged($user, $msg = null) {
+        protected function _logged($user, $msg = null)
+        {
             $url = '/';
             if (Config::get('users/autologin', false)) {
                 User::current($user);

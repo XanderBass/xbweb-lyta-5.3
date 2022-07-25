@@ -17,12 +17,12 @@
 
     namespace xbweb;
 
-    PipeLine::handler('cmf', 'rowUsers', function($data){
+    PipeLine::handler('cmf', 'rowUsers', function($data) {
         unset($data['password']);
         return $data;
     });
 
-    PipeLine::handler('cmf', 'requestUsers', function($data, $operation){
+    PipeLine::handler('cmf', 'requestUsers', function($data, $operation) {
         switch ($operation) {
             case 'update':
                 if (empty($data['request']['password'])) unset($data['errors']['password']);
@@ -31,7 +31,7 @@
         return $data;
     });
 
-    PipeLine::handler('cmf', 'formUsers', function($data, $row, $operation){
+    PipeLine::handler('cmf', 'formUsers', function($data, $row, $operation) {
         switch ($operation) {
             case 'update':
                 $data['password']['flags'] = array();
@@ -40,7 +40,7 @@
         return $data;
     });
 
-    PipeLine::handler('cmf', 'settingsUsers', function($data){
+    PipeLine::handler('cmf', 'settingsUsers', function($data) {
         $data['activation'] = array(
             'name'   => 'activation',
             'class'  => '/integer',

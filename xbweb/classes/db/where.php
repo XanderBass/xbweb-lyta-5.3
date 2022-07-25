@@ -28,7 +28,8 @@
      * @property-read Model  $model       Model
      * @property-read string $operation   Conjuncting operation
      */
-    class Where extends BasicObject {
+    class Where extends BasicObject
+    {
         protected $_conditions = array();
         protected $_model      = null;
         protected $_operation  = 'and';
@@ -40,7 +41,8 @@
          * @param array  $conditions  Conditions
          * @throws \xbweb\NodeError
          */
-        public function __construct(Model $model, $operation = 'and', $conditions = array()) {
+        public function __construct(Model $model, $operation = 'and', $conditions = array())
+        {
             $this->_model     = $model;
             $this->_operation = $operation;
             if (!empty($conditions)) {
@@ -61,7 +63,8 @@
          * @return $this
          * @throws \xbweb\NodeError
          */
-        public function condition($field, $value = null, $operation = '=') {
+        public function condition($field, $value = null, $operation = '=')
+        {
             $A = $this->_model->alias;
             if ($field instanceof Where) {
                 $this->_conditions[] = $field;
@@ -117,7 +120,8 @@
          * @param string $operation  Operation
          * @return $this
          */
-        public function compare($field1, $field2, $operation = '=') {
+        public function compare($field1, $field2, $operation = '=')
+        {
             $A = $this->_model->alias;
             if (!$this->_model->hasField($field1)) return $this;
             $operation = DB::operation($operation, '=');
@@ -137,7 +141,8 @@
          * @return $this
          * @throws \xbweb\NodeError
          */
-        public function field($name, $values = null, $operation = '=') {
+        public function field($name, $values = null, $operation = '=')
+        {
             if (!$this->_model->hasField($name) || !isset($_POST[$name])) return $this;
             $value = $_POST[$name];
             if ($values !== null) {
@@ -155,7 +160,8 @@
          * @param bool   $n  Operate with zero
          * @return $this
          */
-        protected function _bit($f, $v, $o, $n = false) {
+        protected function _bit($f, $v, $o, $n = false)
+        {
             $A  = $this->_model->alias;
             $fd = $this->_model->fields[$f];
             $fk = empty($fd['data']['values']) ? array() : $fd['data']['values'];
@@ -172,7 +178,8 @@
          * String value
          * @return string
          */
-        public function __toString() {
+        public function __toString()
+        {
             $ret = array();
             foreach ($this->_conditions as $cond) {
                 if ($cond instanceof Where) {
@@ -200,7 +207,8 @@
          * @return Where
          * @throws \xbweb\NodeError
          */
-        public static function create(Model $model, $operation = 'and', $conditions = array()) {
+        public static function create(Model $model, $operation = 'and', $conditions = array())
+        {
             return new self($model, $operation, $conditions);
         }
     }

@@ -22,7 +22,8 @@
     /**
      * Class Integer
      */
-    class Integer extends Field {
+    class Integer extends Field
+    {
         const BASE_TYPE = self::T_INT;
         const FLAGS     = 'required, sortable, table';
 
@@ -32,7 +33,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data = parent::__correct($data);
             if (empty($data['data']['type'])) $data['data']['type'] = 'int';
             switch ($data['data']['type']) {
@@ -53,7 +55,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             return self::__value($data, $value);
         }
 
@@ -63,7 +66,8 @@
          * @param mixed $value  Field value
          * @return int
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             return intval($value);
         }
 
@@ -73,7 +77,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             $value = intval($value);
             if (!empty($data['data']['min'])) if ($value < $data['data']['min']) return 'small';
             if (!empty($data['data']['max'])) if ($value > $data['data']['max']) return 'big';
@@ -86,7 +91,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             return intval($value);
         }
     }

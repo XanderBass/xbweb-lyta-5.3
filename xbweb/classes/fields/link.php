@@ -23,7 +23,8 @@
     /**
      * Class Link
      */
-    class Link extends Field {
+    class Link extends Field
+    {
         const BASE_TYPE = self::T_INT_BIG;
         const FLAGS     = 'required, sortable, table, items';
 
@@ -33,7 +34,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data = parent::__correct($data);
             $data['base_type'] = self::T_INT_BIG;
             return $data;
@@ -45,7 +47,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             $ret = self::__value($data, $value);
             return empty($ret) ? 'null' : $ret;
         }
@@ -56,7 +59,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             return intval($value);
         }
 
@@ -66,7 +70,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             return true;
         }
 
@@ -76,7 +81,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             return intval($value);
         }
 
@@ -87,7 +93,8 @@
          * @throws \xbweb\Error
          * @throws \xbweb\ErrorNotFound
          */
-        public static function items(array $field) {
+        public static function items(array $field)
+        {
             if (in_array('items', $field['flags']) && !empty($field['link']['model'])) {
                 $model = Model::create($field['link']['model']);
                 return $model->get('items', false);

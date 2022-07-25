@@ -27,7 +27,8 @@
      * @property-read array    $cache     Current cache
      * @property-read array    $all       All rows
      */
-    class Result {
+    class Result
+    {
         protected $_provider = null;
         protected $_state    = null;
         protected $_count    = null;
@@ -42,7 +43,8 @@
          * @param Provider $provider  DB provider
          * @param mixed    $result    Result data
          */
-        public function __construct(Provider $provider, $result = null) {
+        public function __construct(Provider $provider, $result = null)
+        {
             $this->_provider = $provider;
             $this->_state    = empty($result['state']) ? null : $result['state'];
             $this->_count    = empty($result['count']) ? 0    : intval($result['count']);
@@ -61,7 +63,8 @@
          * @param string $name  Parameter name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             switch ($name) {
                 case 'all':
                     return $this->get_all();
@@ -75,7 +78,8 @@
          * @param string $primary  Primary key
          * @return mixed
          */
-        protected function get_all($primary = null) {
+        protected function get_all($primary = null)
+        {
             if ($this->_cache === null) {
                 $this->_cache = $this->rows($primary);
             }
@@ -86,7 +90,8 @@
          * Validate result object
          * @return bool
          */
-        protected function _no_result() {
+        protected function _no_result()
+        {
             return (!($this->_result instanceof \mysqli_result));
         }
 
@@ -94,7 +99,8 @@
          * Get row
          * @return array|bool
          */
-        public function row() {
+        public function row()
+        {
             if ($this->_no_result()) return false;
             return $this->_result->fetch_assoc();
         }
@@ -105,7 +111,8 @@
          * @param callable $cb       Callback for each row
          * @return array|bool
          */
-        public function rows($primary = null, $cb = null) {
+        public function rows($primary = null, $cb = null)
+        {
             if ($this->_no_result()) return false;
             $ret = array();
             $this->_result->data_seek(0);
@@ -127,7 +134,8 @@
          * @param callable $cb    Callback for each row
          * @return array
          */
-        public function apply($data, $cb) {
+        public function apply($data, $cb)
+        {
             if ($this->_no_result()) return $data;
             if (!is_callable($cb)) return $data;
             $this->_result->data_seek(0);
@@ -141,7 +149,8 @@
          * @param bool   $int    Key is integer
          * @return array|bool
          */
-        public function ids($field, $int = false) {
+        public function ids($field, $int = false)
+        {
             static $cache = null;
             if ($this->_no_result()) return false;
             if ($cache === null) $cache = array();
@@ -160,7 +169,8 @@
          * Set pointer to begin
          * @return bool
          */
-        public function reset() {
+        public function reset()
+        {
             if ($this->_no_result()) return false;
             return $this->_result->data_seek(0);
         }

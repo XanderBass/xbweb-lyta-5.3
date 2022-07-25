@@ -22,7 +22,8 @@
     /**
      * Class Datetime
      */
-    class Datetime extends Field {
+    class Datetime extends Field
+    {
         const BASE_TYPE = self::T_DATETIME;
 
         /**
@@ -31,7 +32,8 @@
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data = parent::__correct($data);
             if (empty($data['data']['type'])) $data['data']['type'] = 'datetime';
             $data['base_type'] = \xbweb::v(array(
@@ -47,7 +49,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __pack(array $data, $value) {
+        protected static function __pack(array $data, $value)
+        {
             if ($value === true) switch ($data['base_type']) {
                 case self::T_TIME: return 'current_date()';
                 case self::T_DATE: return 'current_date()';
@@ -62,7 +65,8 @@
          * @param mixed $value  Field value
          * @return mixed
          */
-        protected static function __unpack(array $data, $value) {
+        protected static function __unpack(array $data, $value)
+        {
             return $value;
         }
 
@@ -72,7 +76,8 @@
          * @param mixed $value  Field value
          * @return bool|string
          */
-        protected static function __valid(array $data, $value) {
+        protected static function __valid(array $data, $value)
+        {
             try {
                 new \DateTime($value);
                 return true;
@@ -87,7 +92,8 @@
          * @param mixed $value  Field value
          * @return string
          */
-        protected static function __value(array $data, $value) {
+        protected static function __value(array $data, $value)
+        {
             if ($value === true) $value = 'now';
             $dtz = empty($data['data']['timezone']) ? null : new \DateTimeZone($data['date']['timezone']);
             $dto = new \DateTime($value, $dtz);

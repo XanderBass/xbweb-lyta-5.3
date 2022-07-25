@@ -22,13 +22,15 @@
     /**
      * Class Select
      */
-    class Select extends Conditioned {
+    class Select extends Conditioned
+    {
         /**
          * Constructor
          * @param Model  $model  Model
          * @param string $name   Query name
          */
-        public function __construct(Model $model, $name = null) {
+        public function __construct(Model $model, $name = null)
+        {
             $this->_opts = array(
                 'straight_join'       => false,
                 'sql_small_result'    => false,
@@ -51,7 +53,8 @@
          * @param[] mixed  Field name(s)
          * @return $this
          */
-        public function fields() {
+        public function fields()
+        {
             $fl = func_get_args();
             if (count($fl) == 1) {
                 if (is_array($fl[0])) {
@@ -70,7 +73,8 @@
          * Get SQL string
          * @return string
          */
-        public function sql() {
+        public function sql()
+        {
             $A    = $this->_model->alias;
             $opts = $this->_opts(
                 'straight_join',
@@ -92,7 +96,8 @@ sql;
          * Get "count" SQL
          * @return string
          */
-        public function sql_count() {
+        public function sql_count()
+        {
             $A    = $this->_model->alias;
             $opts = $this->_opts(
                 'straight_join',
@@ -111,7 +116,8 @@ sql;
          * Execute query
          * @return mixed
          */
-        public function execute() {
+        public function execute()
+        {
             $iq = empty($this->_opts['ignore_no_table']) ? null : true;
             return DB::query($this, $iq);
         }

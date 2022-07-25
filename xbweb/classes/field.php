@@ -27,7 +27,8 @@
      * @method static valid(array $data, $value) bool
      * @method static value(array $data, $value) mixed
      */
-    abstract class Field {
+    abstract class Field
+    {
         const T_SERIAL      = 0x01;
         const T_BOOL        = 0x02;
         const T_TIME        = 0x04;
@@ -67,7 +68,8 @@
          * @throws Error
          * @throws \Exception
          */
-        public static function field($data) {
+        public static function field($data)
+        {
             $data['base_type'] = static::BASE_TYPE;
             if (empty($data['name'])) throw new DataError('No field name');
             if (!preg_match('~^(\w+)$~si', $data['name'])) throw new DataError('Invalid field name');
@@ -113,7 +115,8 @@
          * @return mixed
          * @throws Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             return self::field($data);
         }
 
@@ -125,7 +128,8 @@
          * @throws Error
          * @throws \Exception
          */
-        public static function __callStatic($name, $args) {
+        public static function __callStatic($name, $args)
+        {
             if (empty($args[0]))     throw new FieldError('No field data', $name);
             if (!is_array($args[0])) throw new FieldError('Invalid field data', $name);
             $path = empty($args[0]['class']) ? self::DEF_CLASS : $args[0]['class'];
@@ -148,7 +152,8 @@
          * @return bool
          * @throws Error
          */
-        public static function allowed($data, $operation, $ug = null) {
+        public static function allowed($data, $operation, $ug = null)
+        {
             if ($ug === null) $ug = User::current()->role;
             if (in_array('system', $data['attributes']) && ($operation != 'read')) return false;
             if ($ug == 'root') return true;
@@ -160,7 +165,8 @@
          * @param array $field  Field data
          * @return array
          */
-        public static function std($field) {
+        public static function std($field)
+        {
             $std = empty($field['std']) ? '' : $field['std'];
             switch ($std) {
                 case 'created':

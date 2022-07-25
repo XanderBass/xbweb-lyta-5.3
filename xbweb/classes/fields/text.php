@@ -16,14 +16,16 @@
 
     namespace xbweb\Fields;
 
-    class Text extends Str {
+    class Text extends Str
+    {
         /**
          * Correct field
          * @param array $data  Field data
          * @return array
          * @throws \xbweb\Error
          */
-        protected static function __correct($data) {
+        protected static function __correct($data)
+        {
             $data = parent::__correct($data);
             if (empty($data['data']['type'])) $data['data']['type'] = '';
             switch ($data['data']['type']) {

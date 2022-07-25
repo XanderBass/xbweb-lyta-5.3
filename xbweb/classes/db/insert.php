@@ -25,7 +25,8 @@
      * Class Insert
      * @property-read $rows  Rows
      */
-    class Insert extends Query {
+    class Insert extends Query
+    {
         protected $_rows = array();
 
         /**
@@ -33,7 +34,8 @@
          * @param Model  $model  Model
          * @param string $name   Query name
          */
-        public function __construct(Model $model, $name = null) {
+        public function __construct(Model $model, $name = null)
+        {
             $this->_opts = array(
                 'on_duplicate_key_update' => true,
                 'auto_create_table'       => false,
@@ -51,7 +53,8 @@
          * @param array $row  Row data
          * @return string
          */
-        protected function _insert($row) {
+        protected function _insert($row)
+        {
             $pk = $this->_model->primary;
             $op = $this->_opts('low_priority', 'delayed', 'ignore');
             if (empty($this->_opts['on_duplicate_key_update'])) {
@@ -81,7 +84,8 @@
          * @param mixed $id   Custom ID
          * @return $this
          */
-        public function row($row, $id = null) {
+        public function row($row, $id = null)
+        {
             $cl = array();
             $rv = array();
             $pk = $this->_model->primary;
@@ -118,7 +122,8 @@
          * @param[] mixed  Field name(s)
          * @return $this
          */
-        public function fields() {
+        public function fields()
+        {
             $fl = func_get_args();
             if (count($fl) == 1) {
                 if (is_array($fl[0])) {
@@ -137,7 +142,8 @@
          * Get SQL query
          * @return array
          */
-        public function sql() {
+        public function sql()
+        {
             $ret = array();
             foreach ($this->_rows as $clist => $values) {
                 foreach ($values as $id => $row) {
@@ -152,7 +158,8 @@
          * @return array
          * @throws \Exception
          */
-        public function execute() {
+        public function execute()
+        {
             $point  =  empty($this->_name) ? __METHOD__ : $this->_name;
             $trans  = !empty($this->_opts['wrap_in_transaction']);
             $sore   = !empty($this->_opts['stop_on_row_error']);

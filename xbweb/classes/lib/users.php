@@ -30,7 +30,8 @@
     /**
      * Users library
      */
-    class Users {
+    class Users
+    {
         const FLAGS = ',moderator,admin,root,neo';
         const ROLES = ',moderator,admin,root,neo';
 
@@ -39,7 +40,8 @@
          * @param array $row  User data array
          * @return array
          */
-        public static function correct($row = array()) {
+        public static function correct($row = array())
+        {
             return array(
                 'id'        => empty($row['id'])        ? 0       : intval($row['id']),
                 'login'     => empty($row['login'])     ? ''      : $row['login'],
@@ -64,7 +66,8 @@
          * @param array $data  User data array
          * @return string
          */
-        public static function role($data) {
+        public static function role($data)
+        {
             if (empty($data['id'])) return 'anonimous';
             $flags = empty($data['role']) ? 0 : Roles::toInt($data['role']);
             if (Roles::is('root', $flags))  return 'root';
@@ -81,7 +84,8 @@
          * @param array $data  User data array
          * @return bool
          */
-        public static function isDeleted($data) {
+        public static function isDeleted($data)
+        {
             return !empty($data['deleted']);
         }
 
@@ -91,7 +95,8 @@
          * @return array
          * @throws Error
          */
-        public static function getByLogin($login) {
+        public static function getByLogin($login)
+        {
             if (preg_match(\xbweb::REX_EMAIL, $login)) {
                 $f = 'email';
             } else {
@@ -113,7 +118,8 @@
          * @throws Error
          * @throws ErrorNotFound
          */
-        public static function getByID($id) {
+        public static function getByID($id)
+        {
             if (empty($id)) throw new Error('User ID is empty');
             return self::getBy_('id', intval($id));
         }
@@ -129,7 +135,8 @@
          * @throws ErrorNotFound
          * @throws \Exception
          */
-        protected static function getBy_($key, $value, $m = false) {
+        protected static function getBy_($key, $value, $m = false)
+        {
             if (empty($value)) throw new Error('User value is empty');
             // Entity
             $P = null;
@@ -164,7 +171,8 @@
          * @throws Error
          * @throws ErrorNotFound
          */
-        public static function register(&$request, &$errors = false) {
+        public static function register(&$request, &$errors = false)
+        {
             $model = Model::create('/users');
             $act   = intval(Config::get('users/activation', 0));
             list($request, $errors) = $model->request('create', 'register', true);
@@ -194,7 +202,8 @@
          * @param string $name  Key name
          * @return string
          */
-        public static function gkey($user, $name) {
+        public static function gkey($user, $name)
+        {
             return md5($name.': '.$user['id'].'/'.$user['key']);
         }
 
@@ -207,7 +216,8 @@
          * @return mixed
          * @throws Error
          */
-        public static function mail($tpl, $subject, $user, $data = null) {
+        public static function mail($tpl, $subject, $user, $data = null)
+        {
             $vars = array();
             if (is_array($data)) foreach ($data as $k => $v) $vars[$k] = $v;
             $vars['user'] = $user;

@@ -17,7 +17,8 @@
      * @property-read int    $errno
      * @property-read int    $status
      */
-    class Response {
+    class Response
+    {
         protected $_info   = null;
         protected $_body   = null;
         protected $_error  = null;
@@ -28,7 +29,8 @@
          * Constructor
          * @param resource $curl  CURL resource
          */
-        public function __construct($curl = null) {
+        public function __construct($curl = null)
+        {
             $this->_body  = curl_exec($curl);
             $this->_info  = curl_getinfo($curl);
             $this->_errno = curl_errno($curl);
@@ -42,7 +44,8 @@
          * @param string $name  Property name
          * @return mixed
          */
-        public function __get($name) {
+        public function __get($name)
+        {
             return property_exists($this, "_{$name}") ? $this->{"_{$name}"} : null;
         }
 
@@ -50,7 +53,8 @@
          * toString
          * @return string
          */
-        public function __toString() {
+        public function __toString()
+        {
             return $this->_body;
         }
 
@@ -58,7 +62,8 @@
          * Get JSON
          * @return array
          */
-        public function getJSON() {
+        public function getJSON()
+        {
             return json_decode($this->_body, true);
         }
 
@@ -66,7 +71,8 @@
          * Return success status
          * @return bool
          */
-        public function success() {
+        public function success()
+        {
             return $this->_status == 200;
         }
     }

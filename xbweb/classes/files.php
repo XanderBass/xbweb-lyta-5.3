@@ -21,7 +21,8 @@
     /**
      * Class Files
      */
-    class Files {
+    class Files
+    {
         const FLAGS = '';
 
         /**
@@ -30,7 +31,8 @@
          * @param string $table  Table name
          * @return bool|DB\Result
          */
-        public static function get($ids, $table = null) {
+        public static function get($ids, $table = null)
+        {
             $ids = implode(',', \xbweb::arg($ids, true));
             $tab = self::tableName($table);
             return DB::query("select * from `{$tab}` where `id` in ({$ids})", true);
@@ -42,7 +44,8 @@
          * @param string $table  Table name
          * @return array|bool
          */
-        public static function find($path, $table = null) {
+        public static function find($path, $table = null)
+        {
             $table = self::tableName($table);
             $path  = explode('/', trim($path, '/'));
             $last  = count($path) - 1;
@@ -63,7 +66,8 @@
          * @param string $table  Table name
          * @return bool
          */
-        public static function upload($tmp, $id, $table = null) {
+        public static function upload($tmp, $id, $table = null)
+        {
             $table = self::tableName($table);
             $fname = self::fileName($id, $table);
             if (LibFiles::dir(Paths\CONTENT.$table, LibFiles::R_CREATED, true))
@@ -77,7 +81,8 @@
          * @param string $table   Table name
          * @return array|bool
          */
-        public static function deleted($parent = null, $table = null) {
+        public static function deleted($parent = null, $table = null)
+        {
             $table = self::tableName($table);
             $where = $parent === null ? '' : " and (`parent` = {$parent})";
             $sql   = "select `id`,`parent` from `{$table}` where (`deleted` is not null){$where}";
@@ -101,7 +106,8 @@
          * @param string $table   Table name
          * @return bool
          */
-        public static function clear($parent = null, $table = null) {
+        public static function clear($parent = null, $table = null)
+        {
             $table = self::tableName($table);
             $where = $parent === null ? '' : " and (`parent` = {$parent})";
             $dl    = self::deleted($parent, $table);
@@ -118,7 +124,8 @@
          * @param string $table  Table name
          * @return string
          */
-        public static function table($table = null) {
+        public static function table($table = null)
+        {
             $table = self::tableName($table);
             $users = self::tableName('users');
             return <<<sql
@@ -148,7 +155,8 @@ sql;
          * @param string $table  Table name
          * @return string
          */
-        public static function tableName($table = null) {
+        public static function tableName($table = null)
+        {
             if ($table === null) $table = 'files';
             return DB::table($table);
         }
@@ -159,7 +167,8 @@ sql;
          * @param string $table  Table name
          * @return string
          */
-        public static function fileName($id, $table = null) {
+        public static function fileName($id, $table = null)
+        {
             return Paths\CONTENT.self::tableName($table).'/'.implode('/', str_split(str_pad(dechex($id), 16, '0'), 2));
         }
     }
